@@ -54,6 +54,40 @@ class ViewController: UIViewController {
         }
     }
     
+    func tapped(sender: UITapGestureRecognizer) {
+        print("tapped")
+    }
+    
+    func swiped(sender: UISwipeGestureRecognizer) {
+        switch sender.direction {
+            case UISwipeGestureRecognizerDirection.Left:
+                print("left")
+            case UISwipeGestureRecognizerDirection.Right:
+                print("right")
+            case UISwipeGestureRecognizerDirection.Up:
+                print("up")
+            case UISwipeGestureRecognizerDirection.Down:
+                print("down")
+            default:
+                print("unknown")
+        }
+    }
+    
+    func addInteraction() {
+        // tap
+        let tapRecognizer = UITapGestureRecognizer(target: self, action:"tapped:")
+        self.view.addGestureRecognizer(tapRecognizer)
+        
+        // swipe
+        let directions = [UISwipeGestureRecognizerDirection.Right, UISwipeGestureRecognizerDirection.Left, UISwipeGestureRecognizerDirection.Up, UISwipeGestureRecognizerDirection.Down];
+        
+        for direction in directions {
+            let swipeRecognizer = UISwipeGestureRecognizer(target: self, action:"swiped:")
+            swipeRecognizer.direction = direction
+            self.view.addGestureRecognizer(swipeRecognizer)
+        }
+    }
+    
     func addLogo() {
         let w:CGFloat = 220
         let h:CGFloat = 320
@@ -100,8 +134,8 @@ class ViewController: UIViewController {
         
         self.view.addSubview(moviePlayer.view)
         
-        // add logo
         addLogo()
+        addInteraction()
     }
     
     func onError(e: NSError) {
