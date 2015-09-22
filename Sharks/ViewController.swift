@@ -11,6 +11,7 @@ import AVKit
 
 class ViewController: UIViewController {
     var isPlaying = false
+    var youTubeDataRequest:NSURLConnection!
     var data = NSMutableData()
     var currentStreamIndex = 0
     var streams:[[String:String]]!
@@ -46,7 +47,11 @@ class ViewController: UIViewController {
         let url = NSURL(string: urlPath)!
         let request = NSURLRequest(URL: url)
         
-        _ = NSURLConnection(request: request, delegate: self, startImmediately: true)
+        if (youTubeDataRequest != nil) {
+            youTubeDataRequest.cancel()
+        }
+        
+        youTubeDataRequest = NSURLConnection(request: request, delegate: self, startImmediately: true)
     }
     
     func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
@@ -139,16 +144,31 @@ class ViewController: UIViewController {
         self.view.addSubview(imageView)
     }
     
+    func stopPolling() {
+        if (interval != nil) {
+            interval.invalidate()
+            interval = nil
+        }
+    }
+    
     func poll() {
         if (streamPlayer.currentItem!.playbackBufferEmpty) {
             onError(NSError(domain: "empty", code: 1, userInfo: nil))
         }
     }
     
-    func stopPolling() {
-        if (interval != nil) {
-            interval.invalidate()
-            interval = nil
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        let stream = streamController.player!.currentItem!
+        
+        switch stream.status {
+        case .Unknown:
+            if (stream.error != nil) {
+                onError(stream.error!)
+            }
+        case .Failed:
+            onError(stream.error!)
+        case .ReadyToPlay:
+            onPlay()
         }
     }
     
@@ -187,21 +207,6 @@ class ViewController: UIViewController {
         
         addLogo()
         addInteraction()
-    }
-    
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        let stream = streamController.player!.currentItem!
-        
-        switch stream.status {
-            case .Unknown:
-                if (stream.error != nil) {
-                    onError(stream.error!)
-                }
-            case .Failed:
-                onError(stream.error!)
-            case .ReadyToPlay:
-                onPlay()
-        }
     }
     
     func displayVideo(path: String) {
