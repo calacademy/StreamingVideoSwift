@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var streams:[[String:String]]!
     var streamController = AVPlayerViewController()
     var streamPlayer:AVPlayer!
+    var interval:NSTimer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,7 @@ class ViewController: UIViewController {
     
     func loadYouTubeData(id: String){
         // clear
+        stopPolling()
         self.data = NSMutableData()
         
         let urlPath = "https://youtube.com/get_video_info?video_id=" + id
@@ -134,6 +136,25 @@ class ViewController: UIViewController {
         self.view.addSubview(imageView)
     }
     
+    func poll() {
+        if (streamPlayer.currentItem!.playbackBufferEmpty) {
+            onError(NSError(domain: "empty", code: 1, userInfo: nil))
+        }
+    }
+    
+    func stopPolling() {
+        if (interval != nil) {
+            interval.invalidate()
+            interval = nil
+        }
+    }
+    
+    func onError(e: NSError) {
+        stopPolling()
+        print("error!")
+        print(e)
+    }
+    
     func onPlay() {
         // ReadyToPlay fires multiple times for unknown reasons
         if (isPlaying) {
@@ -153,7 +174,11 @@ class ViewController: UIViewController {
         
         UIView.animateWithDuration(1, delay: 1, options: .CurveEaseOut, animations: {
             self.streamController.view.alpha = 1
-        }, completion: nil)
+        }, completion: { finished in
+            // start polling playback
+            self.stopPolling()
+            self.interval = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "poll", userInfo: nil, repeats: true)
+        })
         
         self.view.addSubview(streamController.view)
         
@@ -161,15 +186,8 @@ class ViewController: UIViewController {
         addInteraction()
     }
     
-    func onError(e: NSError) {
-        print("error!")
-        print(e)
-    }
-    
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         let stream = streamController.player!.currentItem!
-        
-        // print(streamController.player!.rate)
         
         switch stream.status {
             case .Unknown:
@@ -194,8 +212,8 @@ class ViewController: UIViewController {
         streamPlayer.muted = true
         streamController.player = streamPlayer
         streamController.showsPlaybackControls = false
-        streamPlayer.currentItem!.addObserver(self, forKeyPath:"status", options:.Initial, context:nil)
         
+        streamPlayer.currentItem!.addObserver(self, forKeyPath:"status", options:.Initial, context:nil)
         streamPlayer.play()
     }
 }
