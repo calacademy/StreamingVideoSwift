@@ -52,6 +52,9 @@ class ViewController: UIViewController {
     func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
         self.data.appendData(data)
     }
+    func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
+        print("YouTube data error")
+    }
     
     func connectionDidFinishLoading(connection: NSURLConnection!) {
         // split data from YouTube
