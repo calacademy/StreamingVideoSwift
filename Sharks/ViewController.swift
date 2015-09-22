@@ -12,19 +12,34 @@ import AVKit
 class ViewController: UIViewController {
     var isPlaying = false
     var data = NSMutableData()
-    var moviePlayer:AVPlayerViewController!
+    var currentStreamIndex = 0
+    var streams:[[String:String]]!
+    var streamController = AVPlayerViewController()
+    var streamPlayer:AVPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // lagoon
-        // loadYouTubeData("TStjLJIc3DY")
+        // @todo
+        // load this off a server
+        streams = [
+            [
+                "id": "jyWHDIECRYQ",
+                "label": "Reef View"
+            ],
+            [
+                "id": "TStjLJIc3DY",
+                "label": "Lagoon View"
+            ]
+        ]
         
-        // reef
-        loadYouTubeData("jyWHDIECRYQ")
+        loadYouTubeData(streams[currentStreamIndex]["id"]!)
     }
     
     func loadYouTubeData(id: String){
+        // clear
+        self.data = NSMutableData()
+        
         let urlPath = "https://youtube.com/get_video_info?video_id=" + id
         let url = NSURL(string: urlPath)!
         let request = NSURLRequest(URL: url)
@@ -56,6 +71,14 @@ class ViewController: UIViewController {
     
     func tapped(sender: UITapGestureRecognizer) {
         print("tapped")
+        
+        currentStreamIndex++
+        
+        if (currentStreamIndex >= streams.count) {
+            currentStreamIndex = 0;
+        }
+        
+        loadYouTubeData(streams[currentStreamIndex]["id"]!)
     }
     
     func swiped(sender: UISwipeGestureRecognizer) {
@@ -123,16 +146,16 @@ class ViewController: UIViewController {
         let bounds: CGRect = UIScreen.mainScreen().bounds
         let w:CGFloat = bounds.size.width
         let h:CGFloat = bounds.size.height
-        moviePlayer.view.frame = CGRect(x: 0, y: 0, width: w, height: h)
+        streamController.view.frame = CGRect(x: 0, y: 0, width: w, height: h)
         
         // fade in
-        moviePlayer.view.alpha = 0;
+        streamController.view.alpha = 0;
         
         UIView.animateWithDuration(1, delay: 1, options: .CurveEaseOut, animations: {
-            self.moviePlayer.view.alpha = 1
+            self.streamController.view.alpha = 1
         }, completion: nil)
         
-        self.view.addSubview(moviePlayer.view)
+        self.view.addSubview(streamController.view)
         
         addLogo()
         addInteraction()
@@ -144,7 +167,9 @@ class ViewController: UIViewController {
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        let stream = moviePlayer.player!.currentItem!
+        let stream = streamController.player!.currentItem!
+        
+        // print(streamController.player!.rate)
         
         switch stream.status {
             case .Unknown:
@@ -160,15 +185,18 @@ class ViewController: UIViewController {
     
     func displayVideo(path: String) {
         let url:NSURL = NSURL(string: path)!
-        let player = AVPlayer(URL: url)
         
-        moviePlayer = AVPlayerViewController()
-        moviePlayer.player = player;
-        moviePlayer.showsPlaybackControls = false;
-        moviePlayer.player!.currentItem!.addObserver(self, forKeyPath:"status", options:.Initial, context:nil)
-
-        player.volume = 0
-        player.play()
+        if (streamPlayer != nil) {
+            streamPlayer.currentItem!.removeObserver(self, forKeyPath:"status")
+        }
+        
+        streamPlayer = AVPlayer(URL: url)
+        streamPlayer.muted = true
+        streamController.player = streamPlayer
+        streamController.showsPlaybackControls = false
+        streamPlayer.currentItem!.addObserver(self, forKeyPath:"status", options:.Initial, context:nil)
+        
+        streamPlayer.play()
     }
 }
 
