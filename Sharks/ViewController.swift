@@ -37,6 +37,10 @@ class ViewController: UIViewController {
         loadYouTubeData(streams[currentStreamIndex]["id"]!)
     }
     
+    func onError(e: NSError) {
+        print(e)
+    }
+    
     func loadYouTubeData(id: String){
         // clear
         self.data = NSMutableData()
@@ -56,7 +60,7 @@ class ViewController: UIViewController {
         self.data.appendData(data)
     }
     func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
-        print("YouTube data error")
+        onError(error)
     }
     
     func connectionDidFinishLoading(connection: NSURLConnection!) {
@@ -77,9 +81,15 @@ class ViewController: UIViewController {
         }
     }
     
-    func tapped(sender: UITapGestureRecognizer) {
-        print("tapped")
+    func onMenu(sender: UITapGestureRecognizer) {
+        print("onMenu")
         
+        // re-enable default menu button behavior
+        self.view.removeGestureRecognizer(sender)
+    }
+    
+    func onSelect(sender: UITapGestureRecognizer) {
+        // placeholder functionality
         currentStreamIndex++
         
         if (currentStreamIndex >= streams.count) {
@@ -89,7 +99,7 @@ class ViewController: UIViewController {
         loadYouTubeData(streams[currentStreamIndex]["id"]!)
     }
     
-    func swiped(sender: UISwipeGestureRecognizer) {
+    func onSwipe(sender: UISwipeGestureRecognizer) {
         switch sender.direction {
             case UISwipeGestureRecognizerDirection.Left:
                 print("left")
@@ -106,14 +116,26 @@ class ViewController: UIViewController {
     
     func addInteraction() {
         // tap
-        let tapRecognizer = UITapGestureRecognizer(target: self, action:"tapped:")
-        self.view.addGestureRecognizer(tapRecognizer)
+        let selectRecognizer = UITapGestureRecognizer(target: self, action:"onSelect:")
+        selectRecognizer.allowedPressTypes = [
+            NSNumber(integer: UIPressType.Select.rawValue)
+        ];
+        self.view.addGestureRecognizer(selectRecognizer)
+        
+        // menu
+        // while debugging, a double-tap on the menu button is required to exit app
+        // @see https://developer.apple.com/library/prerelease/tvos/releasenotes/General/RN-tvOSSDK-9.0/index.html
+        let menuRecognizer = UITapGestureRecognizer(target: self, action:"onMenu:")
+        menuRecognizer.allowedPressTypes = [
+            NSNumber(integer: UIPressType.Menu.rawValue)
+        ];
+        self.view.addGestureRecognizer(menuRecognizer)
         
         // swipe
         let directions = [UISwipeGestureRecognizerDirection.Right, UISwipeGestureRecognizerDirection.Left, UISwipeGestureRecognizerDirection.Up, UISwipeGestureRecognizerDirection.Down];
         
         for direction in directions {
-            let swipeRecognizer = UISwipeGestureRecognizer(target: self, action:"swiped:")
+            let swipeRecognizer = UISwipeGestureRecognizer(target: self, action:"onSwipe:")
             swipeRecognizer.direction = direction
             self.view.addGestureRecognizer(swipeRecognizer)
         }
@@ -160,20 +182,15 @@ class ViewController: UIViewController {
         
         if (keyPath == "playbackBufferEmpty") {
             if (stream.playbackBufferEmpty && isPlaying) {
-                onError(NSError(domain: "empty (KVO)", code: 1, userInfo: nil))
+                onError(NSError(domain: "playbackBufferEmpty", code: 1, userInfo: nil))
             } else {
+                // buffer full, start playing
                 onPlay()
             }
         }
     }
     
-    func onError(e: NSError) {
-        print("error!")
-        print(e)
-    }
-    
     func onPlay() {
-        // ReadyToPlay fires multiple times for unknown reasons
         if (isPlaying) {
             return
         }
