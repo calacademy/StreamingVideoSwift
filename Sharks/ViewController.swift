@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var streams:[[String:String]]!
     var streamController = AVPlayerViewController()
     var streamPlayer:AVPlayer!
+    var logo:UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,31 @@ class ViewController: UIViewController {
             ]
         ]
         
+        loadYouTubeData(streams[currentStreamIndex]["id"]!)
+    }
+    
+    func onExit() {
+        print("onExit")
+        
+        // destroy stream
+        stopObservingStreamPlayer()
+        
+        if (streamController.player != nil) {
+            streamController.player = nil
+            streamPlayer = nil
+            streamController.view.removeFromSuperview()
+        }
+        
+        // remove logo
+        if (logo != nil) {
+            logo.removeFromSuperview()
+        }
+        
+        isPlaying = false
+    }
+    
+    func onRestart() {
+        print("onRestart")
         loadYouTubeData(streams[currentStreamIndex]["id"]!)
     }
     
@@ -115,6 +141,13 @@ class ViewController: UIViewController {
     }
     
     func addInteraction() {
+        // remove any pre-existing recognizers
+        if (self.view.gestureRecognizers != nil) {
+            for recognizer in self.view.gestureRecognizers! {
+                self.view.removeGestureRecognizer(recognizer)
+            }
+        }
+        
         // tap
         let selectRecognizer = UITapGestureRecognizer(target: self, action:"onSelect:")
         selectRecognizer.allowedPressTypes = [
@@ -145,23 +178,22 @@ class ViewController: UIViewController {
         let w:CGFloat = 220
         let h:CGFloat = 320
         
-        let imageName = "logo.png"
-        let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
+        let image = UIImage(named: "logo.png")
+        logo = UIImageView(image: image!)
         
         // place
         let bounds: CGRect = UIScreen.mainScreen().bounds
-        imageView.frame = CGRect(x: bounds.size.width - w, y: 0, width: w, height: h)
+        logo.frame = CGRect(x: bounds.size.width - w, y: 0, width: w, height: h)
         
         // fade in
-        imageView.alpha = 0
+        logo.alpha = 0
         
         UIView.animateWithDuration(1, delay: 2, options: .CurveEaseOut, animations: {
-            imageView.alpha = 0.65
+            self.logo.alpha = 0.65
         }, completion: nil)
         
         // add to stage
-        self.view.addSubview(imageView)
+        self.view.addSubview(logo)
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -216,13 +248,17 @@ class ViewController: UIViewController {
         addInteraction()
     }
     
-    func displayVideo(path: String) {
-        let url:NSURL = NSURL(string: path)!
-        
+    func stopObservingStreamPlayer() {
         if (streamPlayer != nil) {
             streamPlayer.currentItem!.removeObserver(self, forKeyPath:"playbackBufferEmpty")
             streamPlayer.currentItem!.removeObserver(self, forKeyPath:"status")
         }
+    }
+    
+    func displayVideo(path: String) {
+        let url:NSURL = NSURL(string: path)!
+        
+        stopObservingStreamPlayer()
         
         streamPlayer = AVPlayer(URL: url)
         streamPlayer.muted = true
