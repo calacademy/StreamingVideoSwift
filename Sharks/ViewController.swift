@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     var streams:[[String:String]]!
     var streamController = AVPlayerViewController()
     var streamPlayer:AVPlayer!
-    var interval:NSTimer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +39,6 @@ class ViewController: UIViewController {
     
     func loadYouTubeData(id: String){
         // clear
-        stopPolling()
         self.data = NSMutableData()
         
         let urlPath = "https://youtube.com/get_video_info?video_id=" + id
@@ -144,36 +142,32 @@ class ViewController: UIViewController {
         self.view.addSubview(imageView)
     }
     
-    func stopPolling() {
-        if (interval != nil) {
-            interval.invalidate()
-            interval = nil
-        }
-    }
-    
-    func poll() {
-        if (streamPlayer.currentItem!.playbackBufferEmpty) {
-            onError(NSError(domain: "empty", code: 1, userInfo: nil))
-        }
-    }
-    
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        let stream = streamController.player!.currentItem!
+        let stream = streamPlayer.currentItem!
         
-        switch stream.status {
-        case .Unknown:
-            if (stream.error != nil) {
-                onError(stream.error!)
+        if (keyPath == "status") {
+            switch stream.status {
+                case .Unknown:
+                    if (stream.error != nil) {
+                        onError(stream.error!)
+                    }
+                case .Failed:
+                    onError(stream.error!)
+                default:
+                    break
             }
-        case .Failed:
-            onError(stream.error!)
-        case .ReadyToPlay:
-            onPlay()
+        }
+        
+        if (keyPath == "playbackBufferEmpty") {
+            if (stream.playbackBufferEmpty && isPlaying) {
+                onError(NSError(domain: "empty (KVO)", code: 1, userInfo: nil))
+            } else {
+                onPlay()
+            }
         }
     }
     
     func onError(e: NSError) {
-        stopPolling()
         print("error!")
         print(e)
     }
@@ -197,11 +191,7 @@ class ViewController: UIViewController {
         
         UIView.animateWithDuration(1, delay: 1, options: .CurveEaseOut, animations: {
             self.streamController.view.alpha = 1
-        }, completion: { finished in
-            // start polling playback
-            self.stopPolling()
-            self.interval = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "poll", userInfo: nil, repeats: true)
-        })
+        }, completion: nil)
         
         self.view.addSubview(streamController.view)
         
@@ -213,6 +203,7 @@ class ViewController: UIViewController {
         let url:NSURL = NSURL(string: path)!
         
         if (streamPlayer != nil) {
+            streamPlayer.currentItem!.removeObserver(self, forKeyPath:"playbackBufferEmpty")
             streamPlayer.currentItem!.removeObserver(self, forKeyPath:"status")
         }
         
@@ -221,6 +212,7 @@ class ViewController: UIViewController {
         streamController.player = streamPlayer
         streamController.showsPlaybackControls = false
         
+        streamPlayer.currentItem!.addObserver(self, forKeyPath:"playbackBufferEmpty", options:.Initial, context:nil)
         streamPlayer.currentItem!.addObserver(self, forKeyPath:"status", options:.Initial, context:nil)
         streamPlayer.play()
     }
