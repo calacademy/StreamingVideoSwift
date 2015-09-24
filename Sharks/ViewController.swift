@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     var isPlaying = false
     var youTubeDataRequest:NSURLConnection!
     var data = NSMutableData()
+    var buffering = Buffering(image: nil)
     var currentStreamIndex = 0
     var streams:[[String:String]]!
     var streamController = AVPlayerViewController()
@@ -68,6 +69,8 @@ class ViewController: UIViewController {
     }
     
     func loadYouTubeData(id: String){
+        buffer(true)
+        
         // clear
         self.data = NSMutableData()
         
@@ -223,6 +226,8 @@ class ViewController: UIViewController {
     }
     
     func onPlay() {
+        buffer(false)
+        
         if (isPlaying) {
             return
         }
@@ -268,6 +273,18 @@ class ViewController: UIViewController {
         streamPlayer.currentItem!.addObserver(self, forKeyPath:"playbackBufferEmpty", options:.Initial, context:nil)
         streamPlayer.currentItem!.addObserver(self, forKeyPath:"status", options:.Initial, context:nil)
         streamPlayer.play()
+    }
+    
+    func buffer(boo: Bool) {
+//        if (buffering.onStage == boo) {
+//            return
+//        }
+        
+        if (boo) {
+            self.view.addSubview(buffering)
+        } else {
+            // buffering.removeFromSuperview()
+        }
     }
 }
 
