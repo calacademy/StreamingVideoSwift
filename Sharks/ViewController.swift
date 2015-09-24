@@ -11,6 +11,7 @@ import AVKit
 
 class ViewController: UIViewController {
     var isPlaying = false
+    var isObservingRate = false
     var youTubeDataRequest:NSURLConnection!
     var data = NSMutableData()
     var buffering = Buffering(image: nil)
@@ -219,7 +220,22 @@ class ViewController: UIViewController {
             if (stream.playbackBufferEmpty && isPlaying) {
                 onError(NSError(domain: "playbackBufferEmpty", code: 1, userInfo: nil))
             } else {
-                // buffer full, start playing
+                // buffer full, start checking for rate
+                if (isObservingRate) {
+                    streamPlayer.removeObserver(self, forKeyPath:"rate")
+                }
+                
+                streamPlayer.addObserver(self, forKeyPath:"rate", options:.Initial, context:nil)
+                isObservingRate = true
+            }
+        }
+        
+        if (keyPath == "rate") {
+            if (streamPlayer.rate == 1.0) {
+                // now we're playing
+                streamPlayer.removeObserver(self, forKeyPath:"rate")
+                isObservingRate = false
+                
                 onPlay()
             }
         }
@@ -276,15 +292,11 @@ class ViewController: UIViewController {
     }
     
     func buffer(boo: Bool) {
-//        if (buffering.onStage == boo) {
-//            return
-//        }
-        
-        if (boo) {
-            self.view.addSubview(buffering)
-        } else {
-            // buffering.removeFromSuperview()
+        if (buffering.onStage == boo) {
+            return
         }
+        
+        buffering.show(boo, view: self.view)
     }
 }
 

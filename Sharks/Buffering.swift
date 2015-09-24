@@ -10,6 +10,7 @@ import UIKit
 
 class Buffering: UIImageView {
     var onStage:Bool = false
+    var timer:NSTimer!
     
     override init(image: UIImage?) {
         let logo = UIImage(named: "buffering.png")
@@ -18,14 +19,26 @@ class Buffering: UIImageView {
         _place()
     }
     
+    func show(boo: Bool, view: UIView) {
+        if (timer != nil) {
+            timer.invalidate()
+            timer = nil
+        }
+        
+        if (boo) {
+            view.addSubview(self)
+        } else {
+            // delay before removing
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(0.75, target: self, selector: "removeFromSuperview", userInfo: nil, repeats: false)
+        }
+    }
+    
     override func willMoveToSuperview(newSuperview: UIView?) {
         if (self.superview == nil) {
-            print("adding")
-            
             // fade in
             self.alpha = 0
             
-            UIView.animateWithDuration(0.3, delay: 0.1, options: .CurveEaseOut, animations: {
+            UIView.animateWithDuration(0.6, delay: 0, options: .CurveEaseOut, animations: {
                 self.alpha = 1
             }, completion: nil)
             
@@ -33,7 +46,7 @@ class Buffering: UIImageView {
             let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
             rotateAnimation.fromValue = 0.0
             rotateAnimation.toValue = CGFloat(M_PI * 2.0)
-            rotateAnimation.duration = 1.25
+            rotateAnimation.duration = 1
             rotateAnimation.repeatCount = .infinity
             self.layer.addAnimation(rotateAnimation, forKey: nil)
             
@@ -42,7 +55,6 @@ class Buffering: UIImageView {
     }
     override func didMoveToSuperview() {
         if (self.superview == nil) {
-            print("removing")
             self.layer.removeAllAnimations()
             onStage = false
         }
