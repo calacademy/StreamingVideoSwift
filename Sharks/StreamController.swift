@@ -26,7 +26,7 @@ class StreamController: AVPlayerViewController {
         // fade in
         self.view.alpha = 0;
         
-        UIView.animateWithDuration(0.8, delay: 1, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.8, delay: 2.5, options: .CurveEaseOut, animations: {
             self.view.alpha = 1
         }, completion: { _ in
             NSNotificationCenter.defaultCenter().postNotificationName("streamVisible", object: nil)

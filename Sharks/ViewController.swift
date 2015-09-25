@@ -205,7 +205,7 @@ class ViewController: UIViewController {
         // fade in
         logo.alpha = 0
         
-        UIView.animateWithDuration(0.8, delay: 1.8, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.8, delay: 3, options: .CurveEaseOut, animations: {
             self.logo.alpha = 0.65
         }, completion: nil)
         

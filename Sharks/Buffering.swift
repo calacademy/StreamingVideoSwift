@@ -29,7 +29,7 @@ class Buffering: UIImageView {
             view.addSubview(self)
         } else {
             // delay before removing
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(0.75, target: self, selector: "removeFromSuperview", userInfo: nil, repeats: false)
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: "removeFromSuperview", userInfo: nil, repeats: false)
         }
     }
     
