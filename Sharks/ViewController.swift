@@ -17,12 +17,14 @@ class ViewController: UIViewController {
     var buffering = Buffering(image: nil)
     var currentStreamIndex = 0
     var streams:[[String:String]]!
-    var streamController = AVPlayerViewController()
-    var streamPlayer:AVPlayer!
+    var streamController = StreamController()
     var logo:UIImageView!
+    var streamViewContainer = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(streamViewContainer)
+        streamController.subscribeToObservers(self)
         
         // @todo
         // load this off a server
@@ -44,13 +46,7 @@ class ViewController: UIViewController {
         print("onExit")
         
         // destroy stream
-        stopObservingStreamPlayer()
-        
-        if (streamController.player != nil) {
-            streamController.player = nil
-            streamPlayer = nil
-            streamController.view.removeFromSuperview()
-        }
+        streamController.destroy()
         
         // remove logo
         if (logo != nil) {
@@ -105,7 +101,7 @@ class ViewController: UIViewController {
             if (varArr[0] == "hlsvp") {
                 // found video url, display it
                 let foo = varArr[1]
-                displayVideo(foo.stringByRemovingPercentEncoding!)
+                streamController.setStream(foo.stringByRemovingPercentEncoding!)
                 break
             }
         }
@@ -201,7 +197,8 @@ class ViewController: UIViewController {
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        let stream = streamPlayer.currentItem!
+        let player = streamController.player!
+        let stream = player.currentItem!
         
         if (keyPath == "status") {
             switch stream.status {
@@ -222,18 +219,18 @@ class ViewController: UIViewController {
             } else {
                 // buffer full, start checking for rate
                 if (isObservingRate) {
-                    streamPlayer.removeObserver(self, forKeyPath:"rate")
+                    player.removeObserver(self, forKeyPath:"rate")
                 }
                 
-                streamPlayer.addObserver(self, forKeyPath:"rate", options:.Initial, context:nil)
+                player.addObserver(self, forKeyPath:"rate", options:.Initial, context:nil)
                 isObservingRate = true
             }
         }
         
         if (keyPath == "rate") {
-            if (streamPlayer.rate == 1.0) {
+            if (player.rate == 1.0) {
                 // now we're playing
-                streamPlayer.removeObserver(self, forKeyPath:"rate")
+                player.removeObserver(self, forKeyPath:"rate")
                 isObservingRate = false
                 
                 onPlay()
@@ -250,45 +247,10 @@ class ViewController: UIViewController {
         
         isPlaying = true
         
-        // size
-        let bounds: CGRect = UIScreen.mainScreen().bounds
-        let w:CGFloat = bounds.size.width
-        let h:CGFloat = bounds.size.height
-        streamController.view.frame = CGRect(x: 0, y: 0, width: w, height: h)
-        
-        // fade in
-        streamController.view.alpha = 0;
-        
-        UIView.animateWithDuration(1, delay: 1, options: .CurveEaseOut, animations: {
-            self.streamController.view.alpha = 1
-        }, completion: nil)
-        
-        self.view.addSubview(streamController.view)
+        streamController.addToView(streamViewContainer)
         
         addLogo()
         addInteraction()
-    }
-    
-    func stopObservingStreamPlayer() {
-        if (streamPlayer != nil) {
-            streamPlayer.currentItem!.removeObserver(self, forKeyPath:"playbackBufferEmpty")
-            streamPlayer.currentItem!.removeObserver(self, forKeyPath:"status")
-        }
-    }
-    
-    func displayVideo(path: String) {
-        let url:NSURL = NSURL(string: path)!
-        
-        stopObservingStreamPlayer()
-        
-        streamPlayer = AVPlayer(URL: url)
-        streamPlayer.muted = true
-        streamController.player = streamPlayer
-        streamController.showsPlaybackControls = false
-        
-        streamPlayer.currentItem!.addObserver(self, forKeyPath:"playbackBufferEmpty", options:.Initial, context:nil)
-        streamPlayer.currentItem!.addObserver(self, forKeyPath:"status", options:.Initial, context:nil)
-        streamPlayer.play()
     }
     
     func buffer(boo: Bool) {
