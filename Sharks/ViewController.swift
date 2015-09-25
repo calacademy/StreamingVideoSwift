@@ -10,21 +10,24 @@ import UIKit
 import AVKit
 
 class ViewController: UIViewController {
+    var isFirstPlay = true
     var isPlaying = false
-    var isObservingRate = false
+    var isTransitioning = true
+    
     var youTubeDataRequest:NSURLConnection!
     var data = NSMutableData()
     var buffering = Buffering(image: nil)
     var currentStreamIndex = 0
     var streams:[[String:String]]!
-    var streamController = StreamController()
     var logo:UIImageView!
+    
+    var streamController:StreamController!
     var streamViewContainer = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeStaleViews", name:"streamVisible", object: nil)
         self.view.addSubview(streamViewContainer)
-        streamController.subscribeToObservers(self)
         
         // @todo
         // load this off a server
@@ -46,7 +49,10 @@ class ViewController: UIViewController {
         print("onExit")
         
         // destroy stream
-        streamController.destroy()
+        if (streamController != nil) {
+            streamController.destroy()
+            streamController = nil
+        }
         
         // remove logo
         if (logo != nil) {
@@ -54,6 +60,8 @@ class ViewController: UIViewController {
         }
         
         isPlaying = false
+        isFirstPlay = true
+        isTransitioning = false
     }
     
     func onRestart() {
@@ -66,6 +74,7 @@ class ViewController: UIViewController {
     }
     
     func loadYouTubeData(id: String){
+        isTransitioning = true
         buffer(true)
         
         // clear
@@ -101,7 +110,11 @@ class ViewController: UIViewController {
             if (varArr[0] == "hlsvp") {
                 // found video url, display it
                 let foo = varArr[1]
+                
+                streamController = StreamController()
+                streamController.subscribeToObservers(self)
                 streamController.setStream(foo.stringByRemovingPercentEncoding!)
+                
                 break
             }
         }
@@ -115,6 +128,10 @@ class ViewController: UIViewController {
     }
     
     func onSelect(sender: UITapGestureRecognizer) {
+        if (isTransitioning) {
+            return
+        }
+            
         // placeholder functionality
         currentStreamIndex++
         
@@ -188,7 +205,7 @@ class ViewController: UIViewController {
         // fade in
         logo.alpha = 0
         
-        UIView.animateWithDuration(1, delay: 2, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.8, delay: 1.8, options: .CurveEaseOut, animations: {
             self.logo.alpha = 0.65
         }, completion: nil)
         
@@ -218,20 +235,20 @@ class ViewController: UIViewController {
                 onError(NSError(domain: "playbackBufferEmpty", code: 1, userInfo: nil))
             } else {
                 // buffer full, start checking for rate
-                if (isObservingRate) {
-                    player.removeObserver(self, forKeyPath:"rate")
+                if (!streamController.isObservingRate) {
+                    player.addObserver(self, forKeyPath:"rate", options:.Initial, context:nil)
+                    streamController.isObservingRate = true
                 }
-                
-                player.addObserver(self, forKeyPath:"rate", options:.Initial, context:nil)
-                isObservingRate = true
             }
         }
         
         if (keyPath == "rate") {
             if (player.rate == 1.0) {
                 // now we're playing
-                player.removeObserver(self, forKeyPath:"rate")
-                isObservingRate = false
+                if (streamController.isObservingRate) {
+                    player.removeObserver(self, forKeyPath:"rate")
+                    streamController.isObservingRate = false
+                }
                 
                 onPlay()
             }
@@ -240,17 +257,33 @@ class ViewController: UIViewController {
     
     func onPlay() {
         buffer(false)
-        
-        if (isPlaying) {
-            return
-        }
-        
+                
         isPlaying = true
-        
         streamController.addToView(streamViewContainer)
         
-        addLogo()
-        addInteraction()
+        if (isFirstPlay) {
+            addLogo()
+            addInteraction()
+            isFirstPlay = false;
+        }
+    }
+    
+    func removeStaleViews() {
+        streamController.stopObservingStreamPlayer()
+        var viewsToRemove = streamViewContainer.subviews
+        
+        // keep the last (top)
+        viewsToRemove.removeAtIndex(viewsToRemove.count - 1)
+        
+        for view in viewsToRemove {
+            view.removeFromSuperview()
+        }
+        
+        isTransitioning = false
+        
+        // @todo
+        // re-enable stream listeners
+        // streamController.startObservingStreamPlayer()
     }
     
     func buffer(boo: Bool) {

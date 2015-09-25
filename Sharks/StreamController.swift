@@ -10,6 +10,7 @@ import AVKit
 
 class StreamController: AVPlayerViewController {
     var observer = NSObject()
+    var isObservingRate = false
     
     func subscribeToObservers(myObserver: NSObject) {
         observer = myObserver
@@ -25,9 +26,11 @@ class StreamController: AVPlayerViewController {
         // fade in
         self.view.alpha = 0;
         
-        UIView.animateWithDuration(1, delay: 1, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.8, delay: 1, options: .CurveEaseOut, animations: {
             self.view.alpha = 1
-        }, completion: nil)
+        }, completion: { _ in
+            NSNotificationCenter.defaultCenter().postNotificationName("streamVisible", object: nil)
+        })
         
         container.addSubview(self.view)
     }
@@ -42,21 +45,28 @@ class StreamController: AVPlayerViewController {
         self.player = streamPlayer
         self.showsPlaybackControls = false
         
-        streamPlayer.currentItem!.addObserver(observer, forKeyPath:"playbackBufferEmpty", options:.Initial, context:nil)
-        streamPlayer.currentItem!.addObserver(observer, forKeyPath:"status", options:.Initial, context:nil)
-        
+        startObservingStreamPlayer()
         streamPlayer.play()
+    }
+    
+    func startObservingStreamPlayer() {
+        self.player!.currentItem!.addObserver(observer, forKeyPath:"playbackBufferEmpty", options:.Initial, context:nil)
+        self.player!.currentItem!.addObserver(observer, forKeyPath:"status", options:.Initial, context:nil)
     }
     
     func stopObservingStreamPlayer() {
         if (self.player != nil) {
             self.player!.currentItem!.removeObserver(observer, forKeyPath:"playbackBufferEmpty")
             self.player!.currentItem!.removeObserver(observer, forKeyPath:"status")
+            
+            if (isObservingRate) {
+                self.player!.currentItem!.removeObserver(observer, forKeyPath:"rate")
+            }
         }
     }
     
     func destroy() {
-        stopObservingStreamPlayer()
+        // stopObservingStreamPlayer()
         
         if (self.player != nil) {
             self.player = nil
