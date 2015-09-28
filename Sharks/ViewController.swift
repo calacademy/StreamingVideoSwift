@@ -99,6 +99,8 @@ class ViewController: UIViewController {
     }
     
     func connectionDidFinishLoading(connection: NSURLConnection!) {
+        print("YouTube data loaded from " + connection.currentRequest.URL!.absoluteString)
+        
         // split data from YouTube
         let datastring = NSString(data: data, encoding: NSUTF8StringEncoding)
         let arr = datastring?.componentsSeparatedByString("&") as Array!
@@ -110,6 +112,10 @@ class ViewController: UIViewController {
             if (varArr[0] == "hlsvp") {
                 // found video url, display it
                 let foo = varArr[1]
+                
+                if (streamController != nil) {
+                    streamController.stopObservingStreamPlayer()
+                }
                 
                 streamController = StreamController()
                 streamController.subscribeToObservers(self)
@@ -131,7 +137,9 @@ class ViewController: UIViewController {
         if (isTransitioning) {
             return
         }
-            
+        
+        isPlaying = false
+        
         // placeholder functionality
         currentStreamIndex++
         
@@ -233,23 +241,8 @@ class ViewController: UIViewController {
         if (keyPath == "playbackBufferEmpty") {
             if (stream.playbackBufferEmpty && isPlaying) {
                 onError(NSError(domain: "playbackBufferEmpty", code: 1, userInfo: nil))
-            } else {
-                // buffer full, start checking for rate
-                if (!streamController.isObservingRate) {
-                    player.addObserver(self, forKeyPath:"rate", options:.Initial, context:nil)
-                    streamController.isObservingRate = true
-                }
             }
-        }
-        
-        if (keyPath == "rate") {
-            if (player.rate == 1.0) {
-                // now we're playing
-                if (streamController.isObservingRate) {
-                    player.removeObserver(self, forKeyPath:"rate")
-                    streamController.isObservingRate = false
-                }
-                
+            if (!stream.playbackBufferEmpty && !isPlaying) {
                 onPlay()
             }
         }
@@ -269,8 +262,14 @@ class ViewController: UIViewController {
     }
     
     func removeStaleViews() {
-        streamController.stopObservingStreamPlayer()
         var viewsToRemove = streamViewContainer.subviews
+        
+        if (viewsToRemove.count == 1) {
+            isTransitioning = false
+            return
+        }
+        
+        streamController.stopObservingStreamPlayer()
         
         // keep the last (top)
         viewsToRemove.removeAtIndex(viewsToRemove.count - 1)
@@ -279,11 +278,9 @@ class ViewController: UIViewController {
             view.removeFromSuperview()
         }
         
-        isTransitioning = false
-        
-        // @todo
         // re-enable stream listeners
-        // streamController.startObservingStreamPlayer()
+        streamController.startObservingStreamPlayer()
+        isTransitioning = false
     }
     
     func buffer(boo: Bool) {

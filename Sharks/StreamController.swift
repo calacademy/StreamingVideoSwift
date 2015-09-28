@@ -10,7 +10,6 @@ import AVKit
 
 class StreamController: AVPlayerViewController {
     var observer = NSObject()
-    var isObservingRate = false
     
     func subscribeToObservers(myObserver: NSObject) {
         observer = myObserver
@@ -58,10 +57,6 @@ class StreamController: AVPlayerViewController {
         if (self.player != nil) {
             self.player!.currentItem!.removeObserver(observer, forKeyPath:"playbackBufferEmpty")
             self.player!.currentItem!.removeObserver(observer, forKeyPath:"status")
-            
-            if (isObservingRate) {
-                self.player!.currentItem!.removeObserver(observer, forKeyPath:"rate")
-            }
         }
     }
     
