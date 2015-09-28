@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E885CE3B1BB45F65005A0721 /* Buffering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E885CE3A1BB45F65005A0721 /* Buffering.swift */; };
 		E885CE3D1BB46FFC005A0721 /* buffering.png in Resources */ = {isa = PBXBuildFile; fileRef = E885CE3C1BB46FFC005A0721 /* buffering.png */; };
+		E890771E1BB9CF2C00F6F1B5 /* StreamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */; };
 		E8A104461BAC6B8A000F6736 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104451BAC6B8A000F6736 /* AppDelegate.swift */; };
 		E8A104481BAC6B8A000F6736 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104471BAC6B8A000F6736 /* ViewController.swift */; };
 		E8A1044B1BAC6B8A000F6736 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A104491BAC6B8A000F6736 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		E885CE3A1BB45F65005A0721 /* Buffering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffering.swift; sourceTree = "<group>"; };
 		E885CE3C1BB46FFC005A0721 /* buffering.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buffering.png; sourceTree = "<group>"; };
+		E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamData.swift; sourceTree = "<group>"; };
 		E8A104421BAC6B8A000F6736 /* Sharks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sharks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A104451BAC6B8A000F6736 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8A104471BAC6B8A000F6736 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				E8A1044E1BAC6B8A000F6736 /* Info.plist */,
 				E885CE3A1BB45F65005A0721 /* Buffering.swift */,
 				E8D2903A1BB5A23400AF8B06 /* StreamController.swift */,
+				E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */,
 			);
 			path = Sharks;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8A104481BAC6B8A000F6736 /* ViewController.swift in Sources */,
+				E890771E1BB9CF2C00F6F1B5 /* StreamData.swift in Sources */,
 				E8D2903B1BB5A23400AF8B06 /* StreamController.swift in Sources */,
 				E8A104461BAC6B8A000F6736 /* AppDelegate.swift in Sources */,
 				E885CE3B1BB45F65005A0721 /* Buffering.swift in Sources */,

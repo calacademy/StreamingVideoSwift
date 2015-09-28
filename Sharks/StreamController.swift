@@ -61,7 +61,7 @@ class StreamController: AVPlayerViewController {
     }
     
     func destroy() {
-        // stopObservingStreamPlayer()
+        stopObservingStreamPlayer()
         
         if (self.player != nil) {
             self.player = nil

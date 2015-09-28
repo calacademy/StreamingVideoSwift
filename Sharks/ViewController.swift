@@ -21,12 +21,15 @@ class ViewController: UIViewController {
     var streams:[[String:String]]!
     var logo:UIImageView!
     
+    var streamData = StreamData()
     var streamController:StreamController!
     var streamViewContainer = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeStaleViews", name:"streamVisible", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onDataError", name:"dataError", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onData:", name:"dataLoaded", object: nil)
         self.view.addSubview(streamViewContainer)
         
         // @todo
@@ -43,6 +46,12 @@ class ViewController: UIViewController {
         ]
         
         loadYouTubeData(streams[currentStreamIndex]["id"]!)
+    }
+    
+    func loadYouTubeData(id: String){
+        isTransitioning = true
+        buffer(true)
+        streamData.connect(id)
     }
     
     func onExit() {
@@ -69,61 +78,25 @@ class ViewController: UIViewController {
         loadYouTubeData(streams[currentStreamIndex]["id"]!)
     }
     
+    func onDataError() {
+        onError(NSError(domain: "dataError", code: 1, userInfo: nil))
+    }
+    
     func onError(e: NSError) {
         print(e)
     }
     
-    func loadYouTubeData(id: String){
-        isTransitioning = true
-        buffer(true)
+    func onData(notification: NSNotification) {
+        let obj = notification.userInfo as! AnyObject
+        let url = obj["url"] as! String
         
-        // clear
-        self.data = NSMutableData()
-        
-        let urlPath = "https://youtube.com/get_video_info?video_id=" + id
-        let url = NSURL(string: urlPath)!
-        let request = NSURLRequest(URL: url)
-        
-        if (youTubeDataRequest != nil) {
-            youTubeDataRequest.cancel()
+        if (streamController != nil) {
+            streamController.stopObservingStreamPlayer()
         }
-        
-        youTubeDataRequest = NSURLConnection(request: request, delegate: self, startImmediately: true)
-    }
-    
-    func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
-        self.data.appendData(data)
-    }
-    func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
-        onError(error)
-    }
-    
-    func connectionDidFinishLoading(connection: NSURLConnection!) {
-        print("YouTube data loaded from " + connection.currentRequest.URL!.absoluteString)
-        
-        // split data from YouTube
-        let datastring = NSString(data: data, encoding: NSUTF8StringEncoding)
-        let arr = datastring?.componentsSeparatedByString("&") as Array!
-        
-        // search for "hlsvp"
-        for part in arr {
-            var varArr = part.componentsSeparatedByString("=")
-            
-            if (varArr[0] == "hlsvp") {
-                // found video url, display it
-                let foo = varArr[1]
-                
-                if (streamController != nil) {
-                    streamController.stopObservingStreamPlayer()
-                }
-                
-                streamController = StreamController()
-                streamController.subscribeToObservers(self)
-                streamController.setStream(foo.stringByRemovingPercentEncoding!)
-                
-                break
-            }
-        }
+
+        streamController = StreamController()
+        streamController.subscribeToObservers(self)
+        streamController.setStream(url)
     }
     
     func onMenu(sender: UITapGestureRecognizer) {
