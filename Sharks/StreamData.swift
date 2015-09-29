@@ -10,36 +10,30 @@ import UIKit
 
 class StreamData: NSObject {
     var endpoint = "https://youtube.com/get_video_info?video_id"
-    var connection:NSURLConnection!
-    var data:NSMutableData!
+    var session = NSURLSession.sharedSession()
+    var task:NSURLSessionDataTask!
     
     func connect(id: String) {
-        // clear
-        self.data = NSMutableData()
-        
         let urlPath = endpoint + "=" + id
         let url = NSURL(string: urlPath)!
-        let request = NSURLRequest(URL: url)
         
-        if (connection != nil) {
-            connection.cancel()
-        }
+        session.invalidateAndCancel()
         
-        connection = NSURLConnection(request: request, delegate: self, startImmediately: true)
+        task = session.dataTaskWithURL(url, completionHandler: {
+            data, response, error -> Void in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.onComplete(data, response: response, error: error)
+            }
+        })
+        task.resume()
     }
     
-    func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
-        self.data.appendData(data)
-    }
-    func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
-        NSNotificationCenter.defaultCenter().postNotificationName("dataError", object: nil)
-    }
-    
-    func connectionDidFinishLoading(connection: NSURLConnection!) {
-        print("YouTube data loaded from " + connection.currentRequest.URL!.absoluteString)
+    func onComplete(data: NSData?, response: NSURLResponse?, error: NSError?) {
+        print("data loaded from " + (response!.URL?.absoluteString)!)
         
         // split data from YouTube
-        let datastring = NSString(data: data, encoding: NSUTF8StringEncoding)
+        let datastring = NSString(data: data!, encoding: NSUTF8StringEncoding)
         let arr = datastring?.componentsSeparatedByString("&") as Array!
         
         // search for "hlsvp"
