@@ -30,6 +30,11 @@ class StreamData: NSObject {
     }
     
     func onComplete(data: NSData?, response: NSURLResponse?, error: NSError?) {
+        if (error != nil) {
+            NSNotificationCenter.defaultCenter().postNotificationName("dataError", object: nil)
+            return
+        }
+        
         print("data loaded from " + (response!.URL?.absoluteString)!)
         
         // split data from YouTube

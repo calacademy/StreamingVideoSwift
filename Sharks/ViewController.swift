@@ -10,20 +10,24 @@ import UIKit
 import AVKit
 
 class ViewController: UIViewController {
+    // add logo and interaction once only
     var isFirstPlay = true
+    
+    // so observers can distinguish errors from new streams
     var isPlaying = false
+    
+    // prevent crazy clicks
     var isTransitioning = true
     
-    var youTubeDataRequest:NSURLConnection!
-    var data = NSMutableData()
     var buffering = Buffering(image: nil)
     var currentStreamIndex = 0
     var streams:[[String:String]]!
+    
     var logo:UIImageView!
+    var streamViewContainer = UIView()
     
     var streamData = StreamData()
     var streamController:StreamController!
-    var streamViewContainer = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +88,17 @@ class ViewController: UIViewController {
     
     func onError(e: NSError) {
         print(e)
+        
+        switch e.domain {
+            case "playbackBufferEmpty":
+                // @todo
+                // track attempts
+                print("attempting to reload…")
+                isPlaying = false
+                loadYouTubeData(streams[currentStreamIndex]["id"]!)
+            default:
+                break
+        }
     }
     
     func onData(notification: NSNotification) {
