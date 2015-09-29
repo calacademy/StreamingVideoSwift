@@ -72,9 +72,9 @@ class ViewController: UIViewController {
             logo.removeFromSuperview()
         }
         
+        isTransitioning = false
         isPlaying = false
         isFirstPlay = true
-        isTransitioning = false
     }
     
     func onRestart() {

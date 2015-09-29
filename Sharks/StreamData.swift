@@ -14,8 +14,7 @@ class StreamData: NSObject {
     var task:NSURLSessionDataTask!
     
     func connect(id: String) {
-        let urlPath = endpoint + "=" + id
-        let url = NSURL(string: urlPath)!
+        let url = NSURL(string: endpoint + "=" + id)!
         
         session.invalidateAndCancel()
         
@@ -26,6 +25,7 @@ class StreamData: NSObject {
                 self.onComplete(data, response: response, error: error)
             }
         })
+        
         task.resume()
     }
     
