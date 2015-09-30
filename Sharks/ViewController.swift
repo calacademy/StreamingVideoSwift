@@ -13,9 +13,6 @@ class ViewController: UIViewController {
     // add logo and interaction once only
     var isFirstPlay = true
     
-    // so observers can distinguish errors from new streams
-    var isPlaying = false
-    
     // prevent crazy clicks
     var isTransitioning = true
     
@@ -31,9 +28,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeStaleViews", name:"streamVisible", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onStreamPlay", name:"streamPlaying", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onStreamVisible", name:"streamVisible", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onStreamError:", name:"streamError", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onDataError", name:"dataError", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onData:", name:"dataLoaded", object: nil)
+        
         self.view.addSubview(streamViewContainer)
         
         // @todo
@@ -73,7 +74,6 @@ class ViewController: UIViewController {
         }
         
         isTransitioning = false
-        isPlaying = false
         isFirstPlay = true
     }
     
@@ -86,17 +86,25 @@ class ViewController: UIViewController {
         onError(NSError(domain: "dataError", code: 1, userInfo: nil))
     }
     
-    func onError(e: NSError) {
-        print(e)
+    func onStreamError(notification: NSNotification) {
+        let obj = notification.userInfo as! AnyObject
+        let error = obj["error"] as! NSError
         
+        onError(error)
+    }
+    
+    func onError(e: NSError) {
+        // @todo
+        // track attempts
         switch e.domain {
+            case "dataError":
+                print("dataError")
             case "playbackBufferEmpty":
-                // @todo
-                // track attempts
-                print("attempting to reload…")
-                isPlaying = false
+                print("buffer empty. attempting to reload…")
                 loadYouTubeData(streams[currentStreamIndex]["id"]!)
             default:
+                print("unknown stream error. attempting to reload…")
+                loadYouTubeData(streams[currentStreamIndex]["id"]!)
                 break
         }
     }
@@ -106,12 +114,45 @@ class ViewController: UIViewController {
         let url = obj["url"] as! String
         
         if (streamController != nil) {
-            streamController.stopObservingStreamPlayer()
+            streamController.stopKVO()
         }
-
+        
         streamController = StreamController()
-        streamController.subscribeToObservers(self)
         streamController.setStream(url)
+    }
+    
+    func onStreamPlay() {
+        buffer(false)
+        streamController.addToView(streamViewContainer)
+        
+        if (isFirstPlay) {
+            addLogo()
+            addInteraction()
+            isFirstPlay = false;
+        }
+    }
+    
+    func onStreamVisible() {
+        // remove stale views
+        var viewsToRemove = streamViewContainer.subviews
+        
+        if (viewsToRemove.count == 1) {
+            isTransitioning = false
+            return
+        }
+        
+        streamController.stopKVO()
+        
+        // keep the last (top)
+        viewsToRemove.removeAtIndex(viewsToRemove.count - 1)
+        
+        for view in viewsToRemove {
+            view.removeFromSuperview()
+        }
+        
+        // re-enable stream listeners
+        streamController.startKVO()
+        isTransitioning = false
     }
     
     func onMenu(sender: UITapGestureRecognizer) {
@@ -125,8 +166,6 @@ class ViewController: UIViewController {
         if (isTransitioning) {
             return
         }
-        
-        isPlaying = false
         
         // placeholder functionality
         currentStreamIndex++
@@ -207,68 +246,6 @@ class ViewController: UIViewController {
         
         // add to stage
         self.view.addSubview(logo)
-    }
-    
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        let player = streamController.player!
-        let stream = player.currentItem!
-        
-        if (keyPath == "status") {
-            switch stream.status {
-                case .Unknown:
-                    if (stream.error != nil) {
-                        onError(stream.error!)
-                    }
-                case .Failed:
-                    onError(stream.error!)
-                default:
-                    break
-            }
-        }
-        
-        if (keyPath == "playbackBufferEmpty") {
-            if (stream.playbackBufferEmpty && isPlaying) {
-                onError(NSError(domain: "playbackBufferEmpty", code: 1, userInfo: nil))
-            }
-            if (!stream.playbackBufferEmpty && !isPlaying) {
-                onPlay()
-            }
-        }
-    }
-    
-    func onPlay() {
-        buffer(false)
-                
-        isPlaying = true
-        streamController.addToView(streamViewContainer)
-        
-        if (isFirstPlay) {
-            addLogo()
-            addInteraction()
-            isFirstPlay = false;
-        }
-    }
-    
-    func removeStaleViews() {
-        var viewsToRemove = streamViewContainer.subviews
-        
-        if (viewsToRemove.count == 1) {
-            isTransitioning = false
-            return
-        }
-        
-        streamController.stopObservingStreamPlayer()
-        
-        // keep the last (top)
-        viewsToRemove.removeAtIndex(viewsToRemove.count - 1)
-        
-        for view in viewsToRemove {
-            view.removeFromSuperview()
-        }
-        
-        // re-enable stream listeners
-        streamController.startObservingStreamPlayer()
-        isTransitioning = false
     }
     
     func buffer(boo: Bool) {
