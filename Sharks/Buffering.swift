@@ -10,7 +10,7 @@ import UIKit
 
 class Buffering: UIImageView {
     var onStage:Bool = false
-    var timer:NSTimer!
+    private var _timer:NSTimer!
     
     override init(image: UIImage?) {
         let logo = UIImage(named: "buffering.png")
@@ -20,16 +20,16 @@ class Buffering: UIImageView {
     }
     
     func show(boo: Bool, view: UIView) {
-        if (timer != nil) {
-            timer.invalidate()
-            timer = nil
+        if (_timer != nil) {
+            _timer.invalidate()
+            _timer = nil
         }
         
         if (boo) {
             view.addSubview(self)
         } else {
             // delay before removing
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: "removeFromSuperview", userInfo: nil, repeats: false)
+            self._timer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: "removeFromSuperview", userInfo: nil, repeats: false)
         }
     }
     

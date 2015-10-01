@@ -9,7 +9,7 @@
 import AVKit
 
 class StreamController: AVPlayerViewController {
-    var isPlaying = false
+    private var _isPlaying = false
     
     func addToView(container: UIView) {
         // size
@@ -31,9 +31,30 @@ class StreamController: AVPlayerViewController {
         
     }
     
+    func removeStaleViews(container: UIView) {
+        // remove stale views
+        var viewsToRemove = container.subviews
+        
+        if (viewsToRemove.count == 1) {
+            return
+        }
+        
+        _stopKVO()
+        
+        // keep the last (top)
+        viewsToRemove.removeAtIndex(viewsToRemove.count - 1)
+        
+        for view in viewsToRemove {
+            view.removeFromSuperview()
+        }
+        
+        // re-enable stream listeners
+        _startKVO()
+    }
+    
     func setStream(path: String) {
-        isPlaying = false
-        stopKVO()
+        _isPlaying = false
+        _stopKVO()
         
         let url:NSURL = NSURL(string: path)!
         let streamPlayer = AVPlayer(URL: url)
@@ -41,7 +62,7 @@ class StreamController: AVPlayerViewController {
         self.player = streamPlayer
         self.showsPlaybackControls = false
         
-        startKVO()
+        _startKVO()
         streamPlayer.play()
     }
     
@@ -53,44 +74,44 @@ class StreamController: AVPlayerViewController {
             switch stream.status {
             case .Unknown:
                 if (stream.error != nil) {
-                    onError(stream.error!)
+                    _onError(stream.error!)
                 }
             case .Failed:
-                onError(stream.error!)
+                _onError(stream.error!)
             default:
                 break
             }
         }
         
         if (keyPath == "playbackBufferEmpty") {
-            if (stream.playbackBufferEmpty && isPlaying) {
-                onError(NSError(domain: "playbackBufferEmpty", code: 1, userInfo: nil))
+            if (stream.playbackBufferEmpty && _isPlaying) {
+                _onError(NSError(domain: "playbackBufferEmpty", code: 1, userInfo: nil))
             }
-            if (!stream.playbackBufferEmpty && !isPlaying) {
-                onPlay()
+            if (!stream.playbackBufferEmpty && !_isPlaying) {
+                _onPlay()
             }
         }
     }
     
-    func onPlay() {
-        isPlaying = true
+    private func _onPlay() {
+        _isPlaying = true
         NSNotificationCenter.defaultCenter().postNotificationName("streamPlaying", object: nil)
     }
     
-    func onError(e: NSError) {
-        isPlaying = false
+    private func _onError(e: NSError) {
+        _isPlaying = false
         
         NSNotificationCenter.defaultCenter().postNotificationName("streamError", object: nil, userInfo: [
             "error": e
         ])
     }
     
-    func startKVO() {
+    private func _startKVO() {
         self.player!.currentItem!.addObserver(self, forKeyPath:"playbackBufferEmpty", options:.Initial, context:nil)
         self.player!.currentItem!.addObserver(self, forKeyPath:"status", options:.Initial, context:nil)
     }
     
-    func stopKVO() {
+    private func _stopKVO() {
         if (self.player != nil) {
             self.player!.currentItem!.removeObserver(self, forKeyPath:"playbackBufferEmpty")
             self.player!.currentItem!.removeObserver(self, forKeyPath:"status")
@@ -98,8 +119,12 @@ class StreamController: AVPlayerViewController {
     }
     
     func destroy() {
-        isPlaying = false
-        stopKVO()
+        _isPlaying = false
+        _stopKVO()
+    }
+    
+    func destroyAndRemove() {
+        destroy()
         
         if (self.player != nil) {
             self.player = nil

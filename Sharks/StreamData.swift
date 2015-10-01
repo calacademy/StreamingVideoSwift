@@ -9,27 +9,26 @@
 import UIKit
 
 class StreamData: NSObject {
-    var endpoint = "https://youtube.com/get_video_info?video_id"
-    var session = NSURLSession.sharedSession()
-    var task:NSURLSessionDataTask!
+    private var _endpoint = "https://youtube.com/get_video_info?video_id"
+    private var _session = NSURLSession.sharedSession()
+    private var _task:NSURLSessionDataTask!
     
     func connect(id: String) {
-        let url = NSURL(string: endpoint + "=" + id)!
+        destroy()
+        let url = NSURL(string: _endpoint + "=" + id)!
         
-        session.invalidateAndCancel()
-        
-        task = session.dataTaskWithURL(url, completionHandler: {
+        _task = _session.dataTaskWithURL(url, completionHandler: {
             data, response, error -> Void in
             
             dispatch_async(dispatch_get_main_queue()) {
-                self.onComplete(data, response: response, error: error)
+                self._onComplete(data, response: response, error: error)
             }
         })
         
-        task.resume()
+        _task.resume()
     }
     
-    func onComplete(data: NSData?, response: NSURLResponse?, error: NSError?) {
+    private func _onComplete(data: NSData?, response: NSURLResponse?, error: NSError?) {
         if (error != nil) {
             NSNotificationCenter.defaultCenter().postNotificationName("dataError", object: nil)
             return
@@ -59,5 +58,9 @@ class StreamData: NSObject {
         
         // stream data not found
         NSNotificationCenter.defaultCenter().postNotificationName("dataError", object: nil)
+    }
+    
+    func destroy() {
+        _session.invalidateAndCancel()
     }
 }

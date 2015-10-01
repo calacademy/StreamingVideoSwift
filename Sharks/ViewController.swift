@@ -62,9 +62,11 @@ class ViewController: UIViewController {
     func onExit() {
         print("onExit")
         
+        streamData.destroy()
+        
         // destroy stream
         if (streamController != nil) {
-            streamController.destroy()
+            streamController.destroyAndRemove()
             streamController = nil
         }
         
@@ -114,7 +116,7 @@ class ViewController: UIViewController {
         let url = obj["url"] as! String
         
         if (streamController != nil) {
-            streamController.stopKVO()
+            streamController.destroy()
         }
         
         streamController = StreamController()
@@ -133,25 +135,7 @@ class ViewController: UIViewController {
     }
     
     func onStreamVisible() {
-        // remove stale views
-        var viewsToRemove = streamViewContainer.subviews
-        
-        if (viewsToRemove.count == 1) {
-            isTransitioning = false
-            return
-        }
-        
-        streamController.stopKVO()
-        
-        // keep the last (top)
-        viewsToRemove.removeAtIndex(viewsToRemove.count - 1)
-        
-        for view in viewsToRemove {
-            view.removeFromSuperview()
-        }
-        
-        // re-enable stream listeners
-        streamController.startKVO()
+        streamController.removeStaleViews(streamViewContainer)
         isTransitioning = false
     }
     
