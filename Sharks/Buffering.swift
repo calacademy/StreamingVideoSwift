@@ -13,7 +13,7 @@ class Buffering: UIImageView {
     private var _timer:NSTimer!
     
     override init(image: UIImage?) {
-        let logo = UIImage(named: "buffering.png")
+        let logo = UIImage(named: "buffering")
         super.init(image: logo)
         
         _place()

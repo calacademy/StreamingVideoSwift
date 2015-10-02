@@ -214,7 +214,7 @@ class ViewController: UIViewController {
         let w:CGFloat = 220
         let h:CGFloat = 320
         
-        let image = UIImage(named: "logo.png")
+        let image = UIImage(named: "logo")
         logo = UIImageView(image: image!)
         
         // place
