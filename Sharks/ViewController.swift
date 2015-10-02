@@ -129,6 +129,7 @@ class ViewController: UIViewController {
         
         if (isFirstPlay) {
             addLogo()
+            addMenu()
             addInteraction()
             isFirstPlay = false;
         }
@@ -230,6 +231,16 @@ class ViewController: UIViewController {
         
         // add to stage
         self.view.addSubview(logo)
+    }
+    
+    func addMenu() {
+        let btn = SwitchButton()
+        btn.setup(label: "Lorem ipsum", pic: "lagoon")
+        
+        btn.frame.origin.x = 30
+        btn.frame.origin.y = 30
+        
+        self.view.addSubview(btn)
     }
     
     func buffer(boo: Bool) {
