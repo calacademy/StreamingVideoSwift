@@ -16,6 +16,7 @@
 		E8D2903B1BB5A23400AF8B06 /* StreamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D2903A1BB5A23400AF8B06 /* StreamController.swift */; };
 		E8DC23021BBEF8C3006CE476 /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */; };
 		E8DC23111BBF2372006CE476 /* Whitney-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */; };
+		E8FB95311BC2F77B0090552C /* SwitchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB95301BC2F77B0090552C /* SwitchMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		E8D2903A1BB5A23400AF8B06 /* StreamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamController.swift; sourceTree = "<group>"; };
 		E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchButton.swift; sourceTree = "<group>"; };
 		E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Whitney-Semibold.otf"; sourceTree = "<group>"; };
+		E8FB95301BC2F77B0090552C /* SwitchMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				E885CE3A1BB45F65005A0721 /* Buffering.swift */,
 				E8D2903A1BB5A23400AF8B06 /* StreamController.swift */,
 				E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */,
+				E8FB95301BC2F77B0090552C /* SwitchMenu.swift */,
 			);
 			path = Sharks;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			files = (
 				E8A104481BAC6B8A000F6736 /* ViewController.swift in Sources */,
 				E8DC23021BBEF8C3006CE476 /* SwitchButton.swift in Sources */,
+				E8FB95311BC2F77B0090552C /* SwitchMenu.swift in Sources */,
 				E890771E1BB9CF2C00F6F1B5 /* StreamData.swift in Sources */,
 				E8D2903B1BB5A23400AF8B06 /* StreamController.swift in Sources */,
 				E8A104461BAC6B8A000F6736 /* AppDelegate.swift in Sources */,

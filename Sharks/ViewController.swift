@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     var logo:UIImageView!
     var streamViewContainer = UIView()
     
+    var menu = SwitchMenu()
     var streamData = StreamData()
     var streamController:StreamController!
     
@@ -42,14 +43,17 @@ class ViewController: UIViewController {
         streams = [
             [
                 "id": "jyWHDIECRYQ",
-                "label": "Reef View"
+                "label": "Reef View",
+                "asset": "lagoon"
             ],
             [
                 "id": "TStjLJIc3DY",
-                "label": "Lagoon View"
+                "label": "Lagoon View",
+                "asset": "lagoon"
             ]
         ]
         
+        menu.streams = streams
         loadYouTubeData(streams[currentStreamIndex]["id"]!)
     }
     
@@ -74,6 +78,8 @@ class ViewController: UIViewController {
         if (logo != nil) {
             logo.removeFromSuperview()
         }
+        
+        menu.removeFromSuperview()
         
         isTransitioning = false
         isFirstPlay = true
@@ -129,19 +135,27 @@ class ViewController: UIViewController {
         
         if (isFirstPlay) {
             addLogo()
-            addMenu()
             addInteraction()
             isFirstPlay = false;
         }
     }
     
     func onStreamVisible() {
-        streamController.removeStaleViews(streamViewContainer)
+        if (streamController != nil) {
+            streamController.removeStaleViews(streamViewContainer)
+        }
+        
         isTransitioning = false
     }
     
     func onMenu(sender: UITapGestureRecognizer) {
         print("onMenu")
+        
+        // add menu
+        self.view.addSubview(menu)
+        
+        // select active
+        menu.select(streams[currentStreamIndex]["id"]!, animate: false)
         
         // re-enable default menu button behavior
         self.view.removeGestureRecognizer(sender)
@@ -231,16 +245,6 @@ class ViewController: UIViewController {
         
         // add to stage
         self.view.addSubview(logo)
-    }
-    
-    func addMenu() {
-        let btn = SwitchButton()
-        btn.setup(label: "Lorem ipsum", pic: "lagoon")
-        
-        btn.frame.origin.x = 30
-        btn.frame.origin.y = 30
-        
-        self.view.addSubview(btn)
     }
     
     func buffer(boo: Bool) {

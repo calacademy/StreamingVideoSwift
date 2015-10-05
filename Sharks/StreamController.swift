@@ -35,7 +35,7 @@ class StreamController: AVPlayerViewController {
         // remove stale views
         var viewsToRemove = container.subviews
         
-        if (viewsToRemove.count == 1) {
+        if (viewsToRemove.count <= 1) {
             return
         }
         

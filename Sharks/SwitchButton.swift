@@ -15,6 +15,10 @@ class SwitchButton: UIView {
     private var _arrow:UIImageView!
     private var _border:UIView!
     private var _label:UILabel!
+    private var _overlay:UIView!
+    
+    var isActive:Bool = true
+    var id:String!
     
     override init(frame: CGRect) {
         let frame = CGRect(x: 0, y: 0, width: _w, height: _w)
@@ -23,8 +27,10 @@ class SwitchButton: UIView {
         self.backgroundColor = UIColor.blackColor()
     }
     
-    func setup(label myLabel: NSString, pic myPic: NSString) {
-        _pic = UIImageView(image: UIImage(named: myPic as String))
+    func setup(id myID: String, label myLabel: String, pic myPic: String) {
+        self.id = myID
+        
+        _pic = UIImageView(image: UIImage(named: myPic))
         self.addSubview(_pic)
         
         _addGradient()
@@ -32,11 +38,42 @@ class SwitchButton: UIView {
         _addLabel(myLabel)
         
         // @see http://stackoverflow.com/questions/28934948/how-to-animate-bordercolor-change-in-swift
-        _border = UIView(frame: frame)
+        _border = UIView(frame: self.frame)
         _border.layer.borderColor = UIColor.whiteColor().CGColor
         _border.layer.borderWidth = _borderWidth
         self.addSubview(_border)
         
+        _overlay = UIView(frame: self.frame)
+        _overlay.backgroundColor = UIColor.blackColor()
+        self.addSubview(_overlay)
+        
+        deactivate(false)
+    }
+    
+    func destroy() {
+        self.removeFromSuperview()
+    }
+    
+    func activate(animate: Bool) {
+        if (isActive) {
+            return
+        }
+        
+        _overlay.alpha = 0
+        _arrow.alpha = 0.7
+        _border.layer.borderColor = UIColor(red: 0, green: 255, blue: 255, alpha: 1).CGColor
+        isActive = true
+    }
+    
+    func deactivate(animate: Bool) {
+        if (!isActive) {
+            return
+        }
+        
+        _overlay.alpha = 0.25
+        _arrow.alpha = 0
+        _border.layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1).CGColor
+        isActive = false
     }
     
     private func _addGradient() {
