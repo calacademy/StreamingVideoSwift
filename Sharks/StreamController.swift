@@ -11,6 +11,17 @@ import AVKit
 class StreamController: AVPlayerViewController {
     private var _isPlaying = false
     
+    init() {
+        super.init(nibName:nil, bundle:nil)
+        
+        self.showsPlaybackControls = false
+        self.view.userInteractionEnabled = false
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     func addToView(container: UIView) {
         // size
         let bounds: CGRect = UIScreen.mainScreen().bounds
@@ -60,7 +71,6 @@ class StreamController: AVPlayerViewController {
         let streamPlayer = AVPlayer(URL: url)
         streamPlayer.muted = true
         self.player = streamPlayer
-        self.showsPlaybackControls = false
         
         _startKVO()
         streamPlayer.play()

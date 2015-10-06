@@ -202,6 +202,7 @@ class ViewController: UIViewController {
         // tap
         let selectRecognizer = UITapGestureRecognizer(target: self, action:"onSelect:")
         selectRecognizer.allowedPressTypes = [
+            NSNumber(integer: UIPressType.PlayPause.rawValue),
             NSNumber(integer: UIPressType.Select.rawValue)
         ];
         self.view.addGestureRecognizer(selectRecognizer)
