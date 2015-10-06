@@ -15,6 +15,8 @@ class StreamController: AVPlayerViewController {
         super.init(nibName:nil, bundle:nil)
         
         self.showsPlaybackControls = false
+        
+        // can't override play/pause button without this
         self.view.userInteractionEnabled = false
     }
     
