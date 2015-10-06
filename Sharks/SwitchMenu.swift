@@ -12,6 +12,9 @@ class SwitchMenu: UIView {
     private var _margin:CGFloat = 30
     private var _buttons:[SwitchButton]!
     
+    var onStage:Bool = false
+    var currentIndex:Int = 0
+    
     var streams:[[String:String]] = [] {
         willSet (newStreams) {
             // clear all
@@ -56,13 +59,50 @@ class SwitchMenu: UIView {
     
     func select(id:String, animate:Bool) {
         if (_buttons != nil) {
-            for btn in _buttons {
+            for (i, btn) in _buttons.enumerate() {
                 if (btn.id == id) {
                     btn.activate(animate)
+                    currentIndex = i
                 } else {
                     btn.deactivate(animate)
                 }
             }
+        }
+    }
+    
+    func navigate(direction:String) {
+        var i = currentIndex
+        
+        // increment
+        if (direction == "left") {
+            i--
+        } else {
+            i++
+        }
+        
+        // left
+        if (i < 0) {
+            return
+        }
+        
+        // right
+        if (i > _buttons.count - 1) {
+            return
+        }
+        
+        select(_buttons[i].id, animate: true)
+    }
+    
+    override func willMoveToSuperview(newSuperview: UIView?) {
+        if (self.superview == nil) {
+            onStage = true
+            NSNotificationCenter.defaultCenter().postNotificationName("overlayVisible", object: nil)
+        }
+    }
+    override func didMoveToSuperview() {
+        if (self.superview == nil) {
+            onStage = false
+            NSNotificationCenter.defaultCenter().postNotificationName("overlayHidden", object: nil)
         }
     }
     

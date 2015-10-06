@@ -149,46 +149,56 @@ class ViewController: UIViewController {
     }
     
     func onMenu(sender: UITapGestureRecognizer) {
-        print("onMenu")
+        // select current stream
+        menu.select(streams[currentStreamIndex]["id"]!, animate: false)
         
         // add menu
         self.view.addSubview(menu)
-        
-        // select active
-        menu.select(streams[currentStreamIndex]["id"]!, animate: false)
         
         // re-enable default menu button behavior
         self.view.removeGestureRecognizer(sender)
     }
     
     func onSelect(sender: UITapGestureRecognizer) {
-        if (isTransitioning) {
-            return
+        if (currentStreamIndex != menu.currentIndex) {
+            // prevent crazy clicks
+            if (!isTransitioning) {
+                // switch streams
+                currentStreamIndex = menu.currentIndex
+                loadYouTubeData(streams[currentStreamIndex]["id"]!)
+            }
         }
         
-        // placeholder functionality
-        currentStreamIndex++
+        // remove menu
+        menu.removeFromSuperview()
         
-        if (currentStreamIndex >= streams.count) {
-            currentStreamIndex = 0;
-        }
-        
-        loadYouTubeData(streams[currentStreamIndex]["id"]!)
+        // re-enable menu button
+        addMenuButtonInteraction()
     }
     
     func onSwipe(sender: UISwipeGestureRecognizer) {
         switch sender.direction {
-            case UISwipeGestureRecognizerDirection.Left:
-                print("left")
-            case UISwipeGestureRecognizerDirection.Right:
-                print("right")
-            case UISwipeGestureRecognizerDirection.Up:
-                print("up")
-            case UISwipeGestureRecognizerDirection.Down:
-                print("down")
+            case UISwipeGestureRecognizerDirection.Left,
+            UISwipeGestureRecognizerDirection.Down:
+                menu.navigate("left")
+            case UISwipeGestureRecognizerDirection.Right,
+            UISwipeGestureRecognizerDirection.Up:
+                menu.navigate("right")
             default:
                 print("unknown")
         }
+    }
+    
+    func addMenuButtonInteraction() {
+        // while debugging, a double-tap on the menu button is required to exit app
+        // @see https://developer.apple.com/library/prerelease/tvos/releasenotes/General/RN-tvOSSDK-9.0/index.html
+        let menuRecognizer = UITapGestureRecognizer(target: self, action:"onMenu:")
+        
+        menuRecognizer.allowedPressTypes = [
+            NSNumber(integer: UIPressType.Menu.rawValue)
+        ];
+        
+        self.view.addGestureRecognizer(menuRecognizer)
     }
     
     func addInteraction() {
@@ -199,6 +209,9 @@ class ViewController: UIViewController {
             }
         }
         
+        // menu
+        addMenuButtonInteraction()
+        
         // tap
         let selectRecognizer = UITapGestureRecognizer(target: self, action:"onSelect:")
         selectRecognizer.allowedPressTypes = [
@@ -206,15 +219,6 @@ class ViewController: UIViewController {
             NSNumber(integer: UIPressType.Select.rawValue)
         ];
         self.view.addGestureRecognizer(selectRecognizer)
-        
-        // menu
-        // while debugging, a double-tap on the menu button is required to exit app
-        // @see https://developer.apple.com/library/prerelease/tvos/releasenotes/General/RN-tvOSSDK-9.0/index.html
-        let menuRecognizer = UITapGestureRecognizer(target: self, action:"onMenu:")
-        menuRecognizer.allowedPressTypes = [
-            NSNumber(integer: UIPressType.Menu.rawValue)
-        ];
-        self.view.addGestureRecognizer(menuRecognizer)
         
         // swipe
         let directions = [UISwipeGestureRecognizerDirection.Right, UISwipeGestureRecognizerDirection.Left, UISwipeGestureRecognizerDirection.Up, UISwipeGestureRecognizerDirection.Down];

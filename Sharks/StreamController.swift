@@ -82,14 +82,12 @@ class StreamController: AVPlayerViewController {
         
         if (keyPath == "status") {
             switch stream.status {
-            case .Unknown:
-                if (stream.error != nil) {
-                    _onError(stream.error!)
-                }
-            case .Failed:
-                _onError(stream.error!)
-            default:
-                break
+                case .Unknown, .Failed:
+                    if (stream.error != nil) {
+                        _onError(stream.error!)
+                    }
+                default:
+                    break
             }
         }
         

@@ -16,7 +16,27 @@ class Buffering: UIImageView {
         let logo = UIImage(named: "buffering")
         super.init(image: logo)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOverlayVisible", name:"overlayVisible", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOverlayHidden", name:"overlayHidden", object: nil)
+        
         _place()
+    }
+    
+    func onOverlayVisible() {
+        if (onStage) {
+            // self.layer.removeAllAnimations()
+            self.alpha = 0
+        }
+    }
+    
+    func onOverlayHidden() {
+        if (onStage) {
+            // self.layer.removeAllAnimations()
+            
+            UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+                self.alpha = 1
+            }, completion: nil)
+        }
     }
     
     func show(boo: Bool, view: UIView) {
