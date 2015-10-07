@@ -40,9 +40,7 @@ class SwitchMenu: UIView {
                 btn.frame.origin.x += round((w / 2) - (((CGFloat(streams.count) * (btn.frame.size.width + _margin)) - _margin) / 2))
                 
                 // spacing
-                if (i > 0) {
-                    btn.frame.origin.x += _margin
-                }
+                btn.frame.origin.x += _margin * CGFloat(i)
                 
                 _buttons.append(btn)
                 self.addSubview(btn)
