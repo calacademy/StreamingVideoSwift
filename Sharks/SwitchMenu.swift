@@ -112,7 +112,7 @@ class SwitchMenu: UIView {
             // fade in bg
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
             
-            UIView.animateWithDuration(0.85, delay: 0, options: .CurveEaseOut, animations: {
+            UIView.animateWithDuration(0.6, delay: 0, options: .CurveEaseOut, animations: {
                 self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
             }, completion: nil)
             
