@@ -21,6 +21,9 @@ class ViewController: UIViewController {
     var streams:[[String:String]]!
     var menuRecognizer:UIGestureRecognizer!
     
+    let currentStreamIndexDefaultsKey = "currentStreamIndex"
+    var defaults = NSUserDefaults.standardUserDefaults()
+    
     var logo:UIImageView!
     var streamViewContainer = UIView()
     
@@ -55,13 +58,34 @@ class ViewController: UIViewController {
         ]
         
         menu.streams = streams
+        retrieveDefaults()
         loadYouTubeData(streams[currentStreamIndex]["id"]!)
+    }
+    
+    func retrieveDefaults() {
+        var savedIndex = defaults.integerForKey(currentStreamIndexDefaultsKey)
+        
+        // integerForKey returns 0 if key not found
+        if (savedIndex > 0) {
+            print("default stream retrieved: " + String(savedIndex))
+            savedIndex--
+            
+            if (savedIndex >= streams.count) {
+                print("retrieved stream no longer exists")
+                savedIndex = 0
+            }
+        }
+        
+        currentStreamIndex = savedIndex
     }
     
     func loadYouTubeData(id: String){
         isTransitioning = true
         buffer(true)
         streamData.connect(id)
+        
+        // set as default
+        defaults.setInteger(currentStreamIndex + 1, forKey: currentStreamIndexDefaultsKey)
     }
     
     func onExit() {

@@ -121,7 +121,7 @@ class SwitchMenu: UIView {
                 btn.frame.origin.y = targetY + 120
                 btn.alpha = 0
                 
-                let d = CGFloat(i) * 0.15
+                let d = CGFloat(i) * 0.12
                 
                 UIView.animateWithDuration(0.45, delay: Double(d), options: .CurveEaseOut, animations: {
                     btn.frame.origin.y = targetY
