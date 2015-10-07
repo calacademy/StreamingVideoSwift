@@ -107,7 +107,8 @@ class ViewController: UIViewController {
         // track attempts
         switch e.domain {
             case "dataError":
-                print("dataError")
+                print("data error. attempting to reload…")
+                loadYouTubeData(streams[currentStreamIndex]["id"]!)
             case "playbackBufferEmpty":
                 print("buffer empty. attempting to reload…")
                 loadYouTubeData(streams[currentStreamIndex]["id"]!)

@@ -112,7 +112,7 @@ class SwitchMenu: UIView {
             // fade in bg
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
             
-            UIView.animateWithDuration(0.8, delay: 0, options: .CurveEaseOut, animations: {
+            UIView.animateWithDuration(0.85, delay: 0, options: .CurveEaseOut, animations: {
                 self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
             }, completion: nil)
             
@@ -120,16 +120,16 @@ class SwitchMenu: UIView {
             for (i, btn) in _buttons.enumerate() {
                 let targetY = getTargetY(btn)
                 
-                btn.frame.origin.y = targetY + 125
+                btn.frame.origin.y = targetY + 120
                 btn.alpha = 0
                 
                 let d = CGFloat(i) * 0.15
                 
-                UIView.animateWithDuration(0.4, delay: Double(d), options: .CurveEaseOut, animations: {
+                UIView.animateWithDuration(0.45, delay: Double(d), options: .CurveEaseOut, animations: {
                     btn.frame.origin.y = targetY
                 }, completion: nil)
                 
-                UIView.animateWithDuration(0.6, delay: Double(d), options: .CurveEaseOut, animations: {
+                UIView.animateWithDuration(0.65, delay: Double(d), options: .CurveEaseOut, animations: {
                     btn.alpha = 1
                 }, completion: nil)
             }
