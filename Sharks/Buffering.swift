@@ -10,6 +10,7 @@ import UIKit
 
 class Buffering: UIImageView {
     var onStage:Bool = false
+    private var _isOverlayVisible:Bool = false
     private var _timer:NSTimer!
     
     override init(image: UIImage?) {
@@ -23,6 +24,8 @@ class Buffering: UIImageView {
     }
     
     func onOverlayVisible() {
+        _isOverlayVisible = true
+        
         if (onStage) {
             // self.layer.removeAllAnimations()
             self.alpha = 0
@@ -30,6 +33,8 @@ class Buffering: UIImageView {
     }
     
     func onOverlayHidden() {
+        _isOverlayVisible = false
+
         if (onStage) {
             // self.layer.removeAllAnimations()
             
@@ -58,9 +63,11 @@ class Buffering: UIImageView {
             // fade in
             self.alpha = 0
             
-            UIView.animateWithDuration(0.6, delay: 0, options: .CurveEaseOut, animations: {
-                self.alpha = 1
-            }, completion: nil)
+            if (!_isOverlayVisible) {
+                UIView.animateWithDuration(0.6, delay: 0, options: .CurveEaseOut, animations: {
+                    self.alpha = 1
+                }, completion: nil)
+            }
             
             // rotate
             let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
