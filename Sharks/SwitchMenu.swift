@@ -58,6 +58,10 @@ class SwitchMenu: UIView {
     }
     
     func select(id:String, animate:Bool) {
+        if (!onStage) {
+            return
+        }
+        
         if (_buttons != nil) {
             for (i, btn) in _buttons.enumerate() {
                 if (btn.id == id) {
@@ -71,6 +75,10 @@ class SwitchMenu: UIView {
     }
     
     func navigate(direction:String) {
+        if (!onStage) {
+            return
+        }
+        
         var i = currentIndex
         
         // increment

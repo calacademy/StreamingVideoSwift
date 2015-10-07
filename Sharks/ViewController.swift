@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     var buffering = Buffering(image: nil)
     var currentStreamIndex = 0
     var streams:[[String:String]]!
+    var menuRecognizer:UIGestureRecognizer!
     
     var logo:UIImageView!
     var streamViewContainer = UIView()
@@ -149,17 +150,25 @@ class ViewController: UIViewController {
     }
     
     func onMenu(sender: UITapGestureRecognizer) {
-        // select current stream
-        menu.select(streams[currentStreamIndex]["id"]!, animate: false)
-        
         // add menu
         self.view.addSubview(menu)
         
+        // select current stream
+        menu.select(streams[currentStreamIndex]["id"]!, animate: false)
+        
         // re-enable default menu button behavior
-        self.view.removeGestureRecognizer(sender)
+        if (menuRecognizer != nil) {
+            self.view.removeGestureRecognizer(menuRecognizer)
+        }
     }
     
     func onSelect(sender: UITapGestureRecognizer) {
+        // open menu if not visible
+        if (!menu.onStage) {
+            onMenu(sender)
+            return
+        }
+        
         if (currentStreamIndex != menu.currentIndex) {
             // prevent crazy clicks
             if (!isTransitioning) {
@@ -192,7 +201,11 @@ class ViewController: UIViewController {
     func addMenuButtonInteraction() {
         // while debugging, a double-tap on the menu button is required to exit app
         // @see https://developer.apple.com/library/prerelease/tvos/releasenotes/General/RN-tvOSSDK-9.0/index.html
-        let menuRecognizer = UITapGestureRecognizer(target: self, action:"onMenu:")
+        if (menuRecognizer != nil) {
+            self.view.removeGestureRecognizer(menuRecognizer)
+        }
+        
+        menuRecognizer = UITapGestureRecognizer(target: self, action:"onMenu:")
         
         menuRecognizer.allowedPressTypes = [
             NSNumber(integer: UIPressType.Menu.rawValue)
