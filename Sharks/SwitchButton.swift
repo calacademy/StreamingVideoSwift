@@ -59,6 +59,8 @@ class SwitchButton: UIView {
             return
         }
         
+        self._border.layer.borderColor = UIColor(red: 0, green: 255, blue: 255, alpha: 1).CGColor
+        
         if (animate) {
             UIView.animateWithDuration(0.7, delay: 0, options: .CurveEaseOut, animations: {
                 self._pic.transform = CGAffineTransformMakeScale(1.25, 1.25)
@@ -67,13 +69,11 @@ class SwitchButton: UIView {
             UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
                 self._overlay.alpha = 0
                 self._arrow.alpha = 0.7
-                self._border.layer.borderColor = UIColor(red: 0, green: 255, blue: 255, alpha: 1).CGColor
             }, completion: nil)
         } else {
             self._pic.transform = CGAffineTransformMakeScale(1.25, 1.25)
             self._overlay.alpha = 0
             self._arrow.alpha = 0.7
-            self._border.layer.borderColor = UIColor(red: 0, green: 255, blue: 255, alpha: 1).CGColor
         }
 
         isActive = true
@@ -84,18 +84,18 @@ class SwitchButton: UIView {
             return
         }
         
+        self._border.layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1).CGColor
+        
         if (animate) {
             UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
                 self._pic.transform = CGAffineTransformMakeScale(1, 1)
                 self._overlay.alpha = 0.25
                 self._arrow.alpha = 0
-                self._border.layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1).CGColor
             }, completion: nil)
         } else {
             self._pic.transform = CGAffineTransformMakeScale(1, 1)
             self._overlay.alpha = 0.25
             self._arrow.alpha = 0
-            self._border.layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1).CGColor
         }
         
         isActive = false

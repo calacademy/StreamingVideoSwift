@@ -28,14 +28,13 @@ class SwitchMenu: UIView {
         }
         didSet {
             let w = UIScreen.mainScreen().bounds.size.width
-            let h = UIScreen.mainScreen().bounds.size.height
             
             // add
             for (i, stream) in streams.enumerate() {
                 let btn = SwitchButton()
                 btn.setup(id: stream["id"]!, label: stream["label"]!, pic: stream["asset"]!)
                 
-                btn.frame.origin.y = round((h / 2) - (btn.frame.size.height / 2)) - 10
+                // btn.frame.origin.y = getTargetY(btn)
                 
                 btn.frame.origin.x = CGFloat(i) * btn.frame.size.width
                 btn.frame.origin.x += round((w / 2) - (((CGFloat(streams.count) * (btn.frame.size.width + _margin)) - _margin) / 2))
@@ -54,7 +53,11 @@ class SwitchMenu: UIView {
     override init(frame: CGRect) {
         let bounds: CGRect = UIScreen.mainScreen().bounds
         super.init(frame: CGRect(x: 0, y: 0, width: bounds.size.width, height: bounds.size.height))
-        self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+    }
+    
+    func getTargetY(btn: SwitchButton) -> CGFloat {
+        let h = UIScreen.mainScreen().bounds.size.height
+        return (round((h / 2) - (btn.frame.size.height / 2)) - 10)
     }
     
     func select(id:String, animate:Bool) {
@@ -105,6 +108,31 @@ class SwitchMenu: UIView {
         if (self.superview == nil) {
             onStage = true
             NSNotificationCenter.defaultCenter().postNotificationName("overlayVisible", object: nil)
+            
+            // fade in bg
+            self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+            
+            UIView.animateWithDuration(0.8, delay: 0, options: .CurveEaseOut, animations: {
+                self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+            }, completion: nil)
+            
+            // button intro
+            for (i, btn) in _buttons.enumerate() {
+                let targetY = getTargetY(btn)
+                
+                btn.frame.origin.y = targetY + 125
+                btn.alpha = 0
+                
+                let d = CGFloat(i) * 0.15
+                
+                UIView.animateWithDuration(0.4, delay: Double(d), options: .CurveEaseOut, animations: {
+                    btn.frame.origin.y = targetY
+                }, completion: nil)
+                
+                UIView.animateWithDuration(0.6, delay: Double(d), options: .CurveEaseOut, animations: {
+                    btn.alpha = 1
+                }, completion: nil)
+            }
         }
     }
     override func didMoveToSuperview() {
