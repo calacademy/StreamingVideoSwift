@@ -24,7 +24,8 @@ class SwitchButton: UIView {
         let frame = CGRect(x: 0, y: 0, width: _w, height: _w)
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.blackColor()
+        self.layer.masksToBounds = true
+        self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)
     }
     
     func setup(id myID: String, label myLabel: String, pic myPic: String) {
@@ -37,15 +38,14 @@ class SwitchButton: UIView {
         _addArrow()
         _addLabel(myLabel)
         
-        // @see http://stackoverflow.com/questions/28934948/how-to-animate-bordercolor-change-in-swift
+        _overlay = UIView(frame: self.frame)
+        _overlay.backgroundColor = UIColor.blackColor()
+        self.addSubview(_overlay)
+        
         _border = UIView(frame: self.frame)
         _border.layer.borderColor = UIColor.whiteColor().CGColor
         _border.layer.borderWidth = _borderWidth
         self.addSubview(_border)
-        
-        _overlay = UIView(frame: self.frame)
-        _overlay.backgroundColor = UIColor.blackColor()
-        self.addSubview(_overlay)
         
         deactivate(false)
     }
@@ -59,9 +59,23 @@ class SwitchButton: UIView {
             return
         }
         
-        _overlay.alpha = 0
-        _arrow.alpha = 0.7
-        _border.layer.borderColor = UIColor(red: 0, green: 255, blue: 255, alpha: 1).CGColor
+        if (animate) {
+            UIView.animateWithDuration(0.7, delay: 0, options: .CurveEaseOut, animations: {
+                self._pic.transform = CGAffineTransformMakeScale(1.25, 1.25)
+            }, completion: nil)
+            
+            UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+                self._overlay.alpha = 0
+                self._arrow.alpha = 0.7
+                self._border.layer.borderColor = UIColor(red: 0, green: 255, blue: 255, alpha: 1).CGColor
+            }, completion: nil)
+        } else {
+            self._pic.transform = CGAffineTransformMakeScale(1.25, 1.25)
+            self._overlay.alpha = 0
+            self._arrow.alpha = 0.7
+            self._border.layer.borderColor = UIColor(red: 0, green: 255, blue: 255, alpha: 1).CGColor
+        }
+
         isActive = true
     }
     
@@ -70,9 +84,20 @@ class SwitchButton: UIView {
             return
         }
         
-        _overlay.alpha = 0.25
-        _arrow.alpha = 0
-        _border.layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1).CGColor
+        if (animate) {
+            UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+                self._pic.transform = CGAffineTransformMakeScale(1, 1)
+                self._overlay.alpha = 0.25
+                self._arrow.alpha = 0
+                self._border.layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1).CGColor
+            }, completion: nil)
+        } else {
+            self._pic.transform = CGAffineTransformMakeScale(1, 1)
+            self._overlay.alpha = 0.25
+            self._arrow.alpha = 0
+            self._border.layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1).CGColor
+        }
+        
         isActive = false
     }
     

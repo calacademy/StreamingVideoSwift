@@ -45,7 +45,7 @@ class ViewController: UIViewController {
             [
                 "id": "jyWHDIECRYQ",
                 "label": "Reef View",
-                "asset": "lagoon"
+                "asset": "reef"
             ],
             [
                 "id": "TStjLJIc3DY",
