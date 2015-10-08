@@ -37,7 +37,7 @@ class SwitchMenu: UIView {
                 // btn.frame.origin.y = getTargetY(btn)
                 
                 btn.frame.origin.x = CGFloat(i) * btn.frame.size.width
-                btn.frame.origin.x += round((w / 2) - (((CGFloat(streams.count) * (btn.frame.size.width + _margin)) - _margin) / 2))
+                btn.frame.origin.x += round((w - ((CGFloat(streams.count) * (btn.frame.size.width + _margin)) - _margin)) / 2)
                 
                 // spacing
                 btn.frame.origin.x += _margin * CGFloat(i)

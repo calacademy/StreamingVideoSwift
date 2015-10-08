@@ -28,10 +28,17 @@ class SwitchButton: UIView {
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)
     }
     
-    func setup(id myID: String, label myLabel: String, pic myPic: String) {
+    func setup(id myID: String, label myLabel: String, pic asset: String) {
         self.id = myID
         
-        _pic = UIImageView(image: UIImage(named: myPic))
+        if (asset.hasPrefix("http")) {
+            // load remote
+            _pic = UIImageView(image: UIImage(named: "reef"))
+            _pic.download(asset)
+        } else {
+            _pic = UIImageView(image: UIImage(named: asset))
+        }
+        
         self.addSubview(_pic)
         
         _addGradient()
