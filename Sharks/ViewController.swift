@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onHLSData:", name:"hlsDataLoaded", object: nil)
         
         self.view.addSubview(streamViewContainer)
-        streamData.getConfig()
+        loadConfig()
     }
     
     func retrieveDefaults() {
@@ -61,10 +61,16 @@ class ViewController: UIViewController {
         currentStreamIndex = savedIndex
     }
     
-    func loadHLSData(id: String){
+    func loadConfig() {
         isTransitioning = true
         buffer(true)
-        streamData.getHLSPath(id)
+        streamData.getConfig()
+    }
+    
+    func loadHLSData(){
+        isTransitioning = true
+        buffer(true)
+        streamData.getHLSPath(streamData.streams[currentStreamIndex]["id"]!)
         
         // set as default
         defaults.setInteger(currentStreamIndex + 1, forKey: currentStreamIndexDefaultsKey)
@@ -88,13 +94,13 @@ class ViewController: UIViewController {
         
         menu.removeFromSuperview()
         
-        isTransitioning = false
+        isTransitioning = true
         isFirstPlay = true
     }
     
     func onRestart() {
         print("onRestart")
-        loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
+        loadConfig()
     }
     
     func onDataError(notification: NSNotification) {
@@ -117,16 +123,16 @@ class ViewController: UIViewController {
         switch e.domain {
             case "configDataError":
                 print("Config data error. attempting to reload…")
-                streamData.getConfig()
+                loadConfig()
             case "hlsDataError":
                 print("HLS data error. attempting to reload…")
-                loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
+                loadHLSData()
             case "playbackBufferEmpty":
                 print("buffer empty. attempting to reload…")
-                loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
+                loadHLSData()
             default:
                 print("unknown stream error. attempting to reload…")
-                loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
+                loadHLSData()
                 break
         }
     }
@@ -134,7 +140,7 @@ class ViewController: UIViewController {
     func onConfigData(notification: NSNotification) {
         menu.streams = streamData.streams
         retrieveDefaults()
-        loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
+        loadHLSData()
     }
     
     func onHLSData(notification: NSNotification) {
@@ -193,7 +199,7 @@ class ViewController: UIViewController {
             if (!isTransitioning) {
                 // switch streams
                 currentStreamIndex = menu.currentIndex
-                loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
+                loadHLSData()
             }
         }
         
@@ -241,6 +247,11 @@ class ViewController: UIViewController {
             }
         }
         
+        if (streamData.streams.count < 2) {
+            // no need for a menu
+            return
+        }
+        
         // menu
         addMenuButtonInteraction()
         
@@ -249,11 +260,16 @@ class ViewController: UIViewController {
         selectRecognizer.allowedPressTypes = [
             NSNumber(integer: UIPressType.PlayPause.rawValue),
             NSNumber(integer: UIPressType.Select.rawValue)
-        ];
+        ]
         self.view.addGestureRecognizer(selectRecognizer)
         
         // swipe
-        let directions = [UISwipeGestureRecognizerDirection.Right, UISwipeGestureRecognizerDirection.Left, UISwipeGestureRecognizerDirection.Up, UISwipeGestureRecognizerDirection.Down];
+        let directions = [
+            UISwipeGestureRecognizerDirection.Right,
+            UISwipeGestureRecognizerDirection.Left,
+            UISwipeGestureRecognizerDirection.Up,
+            UISwipeGestureRecognizerDirection.Down
+        ]
         
         for direction in directions {
             let swipeRecognizer = UISwipeGestureRecognizer(target: self, action:"onSwipe:")
