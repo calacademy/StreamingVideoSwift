@@ -18,7 +18,6 @@ class ViewController: UIViewController {
     
     var buffering = Buffering(image: nil)
     var currentStreamIndex = 0
-    var streams:[[String:String]]!
     var menuRecognizer:UIGestureRecognizer!
     
     let currentStreamIndexDefaultsKey = "currentStreamIndex"
@@ -37,29 +36,12 @@ class ViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onStreamPlay", name:"streamPlaying", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onStreamVisible", name:"streamVisible", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onStreamError:", name:"streamError", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onDataError", name:"dataError", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onData:", name:"dataLoaded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onDataError:", name:"dataError", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onConfigData:", name:"configDataLoaded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onHLSData:", name:"hlsDataLoaded", object: nil)
         
         self.view.addSubview(streamViewContainer)
-        
-        // @todo
-        // load this off a server
-        streams = [
-            [
-                "id": "jyWHDIECRYQ",
-                "label": "Reef View",
-                "asset": "reef"
-            ],
-            [
-                "id": "TStjLJIc3DY",
-                "label": "Lagoon View",
-                "asset": "lagoon"
-            ]
-        ]
-        
-        menu.streams = streams
-        retrieveDefaults()
-        loadYouTubeData(streams[currentStreamIndex]["id"]!)
+        streamData.getConfig()
     }
     
     func retrieveDefaults() {
@@ -70,7 +52,7 @@ class ViewController: UIViewController {
             print("default stream retrieved: " + String(savedIndex))
             savedIndex--
             
-            if (savedIndex >= streams.count) {
+            if (savedIndex >= streamData.streams.count) {
                 print("retrieved stream no longer exists")
                 savedIndex = 0
             }
@@ -79,10 +61,10 @@ class ViewController: UIViewController {
         currentStreamIndex = savedIndex
     }
     
-    func loadYouTubeData(id: String){
+    func loadHLSData(id: String){
         isTransitioning = true
         buffer(true)
-        streamData.connect(id)
+        streamData.getHLSPath(id)
         
         // set as default
         defaults.setInteger(currentStreamIndex + 1, forKey: currentStreamIndexDefaultsKey)
@@ -112,11 +94,14 @@ class ViewController: UIViewController {
     
     func onRestart() {
         print("onRestart")
-        loadYouTubeData(streams[currentStreamIndex]["id"]!)
+        loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
     }
     
-    func onDataError() {
-        onError(NSError(domain: "dataError", code: 1, userInfo: nil))
+    func onDataError(notification: NSNotification) {
+        let obj = notification.userInfo as! AnyObject
+        let errorDomain = obj["error"] as! String
+        
+        onError(NSError(domain: errorDomain, code: 1, userInfo: nil))
     }
     
     func onStreamError(notification: NSNotification) {
@@ -130,20 +115,29 @@ class ViewController: UIViewController {
         // @todo
         // track attempts
         switch e.domain {
-            case "dataError":
-                print("data error. attempting to reload…")
-                loadYouTubeData(streams[currentStreamIndex]["id"]!)
+            case "configDataError":
+                print("Config data error. attempting to reload…")
+                streamData.getConfig()
+            case "hlsDataError":
+                print("HLS data error. attempting to reload…")
+                loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
             case "playbackBufferEmpty":
                 print("buffer empty. attempting to reload…")
-                loadYouTubeData(streams[currentStreamIndex]["id"]!)
+                loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
             default:
                 print("unknown stream error. attempting to reload…")
-                loadYouTubeData(streams[currentStreamIndex]["id"]!)
+                loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
                 break
         }
     }
     
-    func onData(notification: NSNotification) {
+    func onConfigData(notification: NSNotification) {
+        menu.streams = streamData.streams
+        retrieveDefaults()
+        loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
+    }
+    
+    func onHLSData(notification: NSNotification) {
         let obj = notification.userInfo as! AnyObject
         let url = obj["url"] as! String
         
@@ -179,7 +173,7 @@ class ViewController: UIViewController {
         self.view.addSubview(menu)
         
         // select current stream
-        menu.select(streams[currentStreamIndex]["id"]!, animate: false)
+        menu.select(streamData.streams[currentStreamIndex]["id"]!, animate: false)
         
         // re-enable default menu button behavior
         if (menuRecognizer != nil) {
@@ -199,7 +193,7 @@ class ViewController: UIViewController {
             if (!isTransitioning) {
                 // switch streams
                 currentStreamIndex = menu.currentIndex
-                loadYouTubeData(streams[currentStreamIndex]["id"]!)
+                loadHLSData(streamData.streams[currentStreamIndex]["id"]!)
             }
         }
         

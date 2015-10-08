@@ -17,6 +17,10 @@ class SwitchMenu: UIView {
     
     var streams:[[String:String]] = [] {
         willSet (newStreams) {
+            if (onStage) {
+                return
+            }
+            
             // clear all
             if (_buttons != nil) {
                 for btn in _buttons {
@@ -27,6 +31,10 @@ class SwitchMenu: UIView {
             _buttons = []
         }
         didSet {
+            if (onStage) {
+                return
+            }
+            
             let w = UIScreen.mainScreen().bounds.size.width
             
             // add
@@ -133,6 +141,7 @@ class SwitchMenu: UIView {
             }
         }
     }
+    
     override func didMoveToSuperview() {
         if (self.superview == nil) {
             onStage = false
