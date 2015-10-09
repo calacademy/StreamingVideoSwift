@@ -157,7 +157,7 @@ class ViewController: UIViewController {
         if (isFirstPlay) {
             addLogo()
             addInteraction()
-            isFirstPlay = false;
+            isFirstPlay = false
         }
     }
     

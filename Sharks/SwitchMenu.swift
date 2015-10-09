@@ -63,7 +63,7 @@ class SwitchMenu: UIView {
     
     func getTargetY(btn: SwitchButton) -> CGFloat {
         let h = UIScreen.mainScreen().bounds.size.height
-        return (round((h / 2) - (btn.frame.size.height / 2)) - 10)
+        return round((h - btn.frame.size.height) / 2) - 10
     }
     
     func select(id:String, animate:Bool) {
