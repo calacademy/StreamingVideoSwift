@@ -44,21 +44,21 @@ class ViewController: UIViewController {
         loadConfig()
     }
     
-    func retrieveDefaults() {
+    func getDefaultStreamIndex() -> Int {
         var savedIndex = defaults.integerForKey(currentStreamIndexDefaultsKey)
         
         // integerForKey returns 0 if key not found
         if (savedIndex > 0) {
-            print("default stream retrieved: " + String(savedIndex))
+            print("NSUserDefaults stream retrieved: " + String(savedIndex))
             savedIndex--
             
             if (savedIndex >= streamData.streams.count) {
-                print("retrieved stream no longer exists")
+                print("NSUserDefaults stream no longer exists")
                 savedIndex = 0
             }
         }
         
-        currentStreamIndex = savedIndex
+        return savedIndex
     }
     
     func loadConfig() {
@@ -118,28 +118,23 @@ class ViewController: UIViewController {
     }
     
     func onError(e: NSError) {
-        // @todo
-        // track attempts
         switch e.domain {
             case "configDataError":
-                print("Config data error. attempting to reload…")
-                loadConfig()
+                print("! Config data error")
             case "hlsDataError":
-                print("HLS data error. attempting to reload…")
-                loadHLSData()
+                print("! HLS data error")
             case "playbackBufferEmpty":
-                print("buffer empty. attempting to reload…")
-                loadHLSData()
+                print("! Buffer empty")
             default:
-                print("unknown stream error. attempting to reload…")
-                loadHLSData()
-                break
+                print("! Unknown stream error")
         }
+        
+        loadConfig()
     }
     
     func onConfigData(notification: NSNotification) {
         menu.streams = streamData.streams
-        retrieveDefaults()
+        currentStreamIndex = getDefaultStreamIndex()
         loadHLSData()
     }
     

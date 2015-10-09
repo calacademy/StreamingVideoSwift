@@ -126,16 +126,16 @@ class SwitchMenu: UIView {
             for (i, btn) in _buttons.enumerate() {
                 let targetY = getTargetY(btn)
                 
-                btn.frame.origin.y = targetY + 120
+                btn.frame.origin.y = targetY + 130
                 btn.alpha = 0
                 
                 let d = CGFloat(i) * 0.12
                 
-                UIView.animateWithDuration(0.45, delay: Double(d), options: .CurveEaseOut, animations: {
+                UIView.animateWithDuration(0.4, delay: Double(d), options: .CurveEaseOut, animations: {
                     btn.frame.origin.y = targetY
                 }, completion: nil)
                 
-                UIView.animateWithDuration(0.65, delay: Double(d), options: .CurveEaseOut, animations: {
+                UIView.animateWithDuration(0.6, delay: Double(d), options: .CurveEaseOut, animations: {
                     btn.alpha = 1
                 }, completion: nil)
             }

@@ -13,11 +13,13 @@ class StreamData: NSObject {
     private var _endpoint:String!
     private var _hlsKey:String!
     private var _task:NSURLSessionDataTask!
-    private var _session = NSURLSession.sharedSession()
+    private var _session:NSURLSession!
+    
     var streams:[[String:String]]!
     
     func getHLSPath(id: String) {
         destroy()
+        _session = NSURLSession(configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration())
         
         let url = NSURL(string: _endpoint + "=" + id)!
         
@@ -34,6 +36,7 @@ class StreamData: NSObject {
     
     func getConfig() {
         destroy()
+        _session = NSURLSession(configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration())
         
         let url = NSURL(string: _configEndpoint)!
         
@@ -129,6 +132,8 @@ class StreamData: NSObject {
     }
     
     func destroy() {
-        _session.invalidateAndCancel()
+        if (_session != nil) {
+            _session.invalidateAndCancel()
+        }
     }
 }
