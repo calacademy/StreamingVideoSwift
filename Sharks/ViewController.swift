@@ -31,6 +31,8 @@ class ViewController: UIViewController {
     var streamController:StreamController!
     
     override func viewDidLoad() {
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "launch")!)
+        
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onStreamPlay", name:"streamPlaying", object: nil)
