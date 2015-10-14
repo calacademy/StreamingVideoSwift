@@ -39,6 +39,8 @@ class SwitchButton: UIView {
             _pic = UIImageView(image: UIImage(named: asset))
         }
         
+        _pic.frame.origin.x = -35
+        _pic.frame.origin.y = -35
         self.addSubview(_pic)
         
         _addGradient()
@@ -69,8 +71,8 @@ class SwitchButton: UIView {
         self._border.layer.borderColor = UIColor(red: 0, green: 255, blue: 255, alpha: 1).CGColor
         
         if (animate) {
-            UIView.animateWithDuration(0.7, delay: 0, options: .CurveEaseOut, animations: {
-                self._pic.transform = CGAffineTransformMakeScale(1.25, 1.25)
+            UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+                self._pic.transform = CGAffineTransformMakeScale(0.9, 0.9)
             }, completion: nil)
             
             UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
@@ -78,7 +80,7 @@ class SwitchButton: UIView {
                 self._arrow.alpha = 0.7
             }, completion: nil)
         } else {
-            self._pic.transform = CGAffineTransformMakeScale(1.25, 1.25)
+            self._pic.transform = CGAffineTransformMakeScale(0.9, 0.9)
             self._overlay.alpha = 0
             self._arrow.alpha = 0.7
         }
@@ -94,13 +96,13 @@ class SwitchButton: UIView {
         self._border.layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1).CGColor
         
         if (animate) {
-            UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
-                self._pic.transform = CGAffineTransformMakeScale(1, 1)
+            UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+                self._pic.transform = CGAffineTransformMakeScale(0.8, 0.8)
                 self._overlay.alpha = 0.25
                 self._arrow.alpha = 0
             }, completion: nil)
         } else {
-            self._pic.transform = CGAffineTransformMakeScale(1, 1)
+            self._pic.transform = CGAffineTransformMakeScale(0.8, 0.8)
             self._overlay.alpha = 0.25
             self._arrow.alpha = 0
         }
