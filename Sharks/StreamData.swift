@@ -132,6 +132,10 @@ class StreamData: NSObject {
     }
     
     func destroy() {
+        if (_task != nil) {
+            _task.cancel()
+        }
+        
         if (_session != nil) {
             _session.invalidateAndCancel()
         }

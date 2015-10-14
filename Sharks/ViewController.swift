@@ -96,6 +96,7 @@ class ViewController: UIViewController {
         
         menu.removeFromSuperview()
         
+        buffer(false)
         isTransitioning = true
         isFirstPlay = true
     }
