@@ -17,6 +17,10 @@ class Buffering: UIImageView {
         let logo = UIImage(named: "buffering")
         super.init(image: logo)
         
+        self.layer.shadowOpacity = 1
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowRadius = 22.0
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOverlayVisible", name:"overlayVisible", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOverlayHidden", name:"overlayHidden", object: nil)
         
