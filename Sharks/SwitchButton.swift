@@ -33,7 +33,7 @@ class SwitchButton: UIView {
         
         if (asset.hasPrefix("http")) {
             // load remote
-            _pic = UIImageView(image: UIImage(named: "reef"))
+            _pic = UIImageView(image: UIImage(named: "lagoon"))
             _pic.download(asset)
         } else {
             _pic = UIImageView(image: UIImage(named: asset))
