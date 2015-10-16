@@ -79,6 +79,10 @@ class StreamController: AVPlayerViewController {
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if (self.player == nil) {
+            return
+        }
+        
         let player = self.player!
         let stream = player.currentItem!
         
