@@ -10,11 +10,14 @@ import AVKit
 
 class StreamController: AVPlayerViewController {
     private var _isPlaying = false
+    private var _pollColorTimer:NSTimer!
+    private var _videoOutput:AVPlayerItemVideoOutput!
     
     init() {
         super.init(nibName:nil, bundle:nil)
         
         self.showsPlaybackControls = false
+        _videoOutput = AVPlayerItemVideoOutput()
         
         // can't override play/pause button without this
         self.view.userInteractionEnabled = false
@@ -102,7 +105,7 @@ class StreamController: AVPlayerViewController {
                 _onError(NSError(domain: "playbackBufferEmpty", code: 1, userInfo: nil))
             }
             if (!stream.playbackBufferEmpty && !_isPlaying) {
-                _onPlay()
+                _pollColor()
             }
         }
     }
@@ -132,7 +135,35 @@ class StreamController: AVPlayerViewController {
         }
     }
     
+    func checkColor() {
+        let itemTime = _videoOutput.itemTimeForHostTime(CACurrentMediaTime())
+        
+        if (_videoOutput.hasNewPixelBufferForItemTime(itemTime)) {
+            _pollColorTimer.invalidate()
+            _onPlay()
+        }
+    }
+    
+    private func _pollColor() {
+        self.player!.currentItem!.removeOutput(_videoOutput)
+        self.player!.currentItem!.addOutput(_videoOutput)
+        
+        if (_pollColorTimer != nil) {
+            _pollColorTimer.invalidate()
+        }
+        
+        _pollColorTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "checkColor", userInfo: nil, repeats: true)
+    }
+    
     func destroy() {
+        if (self.player != nil) {
+            self.player!.currentItem!.removeOutput(_videoOutput)
+        }
+        
+        if (_pollColorTimer != nil) {
+            _pollColorTimer.invalidate()
+        }
+        
         _isPlaying = false
         _stopKVO()
     }
