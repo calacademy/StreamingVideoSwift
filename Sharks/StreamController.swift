@@ -155,11 +155,7 @@ class StreamController: AVPlayerViewController {
         _pollColorTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "checkColor", userInfo: nil, repeats: true)
     }
     
-    func destroy() {
-        if (self.player != nil) {
-            self.player!.currentItem!.removeOutput(_videoOutput)
-        }
-        
+    func destroy() {        
         if (_pollColorTimer != nil) {
             _pollColorTimer.invalidate()
         }
@@ -172,6 +168,7 @@ class StreamController: AVPlayerViewController {
         destroy()
         
         if (self.player != nil) {
+            self.player!.currentItem!.removeOutput(_videoOutput)
             self.player = nil
         }
         
