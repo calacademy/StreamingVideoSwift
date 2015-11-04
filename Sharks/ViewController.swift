@@ -106,6 +106,20 @@ class ViewController: UIViewController {
         loadConfig()
     }
     
+    func onPause() {
+        print("onPause")
+    }
+    
+    func onUnpause() {
+        print("onUnpause")
+        
+        if (streamController != nil) {
+            if (streamController.player != nil) {
+                onRestart()
+            }
+        }
+    }
+    
     func onDataError(notification: NSNotification) {
         let obj = notification.userInfo as! AnyObject
         let errorDomain = obj["error"] as! String
@@ -161,6 +175,8 @@ class ViewController: UIViewController {
             addLogo()
             addInteraction()
             isFirstPlay = false
+        } else {
+            streamController.player!.play()
         }
     }
     
