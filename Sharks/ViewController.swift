@@ -176,7 +176,11 @@ class ViewController: UIViewController {
             addInteraction()
             isFirstPlay = false
         } else {
-            streamController.player!.play()
+            if (streamController != nil) {
+                if (streamController.player != nil) {
+                    streamController.player!.play()
+                }
+            }
         }
     }
     
