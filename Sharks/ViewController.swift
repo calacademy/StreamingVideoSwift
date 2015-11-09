@@ -297,6 +297,7 @@ class ViewController: UIViewController {
     }
     
     func addLogo() {
+        let offset:CGFloat = 30
         let w:CGFloat = 220
         let h:CGFloat = 320
         
@@ -305,13 +306,13 @@ class ViewController: UIViewController {
         
         // place
         let bounds: CGRect = UIScreen.mainScreen().bounds
-        logo.frame = CGRect(x: bounds.size.width - w, y: 0, width: w, height: h)
+        logo.frame = CGRect(x: bounds.size.width - w - offset, y: offset - 5, width: w, height: h)
         
         // fade in
         logo.alpha = 0
         
         UIView.animateWithDuration(0.8, delay: 3, options: .CurveEaseOut, animations: {
-            self.logo.alpha = 0.65
+            self.logo.alpha = 0.5
         }, completion: nil)
         
         // add to stage
