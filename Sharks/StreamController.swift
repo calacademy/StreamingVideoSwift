@@ -7,6 +7,7 @@
 //
 
 import AVKit
+import AVFoundation
 
 class StreamController: AVPlayerViewController {
     private var _isPlaying = false

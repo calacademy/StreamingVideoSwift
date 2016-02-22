@@ -7,12 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E802090E1C7B96D10044F64C /* Assets iOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E802090D1C7B96D10044F64C /* Assets iOS.xcassets */; };
+		E80209161C7B97C20044F64C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104451BAC6B8A000F6736 /* AppDelegate.swift */; };
+		E80209171C7B97C20044F64C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104471BAC6B8A000F6736 /* ViewController.swift */; };
+		E80209181C7B97C20044F64C /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */; };
+		E80209191C7B97C20044F64C /* Buffering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E885CE3A1BB45F65005A0721 /* Buffering.swift */; };
+		E802091A1C7B97C20044F64C /* StreamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D2903A1BB5A23400AF8B06 /* StreamController.swift */; };
+		E802091B1C7B97C20044F64C /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */; };
+		E802091C1C7B97C20044F64C /* StreamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */; };
+		E802091D1C7B97C20044F64C /* SwitchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB95301BC2F77B0090552C /* SwitchMenu.swift */; };
+		E802091E1C7B97C20044F64C /* UIImageView+remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */; };
+		E802091F1C7B99500044F64C /* Whitney-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */; };
+		E80209251C7BA1160044F64C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8A1044C1BAC6B8A000F6736 /* Assets.xcassets */; };
+		E802092A1C7BA1FB0044F64C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E80209291C7BA1FB0044F64C /* Media.xcassets */; };
+		E802092B1C7BA1FB0044F64C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E80209291C7BA1FB0044F64C /* Media.xcassets */; };
+		E884CA111C7BB1960048938E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E884CA101C7BB1960048938E /* Main.storyboard */; };
 		E885CE3B1BB45F65005A0721 /* Buffering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E885CE3A1BB45F65005A0721 /* Buffering.swift */; };
 		E890771E1BB9CF2C00F6F1B5 /* StreamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */; };
 		E8A104461BAC6B8A000F6736 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104451BAC6B8A000F6736 /* AppDelegate.swift */; };
 		E8A104481BAC6B8A000F6736 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104471BAC6B8A000F6736 /* ViewController.swift */; };
 		E8A1044B1BAC6B8A000F6736 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A104491BAC6B8A000F6736 /* Main.storyboard */; };
-		E8A1044D1BAC6B8A000F6736 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8A1044C1BAC6B8A000F6736 /* Assets.xcassets */; };
 		E8D2903B1BB5A23400AF8B06 /* StreamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D2903A1BB5A23400AF8B06 /* StreamController.swift */; };
 		E8DC23021BBEF8C3006CE476 /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */; };
 		E8DC23111BBF2372006CE476 /* Whitney-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */; };
@@ -22,23 +36,35 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E885CE3A1BB45F65005A0721 /* Buffering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffering.swift; sourceTree = "<group>"; };
-		E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamData.swift; sourceTree = "<group>"; };
+		E80209041C7B96D10044F64C /* Sharks iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sharks iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E802090D1C7B96D10044F64C /* Assets iOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets iOS.xcassets"; sourceTree = "<group>"; };
+		E80209121C7B96D10044F64C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E80209291C7BA1FB0044F64C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		E884CA101C7BB1960048938E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E885CE3A1BB45F65005A0721 /* Buffering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Buffering.swift; path = Sharks/Buffering.swift; sourceTree = "<group>"; };
+		E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamData.swift; path = Sharks/StreamData.swift; sourceTree = "<group>"; };
 		E8A104421BAC6B8A000F6736 /* Sharks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sharks.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E8A104451BAC6B8A000F6736 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E8A104471BAC6B8A000F6736 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E8A104451BAC6B8A000F6736 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sharks/AppDelegate.swift; sourceTree = "<group>"; };
+		E8A104471BAC6B8A000F6736 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Sharks/ViewController.swift; sourceTree = "<group>"; };
 		E8A1044A1BAC6B8A000F6736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E8A1044C1BAC6B8A000F6736 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8A1044E1BAC6B8A000F6736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E8D2903A1BB5A23400AF8B06 /* StreamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamController.swift; sourceTree = "<group>"; };
-		E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchButton.swift; sourceTree = "<group>"; };
-		E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Whitney-Semibold.otf"; sourceTree = "<group>"; };
-		E8FB95301BC2F77B0090552C /* SwitchMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchMenu.swift; sourceTree = "<group>"; };
-		E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+remote.swift"; sourceTree = "<group>"; };
-		E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		E8D2903A1BB5A23400AF8B06 /* StreamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamController.swift; path = Sharks/StreamController.swift; sourceTree = "<group>"; };
+		E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchButton.swift; path = Sharks/SwitchButton.swift; sourceTree = "<group>"; };
+		E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Whitney-Semibold.otf"; path = "Sharks/Whitney-Semibold.otf"; sourceTree = "<group>"; };
+		E8FB95301BC2F77B0090552C /* SwitchMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchMenu.swift; path = Sharks/SwitchMenu.swift; sourceTree = "<group>"; };
+		E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImageView+remote.swift"; path = "Sharks/UIImageView+remote.swift"; sourceTree = "<group>"; };
+		E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Sharks/SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E80209011C7B96D10044F64C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8A1043F1BAC6B8A000F6736 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -49,10 +75,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E80208FF1C7B965C0044F64C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E8A104451BAC6B8A000F6736 /* AppDelegate.swift */,
+				E8A104471BAC6B8A000F6736 /* ViewController.swift */,
+				E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */,
+				E885CE3A1BB45F65005A0721 /* Buffering.swift */,
+				E8D2903A1BB5A23400AF8B06 /* StreamController.swift */,
+				E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */,
+				E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */,
+				E8FB95301BC2F77B0090552C /* SwitchMenu.swift */,
+				E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		E80209051C7B96D10044F64C /* Sharks iOS */ = {
+			isa = PBXGroup;
+			children = (
+				E802090D1C7B96D10044F64C /* Assets iOS.xcassets */,
+				E884CA101C7BB1960048938E /* Main.storyboard */,
+				E80209121C7B96D10044F64C /* Info.plist */,
+			);
+			path = "Sharks iOS";
+			sourceTree = "<group>";
+		};
 		E8A104391BAC6B8A000F6736 = {
 			isa = PBXGroup;
 			children = (
+				E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */,
+				E80209291C7BA1FB0044F64C /* Media.xcassets */,
+				E80208FF1C7B965C0044F64C /* Classes */,
 				E8A104441BAC6B8A000F6736 /* Sharks */,
+				E80209051C7B96D10044F64C /* Sharks iOS */,
 				E8A104431BAC6B8A000F6736 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				E8A104421BAC6B8A000F6736 /* Sharks.app */,
+				E80209041C7B96D10044F64C /* Sharks iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,19 +125,9 @@
 		E8A104441BAC6B8A000F6736 /* Sharks */ = {
 			isa = PBXGroup;
 			children = (
-				E8A104451BAC6B8A000F6736 /* AppDelegate.swift */,
-				E8A104471BAC6B8A000F6736 /* ViewController.swift */,
-				E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */,
-				E8A104491BAC6B8A000F6736 /* Main.storyboard */,
-				E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */,
 				E8A1044C1BAC6B8A000F6736 /* Assets.xcassets */,
+				E8A104491BAC6B8A000F6736 /* Main.storyboard */,
 				E8A1044E1BAC6B8A000F6736 /* Info.plist */,
-				E885CE3A1BB45F65005A0721 /* Buffering.swift */,
-				E8D2903A1BB5A23400AF8B06 /* StreamController.swift */,
-				E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */,
-				E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */,
-				E8FB95301BC2F77B0090552C /* SwitchMenu.swift */,
-				E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */,
 			);
 			path = Sharks;
 			sourceTree = "<group>";
@@ -88,6 +135,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E80209031C7B96D10044F64C /* Sharks iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E80209131C7B96D10044F64C /* Build configuration list for PBXNativeTarget "Sharks iOS" */;
+			buildPhases = (
+				E80209001C7B96D10044F64C /* Sources */,
+				E80209011C7B96D10044F64C /* Frameworks */,
+				E80209021C7B96D10044F64C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Sharks iOS";
+			productName = "Sharks iOS";
+			productReference = E80209041C7B96D10044F64C /* Sharks iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E8A104411BAC6B8A000F6736 /* Sharks */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8A104511BAC6B8A000F6736 /* Build configuration list for PBXNativeTarget "Sharks" */;
@@ -111,9 +175,13 @@
 		E8A1043A1BAC6B8A000F6736 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Greg Rotter";
 				TargetAttributes = {
+					E80209031C7B96D10044F64C = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					E8A104411BAC6B8A000F6736 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = XTG2KYSB7E;
@@ -134,17 +202,30 @@
 			projectRoot = "";
 			targets = (
 				E8A104411BAC6B8A000F6736 /* Sharks */,
+				E80209031C7B96D10044F64C /* Sharks iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E80209021C7B96D10044F64C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E802090E1C7B96D10044F64C /* Assets iOS.xcassets in Resources */,
+				E802091F1C7B99500044F64C /* Whitney-Semibold.otf in Resources */,
+				E802092B1C7BA1FB0044F64C /* Media.xcassets in Resources */,
+				E884CA111C7BB1960048938E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8A104401BAC6B8A000F6736 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8A1044D1BAC6B8A000F6736 /* Assets.xcassets in Resources */,
 				E8A1044B1BAC6B8A000F6736 /* Main.storyboard in Resources */,
+				E80209251C7BA1160044F64C /* Assets.xcassets in Resources */,
+				E802092A1C7BA1FB0044F64C /* Media.xcassets in Resources */,
 				E8DC23111BBF2372006CE476 /* Whitney-Semibold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,6 +233,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E80209001C7B96D10044F64C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E802091D1C7B97C20044F64C /* SwitchMenu.swift in Sources */,
+				E80209161C7B97C20044F64C /* AppDelegate.swift in Sources */,
+				E80209181C7B97C20044F64C /* SwitchButton.swift in Sources */,
+				E80209191C7B97C20044F64C /* Buffering.swift in Sources */,
+				E802091B1C7B97C20044F64C /* SwiftyJSON.swift in Sources */,
+				E80209171C7B97C20044F64C /* ViewController.swift in Sources */,
+				E802091A1C7B97C20044F64C /* StreamController.swift in Sources */,
+				E802091C1C7B97C20044F64C /* StreamData.swift in Sources */,
+				E802091E1C7B97C20044F64C /* UIImageView+remote.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8A1043E1BAC6B8A000F6736 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,6 +279,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E80209141C7B96D10044F64C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImageiOS;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "Sharks iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.calacademy.sharksliveios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E80209151C7B96D10044F64C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImageiOS;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "Sharks iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.calacademy.sharksliveios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		E8A1044F1BAC6B8A000F6736 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -296,6 +425,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E80209131C7B96D10044F64C /* Build configuration list for PBXNativeTarget "Sharks iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E80209141C7B96D10044F64C /* Debug */,
+				E80209151C7B96D10044F64C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E8A1043D1BAC6B8A000F6736 /* Build configuration list for PBXProject "Sharks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
