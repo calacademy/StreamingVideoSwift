@@ -14,7 +14,12 @@ class Buffering: UIImageView {
     private var _timer:NSTimer!
     
     override init(image: UIImage?) {
-        let logo = UIImage(named: "buffering")
+        #if os(iOS)
+            let logo = UIImage(named: "bufferingios")
+        #elseif os(tvOS)
+            let logo = UIImage(named: "buffering")
+        #endif
+        
         super.init(image: logo)
         
         self.layer.shadowOpacity = 1
@@ -92,12 +97,19 @@ class Buffering: UIImageView {
     }
     
     private func _place() {
-        let w:CGFloat = 90
-        let h:CGFloat = 90
+        #if os(iOS)
+            let w:CGFloat = 45
+            let h:CGFloat = 45
+            let offset:CGFloat = 5
+        #elseif os(tvOS)
+            let w:CGFloat = 90
+            let h:CGFloat = 90
+            let offset:CGFloat = 10
+        #endif
         
         // place
         let bounds: CGRect = UIScreen.mainScreen().bounds
-        self.frame = CGRect(x: round((bounds.size.width - w) / 2), y: round((bounds.size.height - h) / 2) - 10, width: w, height: h)
+        self.frame = CGRect(x: round((bounds.size.width - w) / 2), y: round((bounds.size.height - h) / 2) - offset, width: w, height: h)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -31,7 +31,8 @@ class ViewController: UIViewController {
     var streamController:StreamController!
     
     override func viewDidLoad() {
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "launch")!)
+        self.view.backgroundColor = UIColor(white: 1, alpha: 0)
+        self.view.layer.contents = UIImage(named: "launch")?.CGImage
         
         super.viewDidLoad()
         
@@ -304,16 +305,20 @@ class ViewController: UIViewController {
         let image = UIImage(named: "logo")
         logo = UIImageView(image: image!)
         
+        placeLogo(w, h: h, offsetX: offset, offsetY: offset - 5)
+    }
+    
+    func placeLogo(w: CGFloat, h: CGFloat, offsetX: CGFloat, offsetY: CGFloat) {
         // place
         let bounds: CGRect = UIScreen.mainScreen().bounds
-        logo.frame = CGRect(x: bounds.size.width - w - offset, y: offset - 5, width: w, height: h)
+        logo.frame = CGRect(x: bounds.size.width - w - offsetX, y: offsetY, width: w, height: h)
         
         // fade in
         logo.alpha = 0
         
         UIView.animateWithDuration(0.8, delay: 3, options: .CurveEaseOut, animations: {
             self.logo.alpha = 0.5
-        }, completion: nil)
+            }, completion: nil)
         
         // add to stage
         self.view.addSubview(logo)

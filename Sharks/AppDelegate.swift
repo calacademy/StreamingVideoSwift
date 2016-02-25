@@ -15,10 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var sharksViewController:ViewController!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        
+        // Override point for customization after application launch.    
         // UIScreen.mainScreen().overscanCompensation = .InsetBounds
-        sharksViewController = self.window?.rootViewController as! ViewController
+        
+        #if os(iOS)
+            sharksViewController = self.window?.rootViewController as! ViewControllerIOS
+        #elseif os(tvOS)
+            sharksViewController = self.window?.rootViewController as! ViewController
+        #endif
+        
         return true
     }
 

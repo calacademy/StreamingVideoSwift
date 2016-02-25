@@ -141,6 +141,9 @@ class StreamController: AVPlayerViewController {
         
         if (_videoOutput.hasNewPixelBufferForItemTime(itemTime)) {
             _pollColorTimer.invalidate()
+            
+            // @todo
+            // add delay in iOS?
             _onPlay()
         }
     }
