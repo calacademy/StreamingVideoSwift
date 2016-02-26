@@ -9,7 +9,11 @@
 import UIKit
 
 class SwitchMenu: UIView {
-    private var _margin:CGFloat = 30
+    #if os(iOS)
+        private var _margin:CGFloat = 15
+    #else
+        private var _margin:CGFloat = 30
+    #endif
     
     var buttons:[SwitchButton]!
     var onStage:Bool = false
@@ -39,7 +43,12 @@ class SwitchMenu: UIView {
             
             // add
             for (i, stream) in streams.enumerate() {
-                let btn = SwitchButton()
+                #if os(iOS)
+                    let btn = SwitchButtonIOS()
+                #else
+                    let btn = SwitchButton()
+                #endif
+                
                 btn.setup(id: stream["id"]!, label: stream["label"]!, pic: stream["asset"]!)
                 
                 // btn.frame.origin.y = getTargetY(btn)
@@ -62,8 +71,14 @@ class SwitchMenu: UIView {
     }
     
     func getTargetY(btn: SwitchButton) -> CGFloat {
+        #if os(iOS)
+            let offset: CGFloat = 3
+        #else
+            let offset: CGFloat = 10
+        #endif
+        
         let h = UIScreen.mainScreen().bounds.size.height
-        return round((h - btn.frame.size.height) / 2) - 10
+        return round((h - btn.frame.size.height) / 2) - offset
     }
     
     func select(id:String, animate:Bool) {

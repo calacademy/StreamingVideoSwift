@@ -24,6 +24,7 @@
 		E829CD461C7E3852003AA289 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E80209291C7BA1FB0044F64C /* Media.xcassets */; };
 		E829CD491C7FB40D003AA289 /* UITouchBeginGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */; };
 		E829CD4C1C80E924003AA289 /* UITouchEndGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */; };
+		E829CD4E1C81027F003AA289 /* SwitchButtonIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD4D1C81027F003AA289 /* SwitchButtonIOS.swift */; };
 		E884CA111C7BB1960048938E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E884CA101C7BB1960048938E /* Main.storyboard */; };
 		E885CE3B1BB45F65005A0721 /* Buffering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E885CE3A1BB45F65005A0721 /* Buffering.swift */; };
 		E890771E1BB9CF2C00F6F1B5 /* StreamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */; };
@@ -46,6 +47,7 @@
 		E829CD441C7CFE0F003AA289 /* ViewControllerIOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerIOS.swift; sourceTree = "<group>"; };
 		E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITouchBeginGestureRecognizer.swift; sourceTree = "<group>"; };
 		E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITouchEndGestureRecognizer.swift; sourceTree = "<group>"; };
+		E829CD4D1C81027F003AA289 /* SwitchButtonIOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchButtonIOS.swift; sourceTree = "<group>"; };
 		E884CA101C7BB1960048938E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E885CE3A1BB45F65005A0721 /* Buffering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Buffering.swift; path = Sharks/Buffering.swift; sourceTree = "<group>"; usesTabs = 1; };
 		E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamData.swift; path = Sharks/StreamData.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				E8A104471BAC6B8A000F6736 /* ViewController.swift */,
 				E829CD441C7CFE0F003AA289 /* ViewControllerIOS.swift */,
 				E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */,
+				E829CD4D1C81027F003AA289 /* SwitchButtonIOS.swift */,
 				E885CE3A1BB45F65005A0721 /* Buffering.swift */,
 				E8D2903A1BB5A23400AF8B06 /* StreamController.swift */,
 				E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */,
@@ -256,6 +259,7 @@
 				E80209171C7B97C20044F64C /* ViewController.swift in Sources */,
 				E829CD491C7FB40D003AA289 /* UITouchBeginGestureRecognizer.swift in Sources */,
 				E802091A1C7B97C20044F64C /* StreamController.swift in Sources */,
+				E829CD4E1C81027F003AA289 /* SwitchButtonIOS.swift in Sources */,
 				E802091C1C7B97C20044F64C /* StreamData.swift in Sources */,
 				E802091E1C7B97C20044F64C /* UIImageView+remote.swift in Sources */,
 			);

@@ -9,13 +9,20 @@
 import UIKit
 
 class SwitchButton: UIView {
-    private var _w:CGFloat = 400
-    private var _borderWidth:CGFloat = 15
     private var _pic:UIImageView!
-    private var _arrow:UIImageView!
     private var _border:UIView!
-    private var _label:UILabel!
     private var _overlay:UIView!
+    
+    #if os(iOS)
+        internal var _w:CGFloat = UIScreen.mainScreen().bounds.size.width * 0.3
+        internal var _borderWidth:CGFloat = 10
+    #else
+        internal var _w:CGFloat = 400
+        internal var _borderWidth:CGFloat = 15
+    #endif
+    
+    internal var _label:UILabel!
+    internal var _arrow:UIImageView!
     
     var isActive:Bool = true
     var isBeingPressed:Bool = false
@@ -111,7 +118,7 @@ class SwitchButton: UIView {
         isActive = false
     }
     
-    private func _addGradient() {
+    internal func _addGradient() {
         let gradient = CAGradientLayer()
         gradient.frame = CGRectMake(0, 0, _w, _w)
         
@@ -126,7 +133,7 @@ class SwitchButton: UIView {
         self.layer.addSublayer(gradient)
     }
     
-    private func _addArrow() {
+    internal func _addArrow() {
         let w:CGFloat = 92
         let h:CGFloat = 97
         
@@ -139,7 +146,7 @@ class SwitchButton: UIView {
         self.addSubview(_arrow)
     }
     
-    private func _addLabel(label: String) {
+    internal func _addLabel(label: String) {
         let h:CGFloat = 30
         
         _label = UILabel(frame: CGRectMake(_borderWidth, _w - _borderWidth - h - 10, _w - (_borderWidth * 2), h))

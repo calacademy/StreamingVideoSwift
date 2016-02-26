@@ -23,13 +23,13 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     
     func onTouchBegin(sender: UIGestureRecognizer) {
         let btn = sender.view as! SwitchButton
+        btn.isBeingPressed = true
         
         if (btn.isActive) {
             return
         }
         
         btn.activate(true)
-        btn.isBeingPressed = true
     }
     
     func onTouchEnd(sender: UIGestureRecognizer) {
