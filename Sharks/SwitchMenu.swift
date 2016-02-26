@@ -10,8 +10,8 @@ import UIKit
 
 class SwitchMenu: UIView {
     private var _margin:CGFloat = 30
-    private var _buttons:[SwitchButton]!
     
+    var buttons:[SwitchButton]!
     var onStage:Bool = false
     var currentIndex:Int = 0
     
@@ -22,13 +22,13 @@ class SwitchMenu: UIView {
             }
             
             // clear all
-            if (_buttons != nil) {
-                for btn in _buttons {
+            if (buttons != nil) {
+                for btn in buttons {
                     btn.destroy()
                 }
             }
             
-            _buttons = []
+            buttons = []
         }
         didSet {
             if (onStage) {
@@ -50,7 +50,7 @@ class SwitchMenu: UIView {
                 // spacing
                 btn.frame.origin.x += _margin * CGFloat(i)
                 
-                _buttons.append(btn)
+                buttons.append(btn)
                 self.addSubview(btn)
             }
         }
@@ -71,8 +71,8 @@ class SwitchMenu: UIView {
             return
         }
         
-        if (_buttons != nil) {
-            for (i, btn) in _buttons.enumerate() {
+        if (buttons != nil) {
+            for (i, btn) in buttons.enumerate() {
                 if (btn.id == id) {
                     btn.activate(animate)
                     currentIndex = i
@@ -103,11 +103,11 @@ class SwitchMenu: UIView {
         }
         
         // right
-        if (i > _buttons.count - 1) {
+        if (i > buttons.count - 1) {
             return
         }
         
-        select(_buttons[i].id, animate: true)
+        select(buttons[i].id, animate: true)
     }
     
     override func willMoveToSuperview(newSuperview: UIView?) {
@@ -123,7 +123,7 @@ class SwitchMenu: UIView {
             }, completion: nil)
             
             // button intro
-            for (i, btn) in _buttons.enumerate() {
+            for (i, btn) in buttons.enumerate() {
                 let targetY = getTargetY(btn)
                 
                 btn.frame.origin.y = targetY + 130

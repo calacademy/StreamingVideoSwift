@@ -22,6 +22,8 @@
 		E802092A1C7BA1FB0044F64C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E80209291C7BA1FB0044F64C /* Media.xcassets */; };
 		E829CD451C7CFE0F003AA289 /* ViewControllerIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD441C7CFE0F003AA289 /* ViewControllerIOS.swift */; };
 		E829CD461C7E3852003AA289 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E80209291C7BA1FB0044F64C /* Media.xcassets */; };
+		E829CD491C7FB40D003AA289 /* UITouchBeginGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */; };
+		E829CD4C1C80E924003AA289 /* UITouchEndGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */; };
 		E884CA111C7BB1960048938E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E884CA101C7BB1960048938E /* Main.storyboard */; };
 		E885CE3B1BB45F65005A0721 /* Buffering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E885CE3A1BB45F65005A0721 /* Buffering.swift */; };
 		E890771E1BB9CF2C00F6F1B5 /* StreamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */; };
@@ -42,6 +44,8 @@
 		E80209121C7B96D10044F64C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E80209291C7BA1FB0044F64C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		E829CD441C7CFE0F003AA289 /* ViewControllerIOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerIOS.swift; sourceTree = "<group>"; };
+		E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITouchBeginGestureRecognizer.swift; sourceTree = "<group>"; };
+		E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITouchEndGestureRecognizer.swift; sourceTree = "<group>"; };
 		E884CA101C7BB1960048938E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E885CE3A1BB45F65005A0721 /* Buffering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Buffering.swift; path = Sharks/Buffering.swift; sourceTree = "<group>"; usesTabs = 1; };
 		E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamData.swift; path = Sharks/StreamData.swift; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 				E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */,
 				E8FB95301BC2F77B0090552C /* SwitchMenu.swift */,
 				E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */,
+				E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */,
+				E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -241,12 +247,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E802091D1C7B97C20044F64C /* SwitchMenu.swift in Sources */,
+				E829CD4C1C80E924003AA289 /* UITouchEndGestureRecognizer.swift in Sources */,
 				E80209161C7B97C20044F64C /* AppDelegate.swift in Sources */,
 				E80209181C7B97C20044F64C /* SwitchButton.swift in Sources */,
 				E80209191C7B97C20044F64C /* Buffering.swift in Sources */,
 				E829CD451C7CFE0F003AA289 /* ViewControllerIOS.swift in Sources */,
 				E802091B1C7B97C20044F64C /* SwiftyJSON.swift in Sources */,
 				E80209171C7B97C20044F64C /* ViewController.swift in Sources */,
+				E829CD491C7FB40D003AA289 /* UITouchBeginGestureRecognizer.swift in Sources */,
 				E802091A1C7B97C20044F64C /* StreamController.swift in Sources */,
 				E802091C1C7B97C20044F64C /* StreamData.swift in Sources */,
 				E802091E1C7B97C20044F64C /* UIImageView+remote.swift in Sources */,

@@ -18,6 +18,7 @@ class SwitchButton: UIView {
     private var _overlay:UIView!
     
     var isActive:Bool = true
+    var isBeingPressed:Bool = false
     var id:String!
     
     override init(frame: CGRect) {
@@ -148,6 +149,10 @@ class SwitchButton: UIView {
         _label.text = label.uppercaseString
         
         self.addSubview(_label)
+    }
+    
+    func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer:UIGestureRecognizer) -> Bool {
+        return true
     }
     
     required init?(coder aDecoder: NSCoder) {
