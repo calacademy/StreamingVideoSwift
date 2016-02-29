@@ -14,8 +14,8 @@ class SwitchButton: UIView {
     private var _overlay:UIView!
     
     #if os(iOS)
-        internal var _w:CGFloat = UIScreen.mainScreen().bounds.size.width * 0.3
-        internal var _borderWidth:CGFloat = 10
+        internal var _w:CGFloat = round(UIScreen.mainScreen().bounds.size.width * 0.3)
+        internal var _borderWidth:CGFloat = 8
     #else
         internal var _w:CGFloat = 400
         internal var _borderWidth:CGFloat = 15
@@ -29,6 +29,12 @@ class SwitchButton: UIView {
     var id:String!
     
     override init(frame: CGRect) {
+        #if os(iOS)
+            if (_w > 225) {
+                _w = 225
+            }
+        #endif
+        
         let frame = CGRect(x: 0, y: 0, width: _w, height: _w)
         super.init(frame: frame)
         
@@ -47,8 +53,9 @@ class SwitchButton: UIView {
             _pic = UIImageView(image: UIImage(named: asset))
         }
         
-        _pic.frame.origin.x = -35
-        _pic.frame.origin.y = -35
+        let dim: CGFloat = _w / 0.8
+        let offset: CGFloat = round(-0.5 * (dim - _w))
+        _pic.frame = CGRectMake(offset, offset, dim, dim)
         self.addSubview(_pic)
         
         _addGradient()

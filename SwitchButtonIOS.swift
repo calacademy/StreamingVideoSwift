@@ -9,7 +9,7 @@
 import UIKit
 
 class SwitchButtonIOS: SwitchButton {
-    override init(frame: CGRect) {
+    override init(frame: CGRect) {        
         super.init(frame: frame)
     }
     

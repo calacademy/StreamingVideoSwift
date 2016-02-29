@@ -30,6 +30,13 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         }
         
         btn.activate(true)
+        
+        // deactivate other btns
+        for otherBtn in menu.buttons {
+            if (otherBtn.id != btn.id) {
+                otherBtn.deactivate(true)
+            }
+        }
     }
     
     func onTouchEnd(sender: UIGestureRecognizer) {
