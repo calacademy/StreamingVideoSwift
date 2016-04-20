@@ -17,6 +17,10 @@ class StreamController: AVPlayerViewController {
     init() {
         super.init(nibName:nil, bundle:nil)
         
+        // allow other apps to play audio
+        let audioSession = AVAudioSession.sharedInstance()
+        try! audioSession.setCategory(AVAudioSessionCategoryAmbient, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
+        
         self.showsPlaybackControls = false
         _videoOutput = AVPlayerItemVideoOutput()
         
@@ -156,7 +160,7 @@ class StreamController: AVPlayerViewController {
             _pollColorTimer.invalidate()
         }
         
-        _pollColorTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "checkColor", userInfo: nil, repeats: true)
+        _pollColorTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(StreamController.checkColor), userInfo: nil, repeats: true)
     }
     
     func destroy() {        

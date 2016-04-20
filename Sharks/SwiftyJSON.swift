@@ -382,20 +382,22 @@ public struct JSONGenerator : GeneratorType {
     
     public mutating func next() -> JSONGenerator.Element? {
         switch self.type {
-        case .Array:
-            if let o = self.arrayGenerate!.next() {
-                return (String(self.arrayIndex++), JSON(o))
-            } else {
+            case .Array:
+                if let o = self.arrayGenerate!.next() {
+                    let i = self.arrayIndex
+                    self.arrayIndex += 1
+                    return (String(i), JSON(o))
+                } else {
+                    return nil
+                }
+            case .Dictionary:
+                if let (k, v): (String, AnyObject) = self.dictionayGenerate!.next() {
+                    return (k, JSON(v))
+                } else {
+                    return nil
+                }
+            default:
                 return nil
-            }
-        case .Dictionary:
-            if let (k, v): (String, AnyObject) = self.dictionayGenerate!.next() {
-                return (k, JSON(v))
-            } else {
-                return nil
-            }
-        default:
-            return nil
         }
     }
 }

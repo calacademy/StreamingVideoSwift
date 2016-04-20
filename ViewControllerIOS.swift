@@ -73,16 +73,16 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         }
         
         // tap to open menu
-        let selectRecognizer = UITapGestureRecognizer(target: self, action:"onSelect:")
+        let selectRecognizer = UITapGestureRecognizer(target: self, action:#selector(ViewController.onSelect(_:)))
         self.view.addGestureRecognizer(selectRecognizer)
         
         // add gestures to menu items
         for btn in menu.buttons {
-            let begin = UITouchBeginGestureRecognizer(target: self, action:"onTouchBegin:")
+            let begin = UITouchBeginGestureRecognizer(target: self, action:#selector(ViewControllerIOS.onTouchBegin(_:)))
             begin.delegate = self
             btn.addGestureRecognizer(begin)
             
-            let end = UITouchEndGestureRecognizer(target: self, action:"onTouchEnd:")
+            let end = UITouchEndGestureRecognizer(target: self, action:#selector(ViewControllerIOS.onTouchEnd(_:)))
             btn.addGestureRecognizer(end)
         }
     }

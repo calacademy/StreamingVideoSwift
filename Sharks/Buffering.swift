@@ -26,8 +26,8 @@ class Buffering: UIImageView {
         self.layer.shadowOffset = CGSize(width: 0, height: 0)
         self.layer.shadowRadius = 22.0
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOverlayVisible", name:"overlayVisible", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onOverlayHidden", name:"overlayHidden", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Buffering.onOverlayVisible), name:"overlayVisible", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Buffering.onOverlayHidden), name:"overlayHidden", object: nil)
         
         _place()
     }
@@ -63,7 +63,7 @@ class Buffering: UIImageView {
             view.addSubview(self)
         } else {
             // delay before removing
-            self._timer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: "removeFromSuperview", userInfo: nil, repeats: false)
+            self._timer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(UIView.removeFromSuperview), userInfo: nil, repeats: false)
         }
     }
     

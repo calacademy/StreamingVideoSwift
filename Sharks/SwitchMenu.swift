@@ -107,9 +107,9 @@ class SwitchMenu: UIView {
         
         // increment
         if (direction == "left") {
-            i--
+            i -= 1
         } else {
-            i++
+            i += 1
         }
         
         // left

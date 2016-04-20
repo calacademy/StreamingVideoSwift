@@ -36,12 +36,12 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onStreamPlay", name:"streamPlaying", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onStreamVisible", name:"streamVisible", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onStreamError:", name:"streamError", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onDataError:", name:"dataError", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onConfigData:", name:"configDataLoaded", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onHLSData:", name:"hlsDataLoaded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onStreamPlay), name:"streamPlaying", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onStreamVisible), name:"streamVisible", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onStreamError(_:)), name:"streamError", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onDataError(_:)), name:"dataError", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onConfigData(_:)), name:"configDataLoaded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onHLSData(_:)), name:"hlsDataLoaded", object: nil)
         
         self.view.addSubview(streamViewContainer)
         loadConfig()
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         // integerForKey returns 0 if key not found
         if (savedIndex > 0) {
             print("NSUserDefaults stream retrieved: " + String(savedIndex))
-            savedIndex--
+            savedIndex -= 1
             
             if (savedIndex >= streamData.streams.count) {
                 print("NSUserDefaults stream no longer exists")
@@ -249,7 +249,7 @@ class ViewController: UIViewController {
             self.view.removeGestureRecognizer(menuRecognizer)
         }
         
-        menuRecognizer = UITapGestureRecognizer(target: self, action:"onMenu:")
+        menuRecognizer = UITapGestureRecognizer(target: self, action:#selector(ViewController.onMenu(_:)))
         
         menuRecognizer.allowedPressTypes = [
             NSNumber(integer: UIPressType.Menu.rawValue)
@@ -275,7 +275,7 @@ class ViewController: UIViewController {
         addMenuButtonInteraction()
         
         // tap
-        let selectRecognizer = UITapGestureRecognizer(target: self, action:"onSelect:")
+        let selectRecognizer = UITapGestureRecognizer(target: self, action:#selector(ViewController.onSelect(_:)))
         selectRecognizer.allowedPressTypes = [
             NSNumber(integer: UIPressType.PlayPause.rawValue),
             NSNumber(integer: UIPressType.Select.rawValue)
@@ -291,7 +291,7 @@ class ViewController: UIViewController {
         ]
         
         for direction in directions {
-            let swipeRecognizer = UISwipeGestureRecognizer(target: self, action:"onSwipe:")
+            let swipeRecognizer = UISwipeGestureRecognizer(target: self, action:#selector(ViewController.onSwipe(_:)))
             swipeRecognizer.direction = direction
             self.view.addGestureRecognizer(swipeRecognizer)
         }
