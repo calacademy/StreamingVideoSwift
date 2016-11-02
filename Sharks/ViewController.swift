@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     var menuRecognizer:UIGestureRecognizer!
     
     let currentStreamIndexDefaultsKey = "currentStreamIndex"
-    var defaults = NSUserDefaults.standardUserDefaults()
+    var defaults = UserDefaults.standard
     
     var logo:UIImageView!
     var streamViewContainer = UIView()
@@ -32,23 +32,23 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor(white: 1, alpha: 0)
-        self.view.layer.contents = UIImage(named: "launch")?.CGImage
+        self.view.layer.contents = UIImage(named: "launch")?.cgImage
         
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onStreamPlay), name:"streamPlaying", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onStreamVisible), name:"streamVisible", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onStreamError(_:)), name:"streamError", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onDataError(_:)), name:"dataError", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onConfigData(_:)), name:"configDataLoaded", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onHLSData(_:)), name:"hlsDataLoaded", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onStreamPlay), name:NSNotification.Name(rawValue: "streamPlaying"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onStreamVisible), name:NSNotification.Name(rawValue: "streamVisible"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onStreamError(_:)), name:NSNotification.Name(rawValue: "streamError"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onDataError(_:)), name:NSNotification.Name(rawValue: "dataError"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onConfigData(_:)), name:NSNotification.Name(rawValue: "configDataLoaded"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onHLSData(_:)), name:NSNotification.Name(rawValue: "hlsDataLoaded"), object: nil)
         
         self.view.addSubview(streamViewContainer)
         loadConfig()
     }
     
     func getDefaultStreamIndex() -> Int {
-        var savedIndex = defaults.integerForKey(currentStreamIndexDefaultsKey)
+        var savedIndex = defaults.integer(forKey: currentStreamIndexDefaultsKey)
         
         // integerForKey returns 0 if key not found
         if (savedIndex > 0) {
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         streamData.getHLSPath(streamData.streams[currentStreamIndex]["id"]!)
         
         // set as default
-        defaults.setInteger(currentStreamIndex + 1, forKey: currentStreamIndexDefaultsKey)
+        defaults.set(currentStreamIndex + 1, forKey: currentStreamIndexDefaultsKey)
     }
     
     func onExit() {
@@ -121,21 +121,21 @@ class ViewController: UIViewController {
         }
     }
     
-    func onDataError(notification: NSNotification) {
-        let obj = notification.userInfo as! AnyObject
+    func onDataError(_ notification: Notification) {
+        let obj = (notification as NSNotification).userInfo as AnyObject
         let errorDomain = obj["error"] as! String
         
         onError(NSError(domain: errorDomain, code: 1, userInfo: nil))
     }
     
-    func onStreamError(notification: NSNotification) {
-        let obj = notification.userInfo as! AnyObject
+    func onStreamError(_ notification: Notification) {
+        let obj = (notification as NSNotification).userInfo as AnyObject
         let error = obj["error"] as! NSError
         
         onError(error)
     }
     
-    func onError(e: NSError) {
+    func onError(_ e: NSError) {
         switch e.domain {
             case "configDataError":
                 print("! Config data error")
@@ -150,14 +150,14 @@ class ViewController: UIViewController {
         loadConfig()
     }
     
-    func onConfigData(notification: NSNotification) {
+    func onConfigData(_ notification: Notification) {
         menu.streams = streamData.streams
         currentStreamIndex = getDefaultStreamIndex()
         loadHLSData()
     }
     
-    func onHLSData(notification: NSNotification) {
-        let obj = notification.userInfo as! AnyObject
+    func onHLSData(_ notification: Notification) {
+        let obj = (notification as NSNotification).userInfo as! [String:AnyObject]
         let url = obj["url"] as! String
         
         if (streamController != nil) {
@@ -193,7 +193,7 @@ class ViewController: UIViewController {
         isTransitioning = false
     }
     
-    func onMenu(sender: UIGestureRecognizer) {
+    func onMenu(_ sender: UIGestureRecognizer) {
         // add menu
         self.view.addSubview(menu)
         
@@ -206,7 +206,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func onSelect(sender: UIGestureRecognizer) {
+    func onSelect(_ sender: UIGestureRecognizer) {
         // open menu if not visible
         if (!menu.onStage) {
             onMenu(sender)
@@ -229,13 +229,13 @@ class ViewController: UIViewController {
         addMenuButtonInteraction()
     }
     
-    func onSwipe(sender: UISwipeGestureRecognizer) {
+    func onSwipe(_ sender: UISwipeGestureRecognizer) {
         switch sender.direction {
-            case UISwipeGestureRecognizerDirection.Left,
-            UISwipeGestureRecognizerDirection.Down:
+            case UISwipeGestureRecognizerDirection.left,
+            UISwipeGestureRecognizerDirection.down:
                 menu.navigate("left")
-            case UISwipeGestureRecognizerDirection.Right,
-            UISwipeGestureRecognizerDirection.Up:
+            case UISwipeGestureRecognizerDirection.right,
+            UISwipeGestureRecognizerDirection.up:
                 menu.navigate("right")
             default:
                 print("unknown")
@@ -252,7 +252,7 @@ class ViewController: UIViewController {
         menuRecognizer = UITapGestureRecognizer(target: self, action:#selector(ViewController.onMenu(_:)))
         
         menuRecognizer.allowedPressTypes = [
-            NSNumber(integer: UIPressType.Menu.rawValue)
+            NSNumber(value: UIPressType.menu.rawValue as Int)
         ];
         
         self.view.addGestureRecognizer(menuRecognizer)
@@ -277,17 +277,17 @@ class ViewController: UIViewController {
         // tap
         let selectRecognizer = UITapGestureRecognizer(target: self, action:#selector(ViewController.onSelect(_:)))
         selectRecognizer.allowedPressTypes = [
-            NSNumber(integer: UIPressType.PlayPause.rawValue),
-            NSNumber(integer: UIPressType.Select.rawValue)
+            NSNumber(value: UIPressType.playPause.rawValue as Int),
+            NSNumber(value: UIPressType.select.rawValue as Int)
         ]
         self.view.addGestureRecognizer(selectRecognizer)
         
         // swipe
         let directions = [
-            UISwipeGestureRecognizerDirection.Right,
-            UISwipeGestureRecognizerDirection.Left,
-            UISwipeGestureRecognizerDirection.Up,
-            UISwipeGestureRecognizerDirection.Down
+            UISwipeGestureRecognizerDirection.right,
+            UISwipeGestureRecognizerDirection.left,
+            UISwipeGestureRecognizerDirection.up,
+            UISwipeGestureRecognizerDirection.down
         ]
         
         for direction in directions {
@@ -308,15 +308,15 @@ class ViewController: UIViewController {
         placeLogo(w, h: h, offsetX: offset, offsetY: offset - 5)
     }
     
-    func placeLogo(w: CGFloat, h: CGFloat, offsetX: CGFloat, offsetY: CGFloat) {
+    func placeLogo(_ w: CGFloat, h: CGFloat, offsetX: CGFloat, offsetY: CGFloat) {
         // place
-        let bounds: CGRect = UIScreen.mainScreen().bounds
+        let bounds: CGRect = UIScreen.main.bounds
         logo.frame = CGRect(x: bounds.size.width - w - offsetX, y: offsetY, width: w, height: h)
         
         // fade in
         logo.alpha = 0
         
-        UIView.animateWithDuration(0.8, delay: 3, options: .CurveEaseOut, animations: {
+        UIView.animate(withDuration: 0.8, delay: 3, options: .curveEaseOut, animations: {
             self.logo.alpha = 0.5
             }, completion: nil)
         
@@ -324,7 +324,7 @@ class ViewController: UIViewController {
         self.view.addSubview(logo)
     }
     
-    func buffer(boo: Bool) {
+    func buffer(_ boo: Bool) {
         if (buffering.onStage == boo) {
             return
         }

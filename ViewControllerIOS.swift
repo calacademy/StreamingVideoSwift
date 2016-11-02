@@ -21,7 +21,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         placeLogo(w, h: h, offsetX: offset, offsetY: offset - 1)
     }
     
-    func onTouchBegin(sender: UIGestureRecognizer) {
+    func onTouchBegin(_ sender: UIGestureRecognizer) {
         let btn = sender.view as! SwitchButton
         btn.isBeingPressed = true
         
@@ -39,7 +39,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func onTouchEnd(sender: UIGestureRecognizer) {
+    func onTouchEnd(_ sender: UIGestureRecognizer) {
         let btn = sender.view as! SwitchButton
         
         if (!btn.isBeingPressed) {
@@ -87,7 +87,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }

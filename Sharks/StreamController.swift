@@ -10,31 +10,31 @@ import AVKit
 import AVFoundation
 
 class StreamController: AVPlayerViewController {
-    private var _isPlaying = false
-    private var _pollColorTimer:NSTimer!
-    private var _videoOutput:AVPlayerItemVideoOutput!
+    fileprivate var _isPlaying = false
+    fileprivate var _pollColorTimer:Timer!
+    fileprivate var _videoOutput:AVPlayerItemVideoOutput!
     
     init() {
         super.init(nibName:nil, bundle:nil)
         
         // allow other apps to play audio
         let audioSession = AVAudioSession.sharedInstance()
-        try! audioSession.setCategory(AVAudioSessionCategoryAmbient, withOptions: AVAudioSessionCategoryOptions.MixWithOthers)
+        try! audioSession.setCategory(AVAudioSessionCategoryAmbient, with: AVAudioSessionCategoryOptions.mixWithOthers)
         
         self.showsPlaybackControls = false
         _videoOutput = AVPlayerItemVideoOutput()
         
         // can't override play/pause button without this
-        self.view.userInteractionEnabled = false
+        self.view.isUserInteractionEnabled = false
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    func addToView(container: UIView) {
+    func addToView(_ container: UIView) {
         // size
-        let bounds: CGRect = UIScreen.mainScreen().bounds
+        let bounds: CGRect = UIScreen.main.bounds
         let w:CGFloat = bounds.size.width
         let h:CGFloat = bounds.size.height
         self.view.frame = CGRect(x: 0, y: 0, width: w, height: h)
@@ -42,17 +42,17 @@ class StreamController: AVPlayerViewController {
         // fade in
         self.view.alpha = 0;
         
-        UIView.animateWithDuration(0.8, delay: 2.5, options: .CurveEaseOut, animations: {
+        UIView.animate(withDuration: 0.8, delay: 2.5, options: .curveEaseOut, animations: {
             self.view.alpha = 1
         }, completion: { _ in
-            NSNotificationCenter.defaultCenter().postNotificationName("streamVisible", object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "streamVisible"), object: nil)
         })
         
         container.addSubview(self.view)
         
     }
     
-    func removeStaleViews(container: UIView) {
+    func removeStaleViews(_ container: UIView) {
         // remove stale views
         var viewsToRemove = container.subviews
         
@@ -63,7 +63,7 @@ class StreamController: AVPlayerViewController {
         _stopKVO()
         
         // keep the last (top)
-        viewsToRemove.removeAtIndex(viewsToRemove.count - 1)
+        viewsToRemove.remove(at: viewsToRemove.count - 1)
         
         for view in viewsToRemove {
             view.removeFromSuperview()
@@ -73,20 +73,20 @@ class StreamController: AVPlayerViewController {
         _startKVO()
     }
     
-    func setStream(path: String) {
+    func setStream(_ path: String) {
         _isPlaying = false
         _stopKVO()
         
-        let url:NSURL = NSURL(string: path)!
-        let streamPlayer = AVPlayer(URL: url)
-        streamPlayer.muted = true
+        let url:URL = URL(string: path)!
+        let streamPlayer = AVPlayer(url: url)
+        streamPlayer.isMuted = true
         self.player = streamPlayer
         
         _startKVO()
         streamPlayer.play()
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if (self.player == nil) {
             return
         }
@@ -96,9 +96,9 @@ class StreamController: AVPlayerViewController {
         
         if (keyPath == "status") {
             switch stream.status {
-                case .Unknown, .Failed:
+                case .unknown, .failed:
                     if (stream.error != nil) {
-                        _onError(stream.error!)
+                        _onError(stream.error! as NSError)
                     }
                 default:
                     break
@@ -106,34 +106,34 @@ class StreamController: AVPlayerViewController {
         }
         
         if (keyPath == "playbackBufferEmpty") {
-            if (stream.playbackBufferEmpty && _isPlaying) {
+            if (stream.isPlaybackBufferEmpty && _isPlaying) {
                 _onError(NSError(domain: "playbackBufferEmpty", code: 1, userInfo: nil))
             }
-            if (!stream.playbackBufferEmpty && !_isPlaying) {
+            if (!stream.isPlaybackBufferEmpty && !_isPlaying) {
                 _pollColor()
             }
         }
     }
     
-    private func _onPlay() {
+    fileprivate func _onPlay() {
         _isPlaying = true
-        NSNotificationCenter.defaultCenter().postNotificationName("streamPlaying", object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "streamPlaying"), object: nil)
     }
     
-    private func _onError(e: NSError) {
+    fileprivate func _onError(_ e: NSError) {
         _isPlaying = false
         
-        NSNotificationCenter.defaultCenter().postNotificationName("streamError", object: nil, userInfo: [
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "streamError"), object: nil, userInfo: [
             "error": e
         ])
     }
     
-    private func _startKVO() {
-        self.player!.currentItem!.addObserver(self, forKeyPath:"playbackBufferEmpty", options:.Initial, context:nil)
-        self.player!.currentItem!.addObserver(self, forKeyPath:"status", options:.Initial, context:nil)
+    fileprivate func _startKVO() {
+        self.player!.currentItem!.addObserver(self, forKeyPath:"playbackBufferEmpty", options:.initial, context:nil)
+        self.player!.currentItem!.addObserver(self, forKeyPath:"status", options:.initial, context:nil)
     }
     
-    private func _stopKVO() {
+    fileprivate func _stopKVO() {
         if (self.player != nil) {
             self.player!.currentItem!.removeObserver(self, forKeyPath:"playbackBufferEmpty")
             self.player!.currentItem!.removeObserver(self, forKeyPath:"status")
@@ -141,9 +141,9 @@ class StreamController: AVPlayerViewController {
     }
     
     func checkColor() {
-        let itemTime = _videoOutput.itemTimeForHostTime(CACurrentMediaTime())
+        let itemTime = _videoOutput.itemTime(forHostTime: CACurrentMediaTime())
         
-        if (_videoOutput.hasNewPixelBufferForItemTime(itemTime)) {
+        if (_videoOutput.hasNewPixelBuffer(forItemTime: itemTime)) {
             _pollColorTimer.invalidate()
             
             // @todo
@@ -152,15 +152,15 @@ class StreamController: AVPlayerViewController {
         }
     }
     
-    private func _pollColor() {
-        self.player!.currentItem!.removeOutput(_videoOutput)
-        self.player!.currentItem!.addOutput(_videoOutput)
+    fileprivate func _pollColor() {
+        self.player!.currentItem!.remove(_videoOutput)
+        self.player!.currentItem!.add(_videoOutput)
         
         if (_pollColorTimer != nil) {
             _pollColorTimer.invalidate()
         }
         
-        _pollColorTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(StreamController.checkColor), userInfo: nil, repeats: true)
+        _pollColorTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(StreamController.checkColor), userInfo: nil, repeats: true)
     }
     
     func destroy() {        
@@ -176,7 +176,7 @@ class StreamController: AVPlayerViewController {
         destroy()
         
         if (self.player != nil) {
-            self.player!.currentItem!.removeOutput(_videoOutput)
+            self.player!.currentItem!.remove(_videoOutput)
             self.player = nil
         }
         

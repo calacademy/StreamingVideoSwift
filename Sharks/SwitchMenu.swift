@@ -10,9 +10,9 @@ import UIKit
 
 class SwitchMenu: UIView {
     #if os(iOS)
-        private var _margin:CGFloat = 15
+        fileprivate var _margin:CGFloat = 15
     #else
-        private var _margin:CGFloat = 30
+        fileprivate var _margin:CGFloat = 30
     #endif
     
     var buttons:[SwitchButton]!
@@ -39,10 +39,10 @@ class SwitchMenu: UIView {
                 return
             }
             
-            let w = UIScreen.mainScreen().bounds.size.width
+            let w = UIScreen.main.bounds.size.width
             
             // add
-            for (i, stream) in streams.enumerate() {
+            for (i, stream) in streams.enumerated() {
                 #if os(iOS)
                     let btn = SwitchButtonIOS()
                 #else
@@ -66,28 +66,28 @@ class SwitchMenu: UIView {
     }
     
     override init(frame: CGRect) {
-        let bounds: CGRect = UIScreen.mainScreen().bounds
+        let bounds: CGRect = UIScreen.main.bounds
         super.init(frame: CGRect(x: 0, y: 0, width: bounds.size.width, height: bounds.size.height))
     }
     
-    func getTargetY(btn: SwitchButton) -> CGFloat {
+    func getTargetY(_ btn: SwitchButton) -> CGFloat {
         #if os(iOS)
             let offset: CGFloat = 3
         #else
             let offset: CGFloat = 10
         #endif
         
-        let h = UIScreen.mainScreen().bounds.size.height
+        let h = UIScreen.main.bounds.size.height
         return round((h - btn.frame.size.height) / 2) - offset
     }
     
-    func select(id:String, animate:Bool) {
+    func select(_ id:String, animate:Bool) {
         if (!onStage) {
             return
         }
         
         if (buttons != nil) {
-            for (i, btn) in buttons.enumerate() {
+            for (i, btn) in buttons.enumerated() {
                 if (btn.id == id) {
                     btn.activate(animate)
                     currentIndex = i
@@ -98,7 +98,7 @@ class SwitchMenu: UIView {
         }
     }
     
-    func navigate(direction:String) {
+    func navigate(_ direction:String) {
         if (!onStage) {
             return
         }
@@ -125,20 +125,20 @@ class SwitchMenu: UIView {
         select(buttons[i].id, animate: true)
     }
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
+    override func willMove(toSuperview newSuperview: UIView?) {
         if (self.superview == nil) {
             onStage = true
-            NSNotificationCenter.defaultCenter().postNotificationName("overlayVisible", object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "overlayVisible"), object: nil)
             
             // fade in bg
             self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
             
-            UIView.animateWithDuration(0.6, delay: 0, options: .CurveEaseOut, animations: {
+            UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseOut, animations: {
                 self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
             }, completion: nil)
             
             // button intro
-            for (i, btn) in buttons.enumerate() {
+            for (i, btn) in buttons.enumerated() {
                 let targetY = getTargetY(btn)
                 
                 btn.frame.origin.y = targetY + 130
@@ -146,11 +146,11 @@ class SwitchMenu: UIView {
                 
                 let d = CGFloat(i) * 0.12
                 
-                UIView.animateWithDuration(0.4, delay: Double(d), options: .CurveEaseOut, animations: {
+                UIView.animate(withDuration: 0.4, delay: Double(d), options: .curveEaseOut, animations: {
                     btn.frame.origin.y = targetY
                 }, completion: nil)
                 
-                UIView.animateWithDuration(0.6, delay: Double(d), options: .CurveEaseOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: Double(d), options: .curveEaseOut, animations: {
                     btn.alpha = 1
                 }, completion: nil)
             }
@@ -160,7 +160,7 @@ class SwitchMenu: UIView {
     override func didMoveToSuperview() {
         if (self.superview == nil) {
             onStage = false
-            NSNotificationCenter.defaultCenter().postNotificationName("overlayHidden", object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "overlayHidden"), object: nil)
         }
     }
     

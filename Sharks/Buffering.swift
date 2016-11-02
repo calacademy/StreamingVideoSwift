@@ -10,8 +10,8 @@ import UIKit
 
 class Buffering: UIImageView {
     var onStage:Bool = false
-    private var _isOverlayVisible:Bool = false
-    private var _timer:NSTimer!
+    fileprivate var _isOverlayVisible:Bool = false
+    fileprivate var _timer:Timer!
     
     override init(image: UIImage?) {
         #if os(iOS)
@@ -26,8 +26,8 @@ class Buffering: UIImageView {
         self.layer.shadowOffset = CGSize(width: 0, height: 0)
         self.layer.shadowRadius = 22.0
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Buffering.onOverlayVisible), name:"overlayVisible", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Buffering.onOverlayHidden), name:"overlayHidden", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(Buffering.onOverlayVisible), name:NSNotification.Name(rawValue: "overlayVisible"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(Buffering.onOverlayHidden), name:NSNotification.Name(rawValue: "overlayHidden"), object: nil)
         
         _place()
     }
@@ -47,13 +47,13 @@ class Buffering: UIImageView {
         if (onStage) {
             // self.layer.removeAllAnimations()
             
-            UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                 self.alpha = 1
             }, completion: nil)
         }
     }
     
-    func show(boo: Bool, view: UIView) {
+    func show(_ boo: Bool, view: UIView) {
         if (_timer != nil) {
             _timer.invalidate()
             _timer = nil
@@ -63,17 +63,17 @@ class Buffering: UIImageView {
             view.addSubview(self)
         } else {
             // delay before removing
-            self._timer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(UIView.removeFromSuperview), userInfo: nil, repeats: false)
+            self._timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(UIView.removeFromSuperview), userInfo: nil, repeats: false)
         }
     }
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
+    override func willMove(toSuperview newSuperview: UIView?) {
         if (self.superview == nil) {
             // fade in
             self.alpha = 0
             
             if (!_isOverlayVisible) {
-                UIView.animateWithDuration(0.6, delay: 0, options: .CurveEaseOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseOut, animations: {
                     self.alpha = 1
                 }, completion: nil)
             }
@@ -84,7 +84,7 @@ class Buffering: UIImageView {
             rotateAnimation.toValue = CGFloat(M_PI * 2.0)
             rotateAnimation.duration = 1
             rotateAnimation.repeatCount = .infinity
-            self.layer.addAnimation(rotateAnimation, forKey: nil)
+            self.layer.add(rotateAnimation, forKey: nil)
             
             onStage = true
         }
@@ -96,7 +96,7 @@ class Buffering: UIImageView {
         }
     }
     
-    private func _place() {
+    fileprivate func _place() {
         #if os(iOS)
             let w:CGFloat = 45
             let h:CGFloat = 45
@@ -108,7 +108,7 @@ class Buffering: UIImageView {
         #endif
         
         // place
-        let bounds: CGRect = UIScreen.mainScreen().bounds
+        let bounds: CGRect = UIScreen.main.bounds
         self.frame = CGRect(x: round((bounds.size.width - w) / 2), y: round((bounds.size.height - h) / 2) - offset, width: w, height: h)
     }
     

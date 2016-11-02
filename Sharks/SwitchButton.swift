@@ -9,12 +9,12 @@
 import UIKit
 
 class SwitchButton: UIView {
-    private var _pic:UIImageView!
-    private var _border:UIView!
-    private var _overlay:UIView!
+    fileprivate var _pic:UIImageView!
+    fileprivate var _border:UIView!
+    fileprivate var _overlay:UIView!
     
     #if os(iOS)
-        internal var _w:CGFloat = round(UIScreen.mainScreen().bounds.size.width * 0.3)
+        internal var _w:CGFloat = round(UIScreen.main.bounds.size.width * 0.3)
         internal var _borderWidth:CGFloat = 8
     #else
         internal var _w:CGFloat = 400
@@ -55,7 +55,7 @@ class SwitchButton: UIView {
         
         let dim: CGFloat = _w / 0.8
         let offset: CGFloat = round(-0.5 * (dim - _w))
-        _pic.frame = CGRectMake(offset, offset, dim, dim)
+        _pic.frame = CGRect(x: offset, y: offset, width: dim, height: dim)
         self.addSubview(_pic)
         
         _addGradient()
@@ -63,11 +63,11 @@ class SwitchButton: UIView {
         _addLabel(myLabel)
         
         _overlay = UIView(frame: self.frame)
-        _overlay.backgroundColor = UIColor.blackColor()
+        _overlay.backgroundColor = UIColor.black
         self.addSubview(_overlay)
         
         _border = UIView(frame: self.frame)
-        _border.layer.borderColor = UIColor.whiteColor().CGColor
+        _border.layer.borderColor = UIColor.white.cgColor
         _border.layer.borderWidth = _borderWidth
         self.addSubview(_border)
         
@@ -78,24 +78,24 @@ class SwitchButton: UIView {
         self.removeFromSuperview()
     }
     
-    func activate(animate: Bool) {
+    func activate(_ animate: Bool) {
         if (isActive) {
             return
         }
         
-        self._border.layer.borderColor = UIColor(red: 0, green: 255, blue: 255, alpha: 1).CGColor
+        self._border.layer.borderColor = UIColor(red: 0, green: 255, blue: 255, alpha: 1).cgColor
         
         if (animate) {
-            UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
-                self._pic.transform = CGAffineTransformMakeScale(0.9, 0.9)
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                self._pic.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             }, completion: nil)
             
-            UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
                 self._overlay.alpha = 0
                 self._arrow.alpha = 0.7
             }, completion: nil)
         } else {
-            self._pic.transform = CGAffineTransformMakeScale(0.9, 0.9)
+            self._pic.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             self._overlay.alpha = 0
             self._arrow.alpha = 0.7
         }
@@ -103,21 +103,21 @@ class SwitchButton: UIView {
         isActive = true
     }
     
-    func deactivate(animate: Bool) {
+    func deactivate(_ animate: Bool) {
         if (!isActive) {
             return
         }
         
-        self._border.layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1).CGColor
+        self._border.layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1).cgColor
         
         if (animate) {
-            UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
-                self._pic.transform = CGAffineTransformMakeScale(0.8, 0.8)
+            UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
+                self._pic.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
                 self._overlay.alpha = 0.25
                 self._arrow.alpha = 0
             }, completion: nil)
         } else {
-            self._pic.transform = CGAffineTransformMakeScale(0.8, 0.8)
+            self._pic.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             self._overlay.alpha = 0.25
             self._arrow.alpha = 0
         }
@@ -127,15 +127,15 @@ class SwitchButton: UIView {
     
     internal func _addGradient() {
         let gradient = CAGradientLayer()
-        gradient.frame = CGRectMake(0, 0, _w, _w)
+        gradient.frame = CGRect(x: 0, y: 0, width: _w, height: _w)
         
         var colors = [CGColor]()
-        colors.append(UIColor(red: 0, green: 0, blue: 0, alpha: 0).CGColor)
-        colors.append(UIColor(red: 0, green: 0, blue: 0, alpha: 0.75).CGColor)
+        colors.append(UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor)
+        colors.append(UIColor(red: 0, green: 0, blue: 0, alpha: 0.75).cgColor)
         
         gradient.colors = colors
-        gradient.startPoint = CGPointMake(0.5, 0.1)
-        gradient.endPoint = CGPointMake(0.5, 0.9)
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.1)
+        gradient.endPoint = CGPoint(x: 0.5, y: 0.9)
         
         self.layer.addSublayer(gradient)
     }
@@ -153,14 +153,14 @@ class SwitchButton: UIView {
         self.addSubview(_arrow)
     }
     
-    internal func _addLabel(label: String) {
+    internal func _addLabel(_ label: String) {
         let h:CGFloat = 30
         
-        _label = UILabel(frame: CGRectMake(_borderWidth, _w - _borderWidth - h - 10, _w - (_borderWidth * 2), h))
-        _label.textColor = UIColor.whiteColor()
-        _label.textAlignment = NSTextAlignment.Center
+        _label = UILabel(frame: CGRect(x: _borderWidth, y: _w - _borderWidth - h - 10, width: _w - (_borderWidth * 2), height: h))
+        _label.textColor = UIColor.white
+        _label.textAlignment = NSTextAlignment.center
         _label.font = UIFont(name: "Whitney-Semibold", size: 30)
-        _label.text = label.uppercaseString
+        _label.text = label.uppercased()
         
         self.addSubview(_label)
     }

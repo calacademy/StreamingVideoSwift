@@ -9,26 +9,28 @@
 import UIKit
 
 class StreamData: NSObject {
-    private let _configEndpoint = "http://s3.amazonaws.com/data.calacademy.org/sharks/data.json"
-    private var _endpoint:String!
-    private var _hlsKey:String!
-    private var _task:NSURLSessionDataTask!
-    private var _session:NSURLSession!
+    fileprivate let _configEndpoint = "http://s3.amazonaws.com/data.calacademy.org/sharks/data.json"
+    fileprivate var _endpoint:String!
+    fileprivate var _hlsKey:String!
+    fileprivate var _task:URLSessionDataTask!
+    fileprivate var _session:URLSession!
     
     var streams:[[String:String]]!
     
-    func getHLSPath(id: String) {
+    func getHLSPath(_ id: String) {
         destroy()
-        _session = NSURLSession(configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration())
+        _session = URLSession(configuration: URLSessionConfiguration.ephemeral)
         
-        let url = NSURL(string: _endpoint + "=" + id)!
+        let url = URL(string: _endpoint + "=" + id)!
         
-        _task = _session.dataTaskWithURL(url, completionHandler: {
+        _task = _session.dataTask(with: url, completionHandler: {
             data, response, error -> Void in
             
-            dispatch_async(dispatch_get_main_queue()) {
-                self._onHLSPathComplete(data, response: response, error: error)
+            DispatchQueue.main.async {
+                self._onHLSPathComplete(data, response: response, error: error as NSError?)
             }
+            
+            return
         })
         
         _task.resume()
@@ -36,32 +38,34 @@ class StreamData: NSObject {
     
     func getConfig() {
         destroy()
-        _session = NSURLSession(configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration())
+        _session = URLSession(configuration: URLSessionConfiguration.ephemeral)
         
-        let url = NSURL(string: _configEndpoint)!
+        let url = URL(string: _configEndpoint)!
         
-        _task = _session.dataTaskWithURL(url, completionHandler: {
+        _task = _session.dataTask(with: url, completionHandler: {
             data, response, error -> Void in
             
-            dispatch_async(dispatch_get_main_queue()) {
-                self._onConfigComplete(data, response: response, error: error)
+            DispatchQueue.main.async {
+                self._onConfigComplete(data, response: response, error: error as NSError?)
             }
+            
+            return
         })
         
         _task.resume()
     }
     
-    private func _onConfigComplete(data: NSData?, response: NSURLResponse?, error: NSError?) {
+    fileprivate func _onConfigComplete(_ data: Data?, response: URLResponse?, error: NSError?) {
         let errorInfo = [
             "error": "configDataError"
         ]
         
         if (error != nil) {
-            NSNotificationCenter.defaultCenter().postNotificationName("dataError", object: nil, userInfo: errorInfo)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "dataError"), object: nil, userInfo: errorInfo)
             return
         }
         
-        print("config loaded from " + (response!.URL?.absoluteString)!)
+        print("config loaded from " + (response!.url?.absoluteString)!)
         
         let json = JSON(data: data!)
 
@@ -84,7 +88,7 @@ class StreamData: NSObject {
                             ])
                         }
                         
-                        NSNotificationCenter.defaultCenter().postNotificationName("configDataLoaded", object: nil)
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "configDataLoaded"), object: nil)
                         return
                     }
                 }
@@ -92,35 +96,35 @@ class StreamData: NSObject {
         }
         
         // stream data not found
-        NSNotificationCenter.defaultCenter().postNotificationName("dataError", object: nil, userInfo: errorInfo)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "dataError"), object: nil, userInfo: errorInfo)
     }
     
-    private func _onHLSPathComplete(data: NSData?, response: NSURLResponse?, error: NSError?) {
+    fileprivate func _onHLSPathComplete(_ data: Data?, response: URLResponse?, error: NSError?) {
         let errorInfo = [
             "error": "hlsDataError"
         ]
         
         if (error != nil) {
-            NSNotificationCenter.defaultCenter().postNotificationName("dataError", object: nil, userInfo: errorInfo)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "dataError"), object: nil, userInfo: errorInfo)
             return
         }
         
-        print("HLS data loaded from " + (response!.URL?.absoluteString)!)
+        print("HLS data loaded from " + (response!.url?.absoluteString)!)
         
         // split data from YouTube
-        let datastring = NSString(data: data!, encoding: NSUTF8StringEncoding)
-        let arr = datastring?.componentsSeparatedByString("&") as Array!
+        let datastring = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+        let arr = datastring?.components(separatedBy: "&") as Array!
         
         // search for "hlsvp"
-        for part in arr {
-            var varArr = part.componentsSeparatedByString("=")
+        for part in arr! {
+            var varArr = part.components(separatedBy: "=")
             
             if (varArr[0] == _hlsKey) {
                 // found video url, broadcast to observers
                 let foo = varArr[1]
                 
-                NSNotificationCenter.defaultCenter().postNotificationName("hlsDataLoaded", object: nil, userInfo: [
-                    "url": foo.stringByRemovingPercentEncoding!
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "hlsDataLoaded"), object: nil, userInfo: [
+                    "url": foo.removingPercentEncoding!
                 ])
                 
                 return
@@ -128,7 +132,7 @@ class StreamData: NSObject {
         }
         
         // stream data not found
-        NSNotificationCenter.defaultCenter().postNotificationName("dataError", object: nil, userInfo: errorInfo)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "dataError"), object: nil, userInfo: errorInfo)
     }
     
     func destroy() {

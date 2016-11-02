@@ -26,14 +26,14 @@ class SwitchButtonIOS: SwitchButton {
         self.addSubview(_arrow)
     }
     
-    override internal func _addLabel(label: String) {
+    override internal func _addLabel(_ label: String) {
         let h:CGFloat = 16
         
-        _label = UILabel(frame: CGRectMake(_borderWidth, _w - _borderWidth - h - 5, _w - (_borderWidth * 2), h))
-        _label.textColor = UIColor.whiteColor()
-        _label.textAlignment = NSTextAlignment.Center
+        _label = UILabel(frame: CGRect(x: _borderWidth, y: _w - _borderWidth - h - 5, width: _w - (_borderWidth * 2), height: h))
+        _label.textColor = UIColor.white
+        _label.textAlignment = NSTextAlignment.center
         _label.font = UIFont(name: "Whitney-Semibold", size: 16)
-        _label.text = label.uppercaseString
+        _label.text = label.uppercased()
         
         self.addSubview(_label)
     }

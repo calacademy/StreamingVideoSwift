@@ -9,9 +9,9 @@
 import UIKit.UIGestureRecognizerSubclass
 
 class UITouchEndGestureRecognizer: UIGestureRecognizer {
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent) {
-        if self.state == .Possible {
-            self.state = .Recognized
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+        if self.state == .possible {
+            self.state = .recognized
         }
     }
 }

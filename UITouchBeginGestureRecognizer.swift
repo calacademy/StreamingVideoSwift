@@ -9,9 +9,9 @@
 import UIKit.UIGestureRecognizerSubclass
 
 class UITouchBeginGestureRecognizer: UIGestureRecognizer {
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent) {
-        if self.state == .Possible {
-            self.state = .Recognized
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        if self.state == .possible {
+            self.state = .recognized
         }
     }
 }
