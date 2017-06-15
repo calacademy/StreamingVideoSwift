@@ -81,7 +81,7 @@ class Buffering: UIImageView {
             // rotate
             let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
             rotateAnimation.fromValue = 0.0
-            rotateAnimation.toValue = CGFloat(M_PI * 2.0)
+            rotateAnimation.toValue = CGFloat(.pi * 2.0)
             rotateAnimation.duration = 1
             rotateAnimation.repeatCount = .infinity
             self.layer.add(rotateAnimation, forKey: nil)

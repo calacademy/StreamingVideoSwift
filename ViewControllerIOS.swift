@@ -10,6 +10,9 @@ import UIKit
 import AVKit
 
 class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
+    var numNetworkErrors = 0
+    let maxNetworkErrors = 3
+    
     override func addLogo() {
         let offset:CGFloat = 6
         let w:CGFloat = 87
@@ -19,6 +22,58 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         logo = UIImageView(image: image!)
         
         placeLogo(w, h: h, offsetX: offset, offsetY: offset - 1)
+    }
+    
+    override func onStreamPlay() {
+        super.onStreamPlay()
+        numNetworkErrors = 0
+    }
+    
+    override func onError(_ e: NSError) {
+        switch e.domain {
+            case "configDataError":
+                print("! Config data error")
+            case "hlsDataError":
+                print("! HLS data error")
+            case "playbackBufferEmpty":
+                print("! Buffer empty")
+            default:
+                print("! Unknown stream error")
+        }
+        
+        numNetworkErrors += 1
+        
+        if (numNetworkErrors < maxNetworkErrors) {
+            // retry
+            loadConfig()
+        } else {
+            // alert
+            showErrorAlert()
+        }
+    }
+    
+    func showErrorAlert() {
+        let alert = UIAlertController(title: "Network Error", message: "There appears to be a problem with the network. Would you like to watch a pre-recorded video instead?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+            self.numNetworkErrors = 0
+            self.loadConfig()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.numNetworkErrors = 0
+            self.playFallbackVideo()
+        }))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func playFallbackVideo() {
+        // @todo
+        // shark video
+        let videoURL = Bundle.main.url(forResource: "penguins-3k-h264", withExtension: "mp4")!
+        loadAndPlay(url: videoURL.absoluteString)
     }
     
     func onTouchBegin(_ sender: UIGestureRecognizer) {
@@ -57,6 +112,10 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
             for recognizer in self.view.gestureRecognizers! {
                 self.view.removeGestureRecognizer(recognizer)
             }
+        }
+        
+        if (menu.buttons == nil) {
+            return
         }
         
         for btn in menu.buttons {

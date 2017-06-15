@@ -25,6 +25,7 @@
 		E829CD491C7FB40D003AA289 /* UITouchBeginGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */; };
 		E829CD4C1C80E924003AA289 /* UITouchEndGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */; };
 		E829CD4E1C81027F003AA289 /* SwitchButtonIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD4D1C81027F003AA289 /* SwitchButtonIOS.swift */; };
+		E868CA4E1EF3230E00B3714F /* penguins-3k-h264.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E868CA4D1EF3230E00B3714F /* penguins-3k-h264.mp4 */; };
 		E884CA111C7BB1960048938E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E884CA101C7BB1960048938E /* Main.storyboard */; };
 		E885CE3B1BB45F65005A0721 /* Buffering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E885CE3A1BB45F65005A0721 /* Buffering.swift */; };
 		E890771E1BB9CF2C00F6F1B5 /* StreamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */; };
@@ -48,6 +49,7 @@
 		E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITouchBeginGestureRecognizer.swift; sourceTree = "<group>"; };
 		E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITouchEndGestureRecognizer.swift; sourceTree = "<group>"; };
 		E829CD4D1C81027F003AA289 /* SwitchButtonIOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchButtonIOS.swift; sourceTree = "<group>"; };
+		E868CA4D1EF3230E00B3714F /* penguins-3k-h264.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "penguins-3k-h264.mp4"; sourceTree = "<group>"; };
 		E884CA101C7BB1960048938E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E885CE3A1BB45F65005A0721 /* Buffering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Buffering.swift; path = Sharks/Buffering.swift; sourceTree = "<group>"; usesTabs = 1; };
 		E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamData.swift; path = Sharks/StreamData.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		E80209051C7B96D10044F64C /* Sharks iOS */ = {
 			isa = PBXGroup;
 			children = (
+				E868CA4D1EF3230E00B3714F /* penguins-3k-h264.mp4 */,
 				E802090D1C7B96D10044F64C /* Assets iOS.xcassets */,
 				E884CA101C7BB1960048938E /* Main.storyboard */,
 				E80209121C7B96D10044F64C /* Info.plist */,
@@ -229,6 +232,7 @@
 			files = (
 				E802090E1C7B96D10044F64C /* Assets iOS.xcassets in Resources */,
 				E802091F1C7B99500044F64C /* Whitney-Semibold.otf in Resources */,
+				E868CA4E1EF3230E00B3714F /* penguins-3k-h264.mp4 in Resources */,
 				E829CD461C7E3852003AA289 /* Media.xcassets in Resources */,
 				E884CA111C7BB1960048938E /* Main.storyboard in Resources */,
 			);

@@ -160,6 +160,10 @@ class ViewController: UIViewController {
         let obj = (notification as NSNotification).userInfo as! [String:AnyObject]
         let url = obj["url"] as! String
         
+        loadAndPlay(url: url)
+    }
+    
+    func loadAndPlay(url: String) {
         if (streamController != nil) {
             streamController.destroy()
         }

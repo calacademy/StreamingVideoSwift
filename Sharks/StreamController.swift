@@ -79,6 +79,7 @@ class StreamController: AVPlayerViewController {
         
         let url:URL = URL(string: path)!
         let streamPlayer = AVPlayer(url: url)
+        
         streamPlayer.isMuted = true
         self.player = streamPlayer
         
