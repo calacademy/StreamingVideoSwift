@@ -11,6 +11,7 @@ import AVKit
 
 class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     var numNetworkErrors = 0
+    var isAlerting = false
     let maxNetworkErrors = 3
     
     override func addLogo() {
@@ -20,8 +21,25 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         
         let image = UIImage(named: "logoios")
         logo = UIImageView(image: image!)
+        logo.isUserInteractionEnabled = true
+        
+        let begin = UITouchBeginGestureRecognizer(target: self, action:#selector(self.onLogoTouchBegin(_:)))
+        begin.delegate = self
+        logo.addGestureRecognizer(begin)
+        
+        let end = UITouchEndGestureRecognizer(target: self, action:#selector(self.onLogoTouchEnd(_:)))
+        logo.addGestureRecognizer(end)
         
         placeLogo(w, h: h, offsetX: offset, offsetY: offset - 1)
+    }
+    
+    func onLogoTouchEnd(_ sender: UIGestureRecognizer) {
+        logo.alpha = 0.5
+        showLogoAlert()
+    }
+    
+    func onLogoTouchBegin(_ sender: UIGestureRecognizer) {
+        logo.alpha = 1
     }
     
     override func onStreamPlay() {
@@ -52,21 +70,69 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func showErrorAlert() {
-        let alert = UIAlertController(title: "Network Error", message: "There appears to be a problem with the network. Would you like to watch a pre-recorded video instead?", preferredStyle: .alert)
+    func requestAlert() -> Bool {
+        if (isAlerting) {
+            return false
+        }
+        
+        // close menu
+        if (menu.onStage) {
+            onSelect()
+        }
+        
+        isAlerting = true
+        return true
+    }
+    
+    func onAlertClose() {
+        isAlerting = false
+    }
+    
+    func showLogoAlert() {
+        if (!requestAlert()) {
+            return
+        }
+        
+        let alert = UIAlertController(title: "Visit Us Online", message: "Learn about events and exhibits, purchase tickets, submit feedback, and more!", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
-            self.numNetworkErrors = 0
-            self.loadConfig()
+            self.onAlertClose()
         }))
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            self.numNetworkErrors = 0
-            self.playFallbackVideo()
+            self.goToWebsite()
+            self.onAlertClose()
         }))
         
         // show the alert
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showErrorAlert() {
+        if (!requestAlert()) {
+            return
+        }
+        
+        numNetworkErrors = 0
+        
+        let alert = UIAlertController(title: "Network Error", message: "There appears to be a problem with the network. Would you like to watch a pre-recorded video instead?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+            self.loadConfig()
+            self.onAlertClose()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.playFallbackVideo()
+            self.onAlertClose()
+        }))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func goToWebsite() {
+        UIApplication.shared.openURL(URL(string: "http://www.calacademy.org/explore-science/sharks-live-for-apple-tv")!)
     }
     
     func playFallbackVideo() {
@@ -132,16 +198,16 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         }
         
         // tap to open menu
-        let selectRecognizer = UITapGestureRecognizer(target: self, action:#selector(ViewController.onSelect(_:)))
+        let selectRecognizer = UITapGestureRecognizer(target: self, action:#selector(self.onSelect(_:)))
         self.view.addGestureRecognizer(selectRecognizer)
         
         // add gestures to menu items
         for btn in menu.buttons {
-            let begin = UITouchBeginGestureRecognizer(target: self, action:#selector(ViewControllerIOS.onTouchBegin(_:)))
+            let begin = UITouchBeginGestureRecognizer(target: self, action:#selector(self.onTouchBegin(_:)))
             begin.delegate = self
             btn.addGestureRecognizer(begin)
             
-            let end = UITouchEndGestureRecognizer(target: self, action:#selector(ViewControllerIOS.onTouchEnd(_:)))
+            let end = UITouchEndGestureRecognizer(target: self, action:#selector(self.onTouchEnd(_:)))
             btn.addGestureRecognizer(end)
         }
     }

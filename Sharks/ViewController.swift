@@ -197,7 +197,7 @@ class ViewController: UIViewController {
         isTransitioning = false
     }
     
-    func onMenu(_ sender: UIGestureRecognizer) {
+    func onMenu(_ sender: UIGestureRecognizer! = nil) {
         // add menu
         self.view.addSubview(menu)
         
@@ -210,7 +210,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func onSelect(_ sender: UIGestureRecognizer) {
+    func onSelect(_ sender: UIGestureRecognizer! = nil) {
         // open menu if not visible
         if (!menu.onStage) {
             onMenu(sender)
