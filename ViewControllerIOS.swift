@@ -67,7 +67,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         donateButton.frame = CGRect(x: offset, y: screen.height - h - offset, width: w, height: h)
         
         addDonateButtonInteraction()
-        fadeIn(donateButton, 0.6, 3.6)
+        fadeIn(donateButton, 0.5, 3.6)
         
         self.view.addSubview(donateButton)
     }
@@ -84,7 +84,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     }
     
     func onDonateTouchEnd(_ sender: UIGestureRecognizer) {
-        donateButton.alpha = 0.6
+        donateButton.alpha = 0.5
         showDonateAlert()
     }
     
