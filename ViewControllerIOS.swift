@@ -285,9 +285,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     }
     
     func playFallbackVideo() {
-        // @todo
-        // shark video
-        let videoURL = Bundle.main.url(forResource: "penguins-3k-h264", withExtension: "mp4")!
+        let videoURL = Bundle.main.url(forResource: "fallback", withExtension: "mp4")!
         loadAndPlay(url: videoURL.absoluteString)
     }
     
