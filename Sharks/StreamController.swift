@@ -33,6 +33,9 @@ class StreamController: AVPlayerViewController {
     }
     
     func addToView(_ container: UIView) {
+        // @todo
+        // adjust to fill screen per aspect ratio
+        
         // size
         let bounds: CGRect = UIScreen.main.bounds
         let w:CGFloat = bounds.size.width

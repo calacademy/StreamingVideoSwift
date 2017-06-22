@@ -90,16 +90,19 @@ class ViewController: UIViewController {
             streamController = nil
         }
         
-        // remove logo
+        removeUI()
+        
+        buffer(false)
+        isTransitioning = true
+        isFirstPlay = true
+    }
+    
+    func removeUI() {
         if (logo != nil) {
             logo.removeFromSuperview()
         }
         
         menu.removeFromSuperview()
-        
-        buffer(false)
-        isTransitioning = true
-        isFirstPlay = true
     }
     
     func onRestart() {
@@ -177,7 +180,7 @@ class ViewController: UIViewController {
         streamController.addToView(streamViewContainer)
         
         if (isFirstPlay) {
-            addLogo()
+            addUI()
             addInteraction()
             isFirstPlay = false
         } else {
@@ -301,6 +304,10 @@ class ViewController: UIViewController {
         }
     }
     
+    func addUI() {
+        addLogo()
+    }
+    
     func addLogo() {
         let offset:CGFloat = 30
         let w:CGFloat = 220
@@ -312,17 +319,21 @@ class ViewController: UIViewController {
         placeLogo(w, h: h, offsetX: offset, offsetY: offset - 5)
     }
     
+    func fadeIn(_ view: UIView, _ targetAlpha: CGFloat, _ delay: Double) {
+        // fade in
+        view.alpha = 0
+        
+        UIView.animate(withDuration: 0.8, delay: delay, options: .curveEaseOut, animations: {
+            view.alpha = targetAlpha
+        }, completion: nil)
+    }
+    
     func placeLogo(_ w: CGFloat, h: CGFloat, offsetX: CGFloat, offsetY: CGFloat) {
         // place
         let bounds: CGRect = UIScreen.main.bounds
         logo.frame = CGRect(x: bounds.size.width - w - offsetX, y: offsetY, width: w, height: h)
         
-        // fade in
-        logo.alpha = 0
-        
-        UIView.animate(withDuration: 0.8, delay: 3, options: .curveEaseOut, animations: {
-            self.logo.alpha = 0.5
-            }, completion: nil)
+        fadeIn(logo, 0.5, 3)
         
         // add to stage
         self.view.addSubview(logo)

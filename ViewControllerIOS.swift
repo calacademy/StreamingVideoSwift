@@ -10,9 +10,98 @@ import UIKit
 import AVKit
 
 class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
+    let maxNetworkErrors = 3
     var numNetworkErrors = 0
     var isAlerting = false
-    let maxNetworkErrors = 3
+    var shadow:UIView!
+    var donateButton:UIView!
+    
+    override func addUI() {
+        super.addUI()
+        addDonateButton()
+    }
+    
+    func getAttributedString (_ string: String, _ font: String, _ size: CGFloat = 18) -> NSMutableAttributedString {
+        let labelFont = UIFont(name: font, size: CGFloat(size))!
+        let attributes = [NSFontAttributeName: labelFont]
+        
+        return NSMutableAttributedString(string: string, attributes: attributes)
+    }
+    
+    func addDonateButton() {
+        donateButton = UIView()
+        shadow = UIImageView(image: UIImage(named: "shadow")!)
+        
+        let screen = UIScreen.main.bounds
+        
+        // shadow
+        let shadowW:CGFloat = 550
+        let shadowH:CGFloat = 175
+        shadow.frame = CGRect(x: 0, y: screen.height - shadowH, width: shadowW, height: shadowH)
+        
+        fadeIn(shadow, 0.7, 3.6)
+        self.view.addSubview(shadow)
+        
+        // label
+        let attributedString = getAttributedString("feed ", "Whitney-Book")
+        let boldString = getAttributedString("the Chondrichthyes", "Whitney-Semibold")
+        attributedString.append(boldString)
+        
+        let label = UILabel(frame: CGRect(x: 80, y: 52, width: 200, height: 21))
+        label.textAlignment = .left
+        label.textColor = UIColor.white
+        label.attributedText = attributedString
+        label.sizeToFit()
+        
+        donateButton.addSubview(label)
+        
+        // image
+        let silhouette = UIImageView(image: UIImage(named: "silhouette")!)
+        donateButton.addSubview(silhouette)
+        
+        // place
+        let offset:CGFloat = 4
+        let w:CGFloat = 250
+        let h:CGFloat = 76
+        donateButton.frame = CGRect(x: offset, y: screen.height - h - offset, width: w, height: h)
+        
+        addDonateButtonInteraction()
+        fadeIn(donateButton, 0.6, 3.6)
+        
+        self.view.addSubview(donateButton)
+    }
+    
+    func addDonateButtonInteraction() {
+        donateButton.isUserInteractionEnabled = true
+        
+        let begin = UITouchBeginGestureRecognizer(target: self, action:#selector(self.onDonateTouchBegin(_:)))
+        begin.delegate = self
+        donateButton.addGestureRecognizer(begin)
+        
+        let end = UITouchEndGestureRecognizer(target: self, action:#selector(self.onDonateTouchEnd(_:)))
+        donateButton.addGestureRecognizer(end)
+    }
+    
+    func onDonateTouchEnd(_ sender: UIGestureRecognizer) {
+        donateButton.alpha = 0.6
+        showDonateAlert()
+    }
+    
+    func onDonateTouchBegin(_ sender: UIGestureRecognizer) {
+        donateButton.alpha = 1
+    }
+    
+    override func removeUI() {
+        super.removeUI()
+        
+        if (donateButton != nil) {
+            donateButton.removeFromSuperview()
+        }
+        
+        if (shadow != nil) {
+            shadow.removeFromSuperview()
+        }
+    }
     
     override func addLogo() {
         let offset:CGFloat = 6
@@ -100,7 +189,27 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         }))
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            self.goToWebsite()
+            self.goToWebsite("http://www.calacademy.org/explore-science/sharks-live-for-apple-tv")
+            self.onAlertClose()
+        }))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showDonateAlert() {
+        if (!requestAlert()) {
+            return
+        }
+        
+        let alert = UIAlertController(title: "Help Advance Our Mission", message: "Please visit our website to make a donation.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+            self.onAlertClose()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.goToWebsite("http://www.calacademy.org/donate")
             self.onAlertClose()
         }))
         
@@ -131,8 +240,8 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func goToWebsite() {
-        UIApplication.shared.openURL(URL(string: "http://www.calacademy.org/explore-science/sharks-live-for-apple-tv")!)
+    func goToWebsite(_ url: String) {
+        UIApplication.shared.openURL(URL(string: url)!)
     }
     
     func playFallbackVideo() {
@@ -145,10 +254,6 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     func onTouchBegin(_ sender: UIGestureRecognizer) {
         let btn = sender.view as! SwitchButton
         btn.isBeingPressed = true
-        
-        if (btn.isActive) {
-            return
-        }
         
         btn.activate(true)
         

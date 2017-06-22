@@ -32,6 +32,8 @@
 		E8A104461BAC6B8A000F6736 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104451BAC6B8A000F6736 /* AppDelegate.swift */; };
 		E8A104481BAC6B8A000F6736 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104471BAC6B8A000F6736 /* ViewController.swift */; };
 		E8A1044B1BAC6B8A000F6736 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A104491BAC6B8A000F6736 /* Main.storyboard */; };
+		E8A149BE1EFADA51004592AD /* Whitney-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A149BD1EFADA51004592AD /* Whitney-Book.otf */; };
+		E8A149C11EFADB38004592AD /* Whitney-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A149BD1EFADA51004592AD /* Whitney-Book.otf */; };
 		E8D2903B1BB5A23400AF8B06 /* StreamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D2903A1BB5A23400AF8B06 /* StreamController.swift */; };
 		E8DC23021BBEF8C3006CE476 /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */; };
 		E8DC23111BBF2372006CE476 /* Whitney-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */; };
@@ -59,6 +61,7 @@
 		E8A1044A1BAC6B8A000F6736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E8A1044C1BAC6B8A000F6736 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8A1044E1BAC6B8A000F6736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8A149BD1EFADA51004592AD /* Whitney-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Whitney-Book.otf"; path = "Sharks/Whitney-Book.otf"; sourceTree = "<group>"; };
 		E8D2903A1BB5A23400AF8B06 /* StreamController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamController.swift; path = Sharks/StreamController.swift; sourceTree = "<group>"; };
 		E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchButton.swift; path = Sharks/SwitchButton.swift; sourceTree = "<group>"; };
 		E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Whitney-Semibold.otf"; path = "Sharks/Whitney-Semibold.otf"; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 		E8A104391BAC6B8A000F6736 = {
 			isa = PBXGroup;
 			children = (
+				E8A149BD1EFADA51004592AD /* Whitney-Book.otf */,
 				E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */,
 				E80209291C7BA1FB0044F64C /* Media.xcassets */,
 				E80208FF1C7B965C0044F64C /* Classes */,
@@ -230,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8A149C11EFADB38004592AD /* Whitney-Book.otf in Resources */,
 				E802090E1C7B96D10044F64C /* Assets iOS.xcassets in Resources */,
 				E802091F1C7B99500044F64C /* Whitney-Semibold.otf in Resources */,
 				E868CA4E1EF3230E00B3714F /* penguins-3k-h264.mp4 in Resources */,
@@ -245,6 +250,7 @@
 				E8A1044B1BAC6B8A000F6736 /* Main.storyboard in Resources */,
 				E80209251C7BA1160044F64C /* Assets.xcassets in Resources */,
 				E802092A1C7BA1FB0044F64C /* Media.xcassets in Resources */,
+				E8A149BE1EFADA51004592AD /* Whitney-Book.otf in Resources */,
 				E8DC23111BBF2372006CE476 /* Whitney-Semibold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

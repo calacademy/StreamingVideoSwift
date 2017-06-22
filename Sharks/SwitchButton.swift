@@ -40,6 +40,7 @@ class SwitchButton: UIView {
         
         self.layer.masksToBounds = true
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)
+        self.isUserInteractionEnabled = true
     }
     
     func setup(id myID: String, label myLabel: String, pic asset: String) {
@@ -83,6 +84,7 @@ class SwitchButton: UIView {
             return
         }
         
+        self.isUserInteractionEnabled = false
         self._border.layer.borderColor = UIColor(red: 0, green: 1, blue: 1, alpha: 1).cgColor
         
         if (animate) {
@@ -108,6 +110,7 @@ class SwitchButton: UIView {
             return
         }
         
+        self.isUserInteractionEnabled = true
         self._border.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
         
         if (animate) {
