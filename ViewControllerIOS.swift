@@ -15,6 +15,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     var isAlerting = false
     var shadow:UIView!
     var donateButton:UIView!
+    var currentAlert:UIAlertController!
     
     override func addUI() {
         super.addUI()
@@ -101,6 +102,11 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         if (shadow != nil) {
             shadow.removeFromSuperview()
         }
+        
+        if (currentAlert != nil) {
+            currentAlert.dismiss(animated: false, completion: nil)
+            onAlertClose()
+        }
     }
     
     override func addLogo() {
@@ -175,6 +181,19 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     
     func onAlertClose() {
         isAlerting = false
+        currentAlert = nil
+    }
+    
+    func getCustomAlertController(_ title: String, _ message: String) -> UIAlertController {
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        
+        let title = getAttributedString(title, "Whitney-Semibold", 18)
+        alert.setValue(title, forKey: "attributedTitle")
+        
+        let message = getAttributedString(message, "Whitney-Book", 16)
+        alert.setValue(message, forKey: "attributedMessage")
+        
+        return alert
     }
     
     func showLogoAlert() {
@@ -182,19 +201,19 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
             return
         }
         
-        let alert = UIAlertController(title: "Visit Us Online", message: "Learn about events and exhibits, purchase tickets, submit feedback, and more!", preferredStyle: .alert)
+        currentAlert = getCustomAlertController("Visit Us Online", "Learn about events and exhibits, purchase tickets, submit feedback, and more!")
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+        currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
             self.onAlertClose()
         }))
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        currentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             self.goToWebsite("http://www.calacademy.org/explore-science/sharks-live-for-apple-tv")
             self.onAlertClose()
         }))
         
         // show the alert
-        self.present(alert, animated: true, completion: nil)
+        self.present(currentAlert, animated: true, completion: nil)
     }
     
     func showDonateAlert() {
@@ -202,19 +221,19 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
             return
         }
         
-        let alert = UIAlertController(title: "Help Advance Our Mission", message: "Please visit our website to make a donation.", preferredStyle: .alert)
+        currentAlert = getCustomAlertController("Help Advance Our Mission", "Please visit our website to make a donation.")
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+        currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
             self.onAlertClose()
         }))
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        currentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             self.goToWebsite("http://www.calacademy.org/donate")
             self.onAlertClose()
         }))
         
         // show the alert
-        self.present(alert, animated: true, completion: nil)
+        self.present(currentAlert, animated: true, completion: nil)
     }
     
     override func onFlatComplete() {
@@ -222,20 +241,20 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
             return
         }
         
-        let alert = UIAlertController(title: "Playback Complete", message: "Would you like to watch the video again?", preferredStyle: .alert)
+        currentAlert = getCustomAlertController("Playback Complete", "Would you like to watch the video again?")
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+        currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
             self.loadConfig()
             self.onAlertClose()
         }))
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        currentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             self.playFallbackVideo()
             self.onAlertClose()
         }))
         
         // show the alert
-        self.present(alert, animated: true, completion: nil)
+        self.present(currentAlert, animated: true, completion: nil)
     }
     
     func showErrorAlert() {
@@ -245,20 +264,20 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         
         numNetworkErrors = 0
         
-        let alert = UIAlertController(title: "Network Error", message: "There appears to be a problem with the network. Would you like to watch a pre-recorded video instead?", preferredStyle: .alert)
+        currentAlert = getCustomAlertController("Network Error", "There appears to be a problem with the network. Would you like to watch a pre-recorded video instead?")
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+        currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
             self.loadConfig()
             self.onAlertClose()
         }))
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        currentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             self.playFallbackVideo()
             self.onAlertClose()
         }))
         
         // show the alert
-        self.present(alert, animated: true, completion: nil)
+        self.present(currentAlert, animated: true, completion: nil)
     }
     
     func goToWebsite(_ url: String) {
