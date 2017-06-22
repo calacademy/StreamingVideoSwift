@@ -17,6 +17,10 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     var donateButton:UIView!
     var currentAlert:UIAlertController!
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func addUI() {
         super.addUI()
         addDonateButton()

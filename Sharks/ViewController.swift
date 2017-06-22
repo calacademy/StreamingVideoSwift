@@ -30,10 +30,6 @@ class ViewController: UIViewController {
     var streamData = StreamData()
     var streamController:StreamController!
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor(white: 1, alpha: 0)
         self.view.layer.contents = UIImage(named: "launch")?.cgImage
