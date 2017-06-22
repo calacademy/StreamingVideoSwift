@@ -14,6 +14,11 @@ class StreamController: AVPlayerViewController {
     fileprivate var _pollColorTimer:Timer!
     fileprivate var _videoOutput:AVPlayerItemVideoOutput!
     
+    let aspect:[String: CGFloat] = [
+        "width": 1280,
+        "height": 720
+    ]
+    
     init() {
         super.init(nibName:nil, bundle:nil)
         
@@ -32,15 +37,20 @@ class StreamController: AVPlayerViewController {
         super.init(coder: aDecoder)
     }
     
-    func addToView(_ container: UIView) {
-        // @todo
-        // adjust to fill screen per aspect ratio
+    func scaleToFill() {
+        let screenSize = UIScreen.main.bounds.size
+        let w:CGFloat = ceil((aspect["width"]! * screenSize.height) / aspect["height"]!)
         
-        // size
-        let bounds: CGRect = UIScreen.main.bounds
-        let w:CGFloat = bounds.size.width
-        let h:CGFloat = bounds.size.height
-        self.view.frame = CGRect(x: 0, y: 0, width: w, height: h)
+        if (w >= screenSize.width) {
+            self.view.frame = CGRect(x: (screenSize.width - w), y: 0, width: w, height: screenSize.height)
+        } else {
+            let h:CGFloat = ceil((aspect["height"]! * screenSize.width) / aspect["width"]!)
+            self.view.frame = CGRect(x: 0, y: (screenSize.height - h), width: screenSize.width, height: h)
+        }
+    }
+    
+    func addToView(_ container: UIView) {
+        scaleToFill()
         
         // fade in
         self.view.alpha = 0;
@@ -52,7 +62,6 @@ class StreamController: AVPlayerViewController {
         })
         
         container.addSubview(self.view)
-        
     }
     
     func removeStaleViews(_ container: UIView) {
