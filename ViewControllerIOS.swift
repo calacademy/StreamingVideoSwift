@@ -40,7 +40,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let shadowH:CGFloat = 175
         shadow.frame = CGRect(x: 0, y: screen.height - shadowH, width: shadowW, height: shadowH)
         
-        fadeIn(shadow, 0.7, 3.6)
+        fadeIn(shadow, 0.8, 3.6)
         self.view.addSubview(shadow)
         
         // label
@@ -48,7 +48,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let boldString = getAttributedString("the Chondrichthyes", "Whitney-Semibold")
         attributedString.append(boldString)
         
-        let label = UILabel(frame: CGRect(x: 80, y: 52, width: 200, height: 21))
+        let label = UILabel(frame: CGRect(x: 75, y: 47, width: 200, height: 21))
         label.textAlignment = .left
         label.textColor = UIColor.white
         label.attributedText = attributedString
@@ -63,7 +63,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         // place
         let offset:CGFloat = 4
         let w:CGFloat = 250
-        let h:CGFloat = 76
+        let h:CGFloat = 71
         donateButton.frame = CGRect(x: offset, y: screen.height - h - offset, width: w, height: h)
         
         addDonateButtonInteraction()
