@@ -217,6 +217,27 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
+    override func onFlatComplete() {
+        if (!requestAlert()) {
+            return
+        }
+        
+        let alert = UIAlertController(title: "Playback Complete", message: "Would you like to watch the video again?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+            self.loadConfig()
+            self.onAlertClose()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.playFallbackVideo()
+            self.onAlertClose()
+        }))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func showErrorAlert() {
         if (!requestAlert()) {
             return

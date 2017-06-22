@@ -37,6 +37,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onStreamPlay), name:NSNotification.Name(rawValue: "streamPlaying"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onFlatComplete), name:NSNotification.Name(rawValue: "flatComplete"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onStreamVisible), name:NSNotification.Name(rawValue: "streamVisible"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onStreamError(_:)), name:NSNotification.Name(rawValue: "streamError"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onDataError(_:)), name:NSNotification.Name(rawValue: "dataError"), object: nil)
@@ -136,6 +137,9 @@ class ViewController: UIViewController {
         let error = obj["error"] as! NSError
         
         onError(error)
+    }
+    
+    func onFlatComplete() {
     }
     
     func onError(_ e: NSError) {

@@ -122,6 +122,14 @@ class StreamController: AVPlayerViewController {
     fileprivate func _onPlay() {
         _isPlaying = true
         NotificationCenter.default.post(name: Notification.Name(rawValue: "streamPlaying"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self._onFlatComplete), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+
+    }
+    
+    func _onFlatComplete() {
+        _isPlaying = false
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "flatComplete"), object: nil)
     }
     
     fileprivate func _onError(_ e: NSError) {
@@ -173,6 +181,7 @@ class StreamController: AVPlayerViewController {
         }
         
         _isPlaying = false
+        NotificationCenter.default.removeObserver(self)
         _stopKVO()
     }
     
@@ -185,5 +194,9 @@ class StreamController: AVPlayerViewController {
         }
         
         self.view.removeFromSuperview()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
