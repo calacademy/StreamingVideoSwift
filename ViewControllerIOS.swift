@@ -280,6 +280,8 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     
     func onTouchBegin(_ sender: UIGestureRecognizer) {
         let btn = sender.view as! SwitchButton
+        // print("onTouchBegin: " + btn.id)
+        
         btn.isBeingPressed = true
         
         btn.activate(true)
@@ -294,6 +296,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     
     func onTouchEnd(_ sender: UIGestureRecognizer) {
         let btn = sender.view as! SwitchButton
+        // print("onTouchEnd: " + btn.id)
         
         if (!btn.isBeingPressed) {
             return
