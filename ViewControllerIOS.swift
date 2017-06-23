@@ -44,7 +44,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let shadowH: CGFloat = 175
         shadow.frame = CGRect(x: 0, y: screen.height - shadowH, width: shadowW, height: shadowH)
         
-        fadeIn(shadow, 0.8, 3.6)
+        fadeIn(shadow, 0.8, 3.2)
         self.view.addSubview(shadow)
         
         // label
@@ -71,7 +71,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         donateButton.frame = CGRect(x: offset, y: screen.height - h - offset, width: w, height: h)
         
         addDonateButtonInteraction()
-        fadeIn(donateButton, 0.5, 3.6)
+        fadeIn(donateButton, 0.5, 3.2)
         
         self.view.addSubview(donateButton)
     }
