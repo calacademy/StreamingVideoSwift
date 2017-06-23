@@ -48,8 +48,8 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         self.view.addSubview(shadow)
         
         // label
-        let attributedString = getAttributedString("feed ", "Whitney-Book")
-        let boldString = getAttributedString("the Chondrichthyes", "Whitney-Semibold")
+        let attributedString = getAttributedString(streamData.donateButton["normal"]!, "Whitney-Book")
+        let boldString = getAttributedString(streamData.donateButton["bold"]!, "Whitney-Semibold")
         attributedString.append(boldString)
         
         let label = UILabel(frame: CGRect(x: 75, y: 47, width: 200, height: 21))
@@ -214,7 +214,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
             return
         }
         
-        let config: [String: String] = streamData.alertConfig[alertKey]!
+        let config: [String: String] = streamData.alerts[alertKey]!
         currentAlert = getCustomAlertController(config["title"]!, config["body"]!)
         
         currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
@@ -237,7 +237,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         
         numNetworkErrors = 0
         
-        let config: [String: String] = streamData.alertConfig[alertKey]!
+        let config: [String: String] = streamData.alerts[alertKey]!
         currentAlert = getCustomAlertController(config["title"]!, config["body"]!)
         
         currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in

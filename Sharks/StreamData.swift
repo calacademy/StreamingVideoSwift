@@ -18,7 +18,12 @@ class StreamData: NSObject {
     var streams: [[String:String]]!
     
     // defaults
-    var alertConfig: [String: [String: String]] = [
+    var donateButton: [String: String] = [
+        "normal": "feed ",
+        "bold": "the Chondrichthyes"
+    ]
+    
+    var alerts: [String: [String: String]] = [
         "logo": [
             "title": "Visit Us Online",
             "body": "Learn about events and exhibits, purchase tickets, submit feedback, and more!",
@@ -90,7 +95,30 @@ class StreamData: NSObject {
         print("config loaded from " + (response!.url?.absoluteString)!)
         
         let json = JSON(data: data!)
-
+        
+        // donate button
+        if let donateButtonData = json["donateButton"].dictionary {
+            for (key, _) in donateButton {
+                if let newValue = donateButtonData[key]?.string {
+                    donateButton[key] = newValue
+                }
+            }
+        }
+        
+        // alerts
+        if let alertsData = json["alerts"].dictionary {
+            for (key, originalAlert) in alerts {
+                if let newAlert = alertsData[key]?.dictionary {
+                    for (alertKey, _) in originalAlert {
+                        if let newValue = newAlert[alertKey]?.string {
+                            alerts[key]?[alertKey] = newValue
+                        }
+                    }
+                }
+            }
+        }
+        
+        // stream
         if let endpoint = json["endpoint"].string {
             _endpoint = endpoint
             
