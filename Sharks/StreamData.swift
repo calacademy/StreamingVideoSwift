@@ -9,13 +9,35 @@
 import UIKit
 
 class StreamData: NSObject {
-    fileprivate let _configEndpoint = "http://s3.amazonaws.com/data.calacademy.org/sharks/data.json"
-    fileprivate var _endpoint:String!
-    fileprivate var _hlsKey:String!
-    fileprivate var _task:URLSessionDataTask!
-    fileprivate var _session:URLSession!
+    fileprivate let _configEndpoint: String = "http://s3.amazonaws.com/data.calacademy.org/sharks/data.json"
+    fileprivate var _endpoint: String!
+    fileprivate var _hlsKey: String!
+    fileprivate var _task: URLSessionDataTask!
+    fileprivate var _session: URLSession!
     
-    var streams:[[String:String]]!
+    var streams: [[String:String]]!
+    
+    // defaults
+    var alertConfig: [String: [String: String]] = [
+        "logo": [
+            "title": "Visit Us Online",
+            "body": "Learn about events and exhibits, purchase tickets, submit feedback, and more!",
+            "url": "http://www.calacademy.org"
+        ],
+        "donate": [
+            "title": "Help Advance Our Mission",
+            "body": "Please visit our website to make a donation.",
+            "url": "http://www.calacademy.org/donate"
+        ],
+        "error": [
+            "title": "Network Error",
+            "body": "There appears to be a problem with the network. Would you like to watch a pre-recorded video instead?"
+        ],
+        "flatPlaybackComplete": [
+            "title": "Playback Complete",
+            "body": "Would you like to watch the video again?"
+        ]
+    ]
     
     func getHLSPath(_ id: String) {
         destroy()

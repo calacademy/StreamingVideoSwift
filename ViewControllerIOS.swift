@@ -13,9 +13,9 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     let maxNetworkErrors = 3
     var numNetworkErrors = 0
     var isAlerting = false
-    var shadow:UIView!
-    var donateButton:UIView!
-    var currentAlert:UIAlertController!
+    var shadow: UIView!
+    var donateButton: UIView!
+    var currentAlert: UIAlertController!
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -40,8 +40,8 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let screen = UIScreen.main.bounds
         
         // shadow
-        let shadowW:CGFloat = 550
-        let shadowH:CGFloat = 175
+        let shadowW: CGFloat = 550
+        let shadowH: CGFloat = 175
         shadow.frame = CGRect(x: 0, y: screen.height - shadowH, width: shadowW, height: shadowH)
         
         fadeIn(shadow, 0.8, 3.6)
@@ -65,9 +65,9 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         donateButton.addSubview(silhouette)
         
         // place
-        let offset:CGFloat = 4
-        let w:CGFloat = 250
-        let h:CGFloat = 71
+        let offset: CGFloat = 4
+        let w: CGFloat = 250
+        let h: CGFloat = 71
         donateButton.frame = CGRect(x: offset, y: screen.height - h - offset, width: w, height: h)
         
         addDonateButtonInteraction()
@@ -114,9 +114,9 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     }
     
     override func addLogo() {
-        let offset:CGFloat = 6
-        let w:CGFloat = 87
-        let h:CGFloat = 135
+        let offset: CGFloat = 6
+        let w: CGFloat = 87
+        let h: CGFloat = 135
         
         let image = UIImage(named: "logoios")
         logo = UIImageView(image: image!)
@@ -200,90 +200,6 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         return alert
     }
     
-    func showLogoAlert() {
-        if (!requestAlert()) {
-            return
-        }
-        
-        currentAlert = getCustomAlertController("Visit Us Online", "Learn about events and exhibits, purchase tickets, submit feedback, and more!")
-        
-        currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
-            self.onAlertClose()
-        }))
-        
-        currentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            self.goToWebsite("http://www.calacademy.org/explore-science/sharks-live-for-apple-tv")
-            self.onAlertClose()
-        }))
-        
-        // show the alert
-        self.present(currentAlert, animated: true, completion: nil)
-    }
-    
-    func showDonateAlert() {
-        if (!requestAlert()) {
-            return
-        }
-        
-        currentAlert = getCustomAlertController("Help Advance Our Mission", "Please visit our website to make a donation.")
-        
-        currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
-            self.onAlertClose()
-        }))
-        
-        currentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            self.goToWebsite("http://www.calacademy.org/donate")
-            self.onAlertClose()
-        }))
-        
-        // show the alert
-        self.present(currentAlert, animated: true, completion: nil)
-    }
-    
-    override func onFlatComplete() {
-        if (!requestAlert()) {
-            return
-        }
-        
-        currentAlert = getCustomAlertController("Playback Complete", "Would you like to watch the video again?")
-        
-        currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
-            self.loadConfig()
-            self.onAlertClose()
-        }))
-        
-        currentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            self.playFallbackVideo()
-            self.onAlertClose()
-        }))
-        
-        // show the alert
-        self.present(currentAlert, animated: true, completion: nil)
-    }
-    
-    func showErrorAlert() {
-        if (!requestAlert()) {
-            return
-        }
-        
-        numNetworkErrors = 0
-        
-        currentAlert = getCustomAlertController("Network Error", "There appears to be a problem with the network. Would you like to watch a pre-recorded video instead?")
-        
-        currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
-            self.loadConfig()
-            self.onAlertClose()
-        }))
-        
-        currentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            self.playFallbackVideo()
-            self.onAlertClose()
-        }))
-        
-        // show the alert
-        self.present(currentAlert, animated: true, completion: nil)
-    }
-    
     func goToWebsite(_ url: String) {
         UIApplication.shared.openURL(URL(string: url)!)
     }
@@ -291,6 +207,67 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     func playFallbackVideo() {
         let videoURL = Bundle.main.url(forResource: "fallback", withExtension: "mp4")!
         loadAndPlay(url: videoURL.absoluteString)
+    }
+    
+    func showUrlAlert(_ alertKey: String) {
+        if (!requestAlert()) {
+            return
+        }
+        
+        let config: [String: String] = streamData.alertConfig[alertKey]!
+        currentAlert = getCustomAlertController(config["title"]!, config["body"]!)
+        
+        currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+            self.onAlertClose()
+        }))
+        
+        currentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.goToWebsite(config["url"]!)
+            self.onAlertClose()
+        }))
+        
+        // show the alert
+        self.present(currentAlert, animated: true, completion: nil)
+    }
+    
+    func showFallbackAlert(_ alertKey: String) {
+        if (!requestAlert()) {
+            return
+        }
+        
+        numNetworkErrors = 0
+        
+        let config: [String: String] = streamData.alertConfig[alertKey]!
+        currentAlert = getCustomAlertController(config["title"]!, config["body"]!)
+        
+        currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+            self.loadConfig()
+            self.onAlertClose()
+        }))
+        
+        currentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.playFallbackVideo()
+            self.onAlertClose()
+        }))
+        
+        // show the alert
+        self.present(currentAlert, animated: true, completion: nil)
+    }
+    
+    func showLogoAlert() {
+        showUrlAlert("logo")
+    }
+    
+    func showDonateAlert() {
+        showUrlAlert("donate")
+    }
+    
+    func showErrorAlert() {
+        showFallbackAlert("error")
+    }
+    
+    override func onFlatComplete() {
+        showFallbackAlert("flatPlaybackComplete")
     }
     
     func onTouchBegin(_ sender: UIGestureRecognizer) {
