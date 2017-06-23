@@ -335,9 +335,25 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         // tap to open menu
         let selectRecognizer = UITapGestureRecognizer(target: self, action:#selector(self.onSelect(_:)))
         self.view.addGestureRecognizer(selectRecognizer)
+    }
+    
+    override func onMenu(_ sender: UIGestureRecognizer! = nil) {
+        super.onMenu(sender)
         
-        // add gestures to menu items
+        if (menu.buttons == nil) {
+            return
+        }
+        
+        // gesture recognizers
         for btn in menu.buttons {
+            // remove
+            if (btn.gestureRecognizers != nil) {
+                for recognizer in btn.gestureRecognizers! {
+                    btn.removeGestureRecognizer(recognizer)
+                }
+            }
+            
+            // add
             let begin = UITouchBeginGestureRecognizer(target: self, action:#selector(self.onTouchBegin(_:)))
             begin.delegate = self
             btn.addGestureRecognizer(begin)
