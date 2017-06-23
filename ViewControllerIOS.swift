@@ -21,6 +21,14 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         return true
     }
     
+    override func getBackgroundImage() -> CGImage {
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            return (UIImage(named: "bgipad")?.cgImage)!
+        }
+        
+        return (UIImage(named: "launch")?.cgImage)!
+    }
+    
     override func addUI() {
         super.addUI()
         addDonateButton()

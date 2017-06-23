@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor(white: 1, alpha: 0)
-        self.view.layer.contents = UIImage(named: "launch")?.cgImage
+        self.view.layer.contents = getBackgroundImage()
         
         super.viewDidLoad()
         
@@ -46,6 +46,10 @@ class ViewController: UIViewController {
         
         self.view.addSubview(streamViewContainer)
         loadConfig()
+    }
+    
+    func getBackgroundImage() -> CGImage {
+        return (UIImage(named: "launch")?.cgImage)!
     }
     
     func getDefaultStreamIndex() -> Int {

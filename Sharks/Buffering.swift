@@ -9,9 +9,9 @@
 import UIKit
 
 class Buffering: UIImageView {
-    var onStage:Bool = false
-    fileprivate var _isOverlayVisible:Bool = false
-    fileprivate var _timer:Timer!
+    var onStage: Bool = false
+    fileprivate var _isOverlayVisible: Bool = false
+    fileprivate var _timer: Timer!
     
     override init(image: UIImage?) {
         #if os(iOS)
@@ -26,8 +26,8 @@ class Buffering: UIImageView {
         self.layer.shadowOffset = CGSize(width: 0, height: 0)
         self.layer.shadowRadius = 22.0
 
-        NotificationCenter.default.addObserver(self, selector: #selector(Buffering.onOverlayVisible), name:NSNotification.Name(rawValue: "overlayVisible"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(Buffering.onOverlayHidden), name:NSNotification.Name(rawValue: "overlayHidden"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(Buffering.onOverlayVisible), name: NSNotification.Name(rawValue: "overlayVisible"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(Buffering.onOverlayHidden), name: NSNotification.Name(rawValue: "overlayHidden"), object: nil)
         
         _place()
     }
@@ -98,13 +98,13 @@ class Buffering: UIImageView {
     
     fileprivate func _place() {
         #if os(iOS)
-            let w:CGFloat = 45
-            let h:CGFloat = 45
-            let offset:CGFloat = 5
+            let w: CGFloat = 45
+            let h: CGFloat = 45
+            let offset: CGFloat = 5
         #elseif os(tvOS)
-            let w:CGFloat = 90
-            let h:CGFloat = 90
-            let offset:CGFloat = 10
+            let w: CGFloat = 90
+            let h: CGFloat = 90
+            let offset: CGFloat = 10
         #endif
         
         // place
