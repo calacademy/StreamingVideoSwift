@@ -36,13 +36,14 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onStreamPlay), name:NSNotification.Name(rawValue: "streamPlaying"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onFlatComplete), name:NSNotification.Name(rawValue: "flatComplete"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onStreamVisible), name:NSNotification.Name(rawValue: "streamVisible"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onStreamError(_:)), name:NSNotification.Name(rawValue: "streamError"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onDataError(_:)), name:NSNotification.Name(rawValue: "dataError"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onConfigData(_:)), name:NSNotification.Name(rawValue: "configDataLoaded"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onHLSData(_:)), name:NSNotification.Name(rawValue: "hlsDataLoaded"), object: nil)
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(ViewController.onStreamPlay), name:NSNotification.Name(rawValue: "streamPlaying"), object: nil)
+        nc.addObserver(self, selector: #selector(ViewController.onFlatComplete), name:NSNotification.Name(rawValue: "flatComplete"), object: nil)
+        nc.addObserver(self, selector: #selector(ViewController.onStreamVisible), name:NSNotification.Name(rawValue: "streamVisible"), object: nil)
+        nc.addObserver(self, selector: #selector(ViewController.onStreamError(_:)), name:NSNotification.Name(rawValue: "streamError"), object: nil)
+        nc.addObserver(self, selector: #selector(ViewController.onDataError(_:)), name:NSNotification.Name(rawValue: "dataError"), object: nil)
+        nc.addObserver(self, selector: #selector(ViewController.onConfigData(_:)), name:NSNotification.Name(rawValue: "configDataLoaded"), object: nil)
+        nc.addObserver(self, selector: #selector(ViewController.onHLSData(_:)), name:NSNotification.Name(rawValue: "hlsDataLoaded"), object: nil)
         
         self.view.addSubview(streamViewContainer)
         loadConfig()
@@ -170,21 +171,21 @@ class ViewController: UIViewController {
         }
     }
     
-    func onDataError(_ notification: Notification) {
+    @objc func onDataError(_ notification: Notification) {
         let obj = (notification as NSNotification).userInfo as AnyObject
         let errorDomain = obj["error"] as! String
         
         onError(NSError(domain: errorDomain, code: 1, userInfo: nil))
     }
     
-    func onStreamError(_ notification: Notification) {
+    @objc func onStreamError(_ notification: Notification) {
         let obj = (notification as NSNotification).userInfo as AnyObject
         let error = obj["error"] as! NSError
         
         onError(error)
     }
     
-    func onFlatComplete() {
+    @objc func onFlatComplete() {
     }
     
     func onError(_ e: NSError) {
@@ -202,13 +203,13 @@ class ViewController: UIViewController {
         loadConfig()
     }
     
-    func onConfigData(_ notification: Notification) {
+    @objc func onConfigData(_ notification: Notification) {
         menu.streams = streamData.streams
         currentStreamIndex = getDefaultStreamIndex()
         loadHLSData()
     }
     
-    func onHLSData(_ notification: Notification) {
+    @objc func onHLSData(_ notification: Notification) {
         let obj = (notification as NSNotification).userInfo as! [String:AnyObject]
         let url = obj["url"] as! String
         
@@ -224,7 +225,7 @@ class ViewController: UIViewController {
         streamController.setStream(url)
     }
     
-    func onStreamPlay() {
+    @objc func onStreamPlay() {
         buffer(false)
         streamController.addToView(streamViewContainer)
         
@@ -241,7 +242,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func onStreamVisible() {
+    @objc func onStreamVisible() {
         if (streamController != nil) {
             streamController.removeStaleViews(streamViewContainer)
         }
@@ -249,7 +250,7 @@ class ViewController: UIViewController {
         isTransitioning = false
     }
     
-    func onMenu(_ sender: UIGestureRecognizer! = nil) {
+    @objc func onMenu(_ sender: UIGestureRecognizer! = nil) {
         // add menu
         self.view.addSubview(menu)
         
@@ -262,7 +263,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func onSelect(_ sender: UIGestureRecognizer! = nil) {
+    @objc func onSelect(_ sender: UIGestureRecognizer! = nil) {
         // open menu if not visible
         if (!menu.onStage) {
             onMenu(sender)
@@ -285,7 +286,7 @@ class ViewController: UIViewController {
         addMenuButtonInteraction()
     }
     
-    func onSwipe(_ sender: UISwipeGestureRecognizer) {
+    @objc func onSwipe(_ sender: UISwipeGestureRecognizer) {
         switch sender.direction {
             case UISwipeGestureRecognizerDirection.left,
             UISwipeGestureRecognizerDirection.down:

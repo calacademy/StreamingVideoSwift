@@ -33,7 +33,7 @@ class StreamData: NSObject {
         [
             "button": [
                 "normal": "feed ",
-                "bold": "the Chondrichthyes"
+                "bold": "the Stingrays"
             ],
             "alert": [
                 "title": "Help Advance Our Mission",

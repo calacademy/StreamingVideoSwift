@@ -32,7 +32,7 @@ class Buffering: UIImageView {
         _place()
     }
     
-    func onOverlayVisible() {
+	@objc func onOverlayVisible() {
         _isOverlayVisible = true
         
         if (onStage) {
@@ -41,7 +41,7 @@ class Buffering: UIImageView {
         }
     }
     
-    func onOverlayHidden() {
+	@objc func onOverlayHidden() {
         _isOverlayVisible = false
 
         if (onStage) {

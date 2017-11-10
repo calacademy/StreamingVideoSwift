@@ -75,7 +75,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     
     func getAttributedString (_ string: String, _ font: String, _ size: CGFloat = 18) -> NSMutableAttributedString {
         let labelFont = UIFont(name: font, size: CGFloat(size))!
-        let attributes = [NSFontAttributeName: labelFont]
+        let attributes = [NSAttributedStringKey.font: labelFont]
         
         return NSMutableAttributedString(string: string, attributes: attributes)
     }
@@ -145,12 +145,12 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         donateButton.addGestureRecognizer(end)
     }
     
-    func onDonateTouchEnd(_ sender: UIGestureRecognizer) {
+    @objc func onDonateTouchEnd(_ sender: UIGestureRecognizer) {
         donateButton.alpha = 0.5
         showDonateAlert()
     }
     
-    func onDonateTouchBegin(_ sender: UIGestureRecognizer) {
+    @objc func onDonateTouchBegin(_ sender: UIGestureRecognizer) {
         donateButton.alpha = 1
     }
     
@@ -198,12 +198,12 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         placeLogo(w, h: h, offsetX: offset, offsetY: offset - 1)
     }
     
-    func onLogoTouchEnd(_ sender: UIGestureRecognizer) {
+    @objc func onLogoTouchEnd(_ sender: UIGestureRecognizer) {
         logo.alpha = 0.5
         showLogoAlert()
     }
     
-    func onLogoTouchBegin(_ sender: UIGestureRecognizer) {
+    @objc func onLogoTouchBegin(_ sender: UIGestureRecognizer) {
         logo.alpha = 1
     }
     
@@ -341,7 +341,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         showFallbackAlert("flatPlaybackComplete")
     }
     
-    func onTouchBegin(_ sender: UIGestureRecognizer) {
+    @objc func onTouchBegin(_ sender: UIGestureRecognizer) {
         let btn = sender.view as! SwitchButton
         // print("onTouchBegin: " + btn.id)
         
@@ -357,7 +357,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func onTouchEnd(_ sender: UIGestureRecognizer) {
+    @objc func onTouchEnd(_ sender: UIGestureRecognizer) {
         let btn = sender.view as! SwitchButton
         // print("onTouchEnd: " + btn.id)
         
