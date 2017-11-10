@@ -22,16 +22,28 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     }
     
     override func getBackgroundImage() -> CGImage {
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
-            return (UIImage(named: "bgipad")?.cgImage)!
+        var asset = "iphonelarge"
+        
+        if let type = getDeviceType() {
+            asset = type
         }
         
-        return (UIImage(named: "launch")?.cgImage)!
+        return (UIImage(named: "bg" + asset)?.cgImage)!
     }
     
     override func addUI() {
         super.addUI()
         addDonateButton()
+    }
+    
+    func isIphoneX() -> Bool {
+        if (UIDevice.current.userInterfaceIdiom == .phone) {
+            if (UIScreen.main.nativeBounds.height == 2436) {
+                return true
+            }
+        }
+        
+        return false
     }
     
     func getAttributedString (_ string: String, _ font: String, _ size: CGFloat = 18) -> NSMutableAttributedString {
@@ -60,7 +72,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let boldString = getAttributedString(streamData.donateButton["bold"]!, "Whitney-Semibold")
         attributedString.append(boldString)
         
-        let label = UILabel(frame: CGRect(x: 75, y: 47, width: 200, height: 21))
+        let label = UILabel(frame: CGRect(x: 68, y: 79, width: 200, height: 21))
         label.textAlignment = .left
         label.textColor = UIColor.white
         label.attributedText = attributedString
@@ -70,13 +82,15 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         
         // image
         let silhouette = UIImageView(image: UIImage(named: "silhouette")!)
+        silhouette.alpha = 0.8
         donateButton.addSubview(silhouette)
         
         // place
-        let offset: CGFloat = 4
-        let w: CGFloat = 250
-        let h: CGFloat = 71
-        donateButton.frame = CGRect(x: offset, y: screen.height - h - offset, width: w, height: h)
+        let offset: CGFloat = 9
+        let w: CGFloat = 300
+        let h: CGFloat = 100
+        
+        donateButton.frame = CGRect(x: offset + 5, y: screen.height - h - offset, width: w, height: h)
         
         addDonateButtonInteraction()
         fadeIn(donateButton, 0.5, 3.2)
@@ -123,10 +137,18 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     
     override func addLogo() {
         let offset: CGFloat = 6
-        let w: CGFloat = 87
-        let h: CGFloat = 135
         
-        let image = UIImage(named: "logoios")
+        var asset = "logoios"
+        var w: CGFloat = 87
+        var h: CGFloat = 135
+        
+        if (isIphoneX()) {
+            asset = "logoioshoriz"
+            w = 182
+            h = 90
+        }
+        
+        let image = UIImage(named: asset)
         logo = UIImageView(image: image!)
         logo.isUserInteractionEnabled = true
         

@@ -102,8 +102,8 @@ class Buffering: UIImageView {
             let h: CGFloat = 45
             let offset: CGFloat = 5
         #elseif os(tvOS)
-            let w: CGFloat = 90
-            let h: CGFloat = 90
+            let w: CGFloat = 70
+            let h: CGFloat = 70
             let offset: CGFloat = 10
         #endif
         

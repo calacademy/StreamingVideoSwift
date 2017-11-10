@@ -136,7 +136,7 @@ class StreamController: AVPlayerViewController {
 
     }
     
-    func _onFlatComplete() {
+    @objc func _onFlatComplete() {
         _isPlaying = false
         NotificationCenter.default.post(name: Notification.Name(rawValue: "flatComplete"), object: nil)
     }
@@ -161,7 +161,7 @@ class StreamController: AVPlayerViewController {
         }
     }
     
-    func checkColor() {
+    @objc func checkColor() {
         let itemTime = _videoOutput.itemTime(forHostTime: CACurrentMediaTime())
         
         if (_videoOutput.hasNewPixelBuffer(forItemTime: itemTime)) {

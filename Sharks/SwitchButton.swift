@@ -142,8 +142,8 @@ class SwitchButton: UIView {
     }
     
     internal func _addArrow() {
-        let w:CGFloat = 92
-        let h:CGFloat = 97
+        let w:CGFloat = 94
+        let h:CGFloat = 100
         
         _arrow = UIImageView(image: UIImage(named: "arrow"))
         _arrow.alpha = 0.7

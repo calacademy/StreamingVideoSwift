@@ -9,7 +9,7 @@
 import UIKit
 
 class StreamData: NSObject {
-    fileprivate let _configEndpoint: String = "http://s3.amazonaws.com/data.calacademy.org/sharks/data.json"
+    fileprivate let _configEndpoint: String = "https://s3.amazonaws.com/data.calacademy.org/sharks/data.json"
     fileprivate var _endpoint: String!
     fileprivate var _hlsKey: String!
     fileprivate var _task: URLSessionDataTask!

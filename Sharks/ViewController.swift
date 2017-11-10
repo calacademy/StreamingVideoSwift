@@ -52,6 +52,47 @@ class ViewController: UIViewController {
         return (UIImage(named: "launch")?.cgImage)!
     }
     
+    func getDeviceType() -> String? {
+        let screen = UIScreen.main.nativeBounds
+        
+        // Apple TV
+        if (UIDevice.current.userInterfaceIdiom == .tv) {
+            return "tv"
+        }
+        
+        // iPad
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            switch (screen.height) {
+                case 2048:
+                    return "ipadsmall"
+                case 2224:
+                    return "ipadmedium"
+                case 2732:
+                    return "ipadlarge"
+                default:
+                    return nil
+            }
+        }
+        
+        // iPhone
+        if (UIDevice.current.userInterfaceIdiom == .phone) {
+            switch (screen.height) {
+                case 1136:
+                    return "iphonesmall"
+                case 1334:
+                    return "iphonemedium"
+                case 2208:
+                    return "iphonelarge"
+                case 2436:
+                    return "iphonex"
+                default:
+                    return nil
+            }
+        }
+
+        return nil
+    }
+    
     func getDefaultStreamIndex() -> Int {
         var savedIndex = defaults.integer(forKey: currentStreamIndexDefaultsKey)
         
