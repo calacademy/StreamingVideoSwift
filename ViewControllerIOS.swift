@@ -17,6 +17,9 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     var donateButton: UIView!
     var currentAlert: UIAlertController!
     
+    let donateStyleIndexKey = "donateStyleIndex"
+    var donateStyle: [String : [String : String]]!
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -34,6 +37,30 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     override func addUI() {
         super.addUI()
         addDonateButton()
+    }
+    
+    func getDonateStyleIndex() -> Int {
+        var savedIndex = defaults.integer(forKey: donateStyleIndexKey)
+        
+        // integerForKey returns 0 if key not found
+        if (savedIndex > 0) {
+            print("NSUserDefaults donate style index retrieved: " + String(savedIndex))
+            savedIndex -= 1
+            
+            if (savedIndex >= streamData.donateStyles.count) {
+                print("NSUserDefaults donate style index no longer exists")
+                savedIndex = 0
+            }
+        }
+        
+        // increment for next round
+        if (savedIndex + 1 >= streamData.donateStyles.count) {
+            defaults.set(1, forKey: donateStyleIndexKey)
+        } else {
+            defaults.set(savedIndex + 2, forKey: donateStyleIndexKey)
+        }
+        
+        return savedIndex
     }
     
     func isIphoneX() -> Bool {
@@ -54,6 +81,9 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     }
     
     func addDonateButton() {
+        let donateStyleIndex = getDonateStyleIndex()
+        donateStyle = streamData.donateStyles[donateStyleIndex]
+        
         donateButton = UIView()
         shadow = UIImageView(image: UIImage(named: "shadow")!)
         
@@ -68,8 +98,8 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         self.view.addSubview(shadow)
         
         // label
-        let attributedString = getAttributedString(streamData.donateButton["normal"]!, "Whitney-Book")
-        let boldString = getAttributedString(streamData.donateButton["bold"]!, "Whitney-Semibold")
+        let attributedString = getAttributedString(donateStyle["button"]!["normal"]!, "Whitney-Book")
+        let boldString = getAttributedString(donateStyle["button"]!["bold"]!, "Whitney-Semibold")
         attributedString.append(boldString)
         
         let label = UILabel(frame: CGRect(x: 68, y: 79, width: 200, height: 21))
@@ -86,11 +116,17 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         donateButton.addSubview(silhouette)
         
         // place
-        let offset: CGFloat = 9
         let w: CGFloat = 300
         let h: CGFloat = 100
         
-        donateButton.frame = CGRect(x: offset + 5, y: screen.height - h - offset, width: w, height: h)
+        let yOffset: CGFloat = 9
+        var xOffset: CGFloat = 12
+        
+        if (isIphoneX()) {
+            xOffset += 4
+        }
+        
+        donateButton.frame = CGRect(x: xOffset, y: screen.height - h - yOffset, width: w, height: h)
         
         addDonateButtonInteraction()
         fadeIn(donateButton, 0.5, 3.2)
@@ -244,7 +280,12 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
             return
         }
         
-        let config: [String: String] = streamData.alerts[alertKey]!
+        var config: [String: String] = streamData.alerts[alertKey]!
+        
+        if (alertKey == "donate") {
+            config = donateStyle["alert"]!
+        }
+        
         currentAlert = getCustomAlertController(config["title"]!, config["body"]!)
         
         currentAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in

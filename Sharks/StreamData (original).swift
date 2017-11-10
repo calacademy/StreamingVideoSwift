@@ -9,7 +9,7 @@
 import UIKit
 
 class StreamData: NSObject {
-    fileprivate let _configEndpoint: String = "https://s3.amazonaws.com/data.calacademy.org/sharks/data.json"
+    fileprivate let _configEndpoint: String = "http://s3.amazonaws.com/data.calacademy.org/sharks/data.json"
     fileprivate var _endpoint: String!
     fileprivate var _hlsKey: String!
     fileprivate var _task: URLSessionDataTask!
@@ -18,36 +18,21 @@ class StreamData: NSObject {
     var streams: [[String:String]]!
     
     // defaults
-    var donateStyles: [[String : [String : String]]] = [
-        [
-            "button": [
-                "normal": "subscribe to ",
-                "bold": "updates"
-            ],
-            "alert": [
-                "title": "Updates from the Academy",
-                "body": "Signup to receive occasional updates via email.",
-                "url": "https://www.calacademy.org/stay-connected/?src=stingrayslive"
-            ]
-        ],
-        [
-            "button": [
-                "normal": "feed ",
-                "bold": "the Chondrichthyes"
-            ],
-            "alert": [
-                "title": "Help Advance Our Mission",
-                "body": "Please visit our website to make a donation.",
-                "url": "https://www.calacademy.org/donate/?src=stingrayslive"
-            ]
-        ]
+    var donateButton: [String: String] = [
+        "normal": "feed ",
+        "bold": "the Chondrichthyes"
     ]
     
     var alerts: [String: [String: String]] = [
         "logo": [
             "title": "Visit Us Online",
             "body": "Learn about events and exhibits, purchase tickets, submit feedback, and more!",
-            "url": "http://www.calacademy.org/?src=stingrayslive"
+            "url": "http://www.calacademy.org"
+        ],
+        "donate": [
+            "title": "Help Advance Our Mission",
+            "body": "Please visit our website to make a donation.",
+            "url": "http://www.calacademy.org/donate"
         ],
         "error": [
             "title": "Network Error",
@@ -111,23 +96,11 @@ class StreamData: NSObject {
         
         let json = JSON(data: data!)
         
-        // donate styles
-        if let myDonateStyles = json["donateStyles"].array {
-            if (myDonateStyles.count > 0) {
-                donateStyles = [[String : [String : String]]]()
-                
-                for donateStyle in myDonateStyles {
-                    donateStyles.append([
-                        "button": [
-                            "normal": donateStyle["button"]["normal"].string!,
-                            "bold": donateStyle["button"]["bold"].string!
-                        ],
-                        "alert": [
-                            "title": donateStyle["alert"]["title"].string!,
-                            "body": donateStyle["alert"]["body"].string!,
-                            "url": donateStyle["alert"]["url"].string!
-                        ]
-                    ])
+        // donate button
+        if let donateButtonData = json["donateButton"].dictionary {
+            for (key, _) in donateButton {
+                if let newValue = donateButtonData[key]?.string {
+                    donateButton[key] = newValue
                 }
             }
         }
@@ -143,8 +116,6 @@ class StreamData: NSObject {
                     }
                 }
             }
-            
-            alerts["donate"] = donateStyles[0]["alert"]
         }
         
         // stream
