@@ -24,6 +24,10 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         return true
     }
     
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true
+    }
+    
     override func getBackgroundImage() -> CGImage {
         var asset = "iphonelarge"
         
