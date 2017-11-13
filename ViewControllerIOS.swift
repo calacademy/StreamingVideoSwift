@@ -119,7 +119,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let w: CGFloat = 300
         let h: CGFloat = 100
         
-        let yOffset: CGFloat = 9
+        let yOffset: CGFloat = 8
         var xOffset: CGFloat = 12
         
         if (isIphoneX()) {

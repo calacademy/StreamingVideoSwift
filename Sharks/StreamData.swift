@@ -18,6 +18,8 @@ class StreamData: NSObject {
     var streams: [[String:String]]!
     
     // defaults
+    var minSecs: NSNumber = 6
+    
     var donateStyles: [[String : [String : String]]] = [
         [
             "button": [
@@ -110,6 +112,11 @@ class StreamData: NSObject {
         print("config loaded from " + (response!.url?.absoluteString)!)
         
         let json = JSON(data: data!)
+        
+        // minSecs
+        if let myMinSecs = json["minSecs"].number {
+            minSecs = myMinSecs
+        }
         
         // donate styles
         if let myDonateStyles = json["donateStyles"].array {

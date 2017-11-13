@@ -222,7 +222,7 @@ class ViewController: UIViewController {
         }
         
         streamController = StreamController()
-        streamController.setStream(url)
+        streamController.setStream(url, minSecs: streamData.minSecs)
     }
     
     @objc func onStreamPlay() {

@@ -11,7 +11,11 @@ import AVFoundation
 
 class StreamController: AVPlayerViewController {
     fileprivate var _isPlaying = false
+    fileprivate var _isReady = false
+    fileprivate var _isMinSecsElapsed = false
+    
     fileprivate var _pollColorTimer:Timer!
+    fileprivate var _pollMinSecs:Timer!
     fileprivate var _videoOutput:AVPlayerItemVideoOutput!
     
     let aspect:[String: CGFloat] = [
@@ -85,9 +89,18 @@ class StreamController: AVPlayerViewController {
         _startKVO()
     }
     
-    func setStream(_ path: String) {
+    func setStream(_ path: String, minSecs: NSNumber) {
         _isPlaying = false
+        _isReady = false
+        _isMinSecsElapsed = false
+        
         _stopKVO()
+        
+        if (_pollMinSecs != nil) {
+            _pollMinSecs.invalidate()
+        }
+        
+        _pollMinSecs = Timer.scheduledTimer(timeInterval: minSecs.doubleValue, target: self, selector: #selector(StreamController.onMinSecsReached), userInfo: nil, repeats: false)
         
         let url:URL = URL(string: path)!
         let streamPlayer = AVPlayer(url: url)
@@ -97,6 +110,14 @@ class StreamController: AVPlayerViewController {
         
         _startKVO()
         streamPlayer.play()
+    }
+    
+    @objc func onMinSecsReached() {
+        _isMinSecsElapsed = true
+        
+        if (_isReady && !_isPlaying) {
+            _onPlay()
+        }
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -129,11 +150,12 @@ class StreamController: AVPlayerViewController {
     }
     
     fileprivate func _onPlay() {
-        _isPlaying = true
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "streamPlaying"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self._onFlatComplete), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-
+        if (_isMinSecsElapsed) {
+            _isPlaying = true
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "streamPlaying"), object: nil)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(self._onFlatComplete), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        }
     }
     
     @objc func _onFlatComplete() {
@@ -167,8 +189,7 @@ class StreamController: AVPlayerViewController {
         if (_videoOutput.hasNewPixelBuffer(forItemTime: itemTime)) {
             _pollColorTimer.invalidate()
             
-            // @todo
-            // add delay in iOS?
+            _isReady = true
             _onPlay()
         }
     }
@@ -189,7 +210,14 @@ class StreamController: AVPlayerViewController {
             _pollColorTimer.invalidate()
         }
         
+        if (_pollMinSecs != nil) {
+            _pollMinSecs.invalidate()
+        }
+        
         _isPlaying = false
+        _isReady = false
+        _isMinSecsElapsed = false
+        
         NotificationCenter.default.removeObserver(self)
         _stopKVO()
     }
