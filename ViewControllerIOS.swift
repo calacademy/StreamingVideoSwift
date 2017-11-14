@@ -10,6 +10,8 @@ import UIKit
 import AVKit
 
 class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
+    let _uiOpacity: CGFloat = 0.6
+    
     let maxNetworkErrors = 3
     var numNetworkErrors = 0
     var isAlerting = false
@@ -133,7 +135,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         donateButton.frame = CGRect(x: xOffset, y: screen.height - h - yOffset, width: w, height: h)
         
         addDonateButtonInteraction()
-        fadeIn(donateButton, 0.5, 3.2)
+        fadeIn(donateButton, _uiOpacity, 3.2)
         
         self.view.addSubview(donateButton)
     }
@@ -199,7 +201,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let end = UITouchEndGestureRecognizer(target: self, action:#selector(self.onLogoTouchEnd(_:)))
         logo.addGestureRecognizer(end)
         
-        placeLogo(w, h: h, offsetX: offset, offsetY: offset - 1)
+        placeLogo(w, h: h, offsetX: offset, offsetY: offset - 1, targetOpacity: _uiOpacity)
     }
     
     @objc func onLogoTouchEnd(_ sender: UIGestureRecognizer) {

@@ -378,12 +378,12 @@ class ViewController: UIViewController {
         }, completion: nil)
     }
     
-    func placeLogo(_ w: CGFloat, h: CGFloat, offsetX: CGFloat, offsetY: CGFloat) {
+    func placeLogo(_ w: CGFloat, h: CGFloat, offsetX: CGFloat, offsetY: CGFloat, targetOpacity: CGFloat = 0.5) {
         // place
         let bounds: CGRect = UIScreen.main.bounds
         logo.frame = CGRect(x: bounds.size.width - w - offsetX, y: offsetY, width: w, height: h)
         
-        fadeIn(logo, 0.5, 3)
+        fadeIn(logo, targetOpacity, 3)
         
         // add to stage
         self.view.addSubview(logo)
