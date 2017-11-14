@@ -12,6 +12,7 @@ import AVFoundation
 class StreamController: AVPlayerViewController {
     fileprivate var _isPlaying = false
     fileprivate var _isReady = false
+    fileprivate var _isFlat = false
     fileprivate var _isMinSecsElapsed = false
     
     fileprivate var _pollColorTimer:Timer!
@@ -89,10 +90,11 @@ class StreamController: AVPlayerViewController {
         _startKVO()
     }
     
-    func setStream(_ path: String, minSecs: NSNumber) {
+    func setStream(_ path: String, minSecs: NSNumber, isFlat: Bool) {
         _isPlaying = false
         _isReady = false
         _isMinSecsElapsed = false
+        _isFlat = isFlat
         
         _stopKVO()
         
@@ -150,7 +152,7 @@ class StreamController: AVPlayerViewController {
     }
     
     fileprivate func _onPlay() {
-        if (_isMinSecsElapsed) {
+        if (_isMinSecsElapsed || _isFlat) {
             _isPlaying = true
             NotificationCenter.default.post(name: Notification.Name(rawValue: "streamPlaying"), object: nil)
             
@@ -216,6 +218,7 @@ class StreamController: AVPlayerViewController {
         
         _isPlaying = false
         _isReady = false
+        _isFlat = false
         _isMinSecsElapsed = false
         
         NotificationCenter.default.removeObserver(self)

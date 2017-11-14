@@ -276,7 +276,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     
     func playFallbackVideo() {
         let videoURL = Bundle.main.url(forResource: "fallback", withExtension: "mp4")!
-        loadAndPlay(url: videoURL.absoluteString)
+        loadAndPlay(url: videoURL.absoluteString, isFlat: true)
     }
     
     func showUrlAlert(_ alertKey: String) {
@@ -434,4 +434,3 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         return true
     }
 }
-

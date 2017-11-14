@@ -216,13 +216,13 @@ class ViewController: UIViewController {
         loadAndPlay(url: url)
     }
     
-    func loadAndPlay(url: String) {
+    func loadAndPlay(url: String, isFlat: Bool = false) {
         if (streamController != nil) {
             streamController.destroy()
         }
         
         streamController = StreamController()
-        streamController.setStream(url, minSecs: streamData.minSecs)
+        streamController.setStream(url, minSecs: streamData.minSecs, isFlat: isFlat)
     }
     
     @objc func onStreamPlay() {
