@@ -106,7 +106,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let boldString = getAttributedString(donateStyle["button"]!["bold"]!, "Whitney-Semibold")
         attributedString.append(boldString)
         
-        let label = UILabel(frame: CGRect(x: 68, y: 79, width: 200, height: 21))
+        let label = UILabel(frame: CGRect(x: 67, y: 79, width: 200, height: 21))
         label.textAlignment = .left
         label.textColor = UIColor.white
         label.attributedText = attributedString
