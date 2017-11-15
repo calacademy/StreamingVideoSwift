@@ -132,7 +132,7 @@ class SwitchButton: UIView {
         
         var colors = [CGColor]()
         colors.append(UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor)
-        colors.append(UIColor(red: 0, green: 0, blue: 0, alpha: 0.75).cgColor)
+        colors.append(UIColor(red: 0, green: 0, blue: 0, alpha: 0.6).cgColor)
         
         gradient.colors = colors
         gradient.startPoint = CGPoint(x: 0.5, y: 0.1)
