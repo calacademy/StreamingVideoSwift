@@ -23,24 +23,24 @@ class StreamData: NSObject {
     var donateStyles: [[String : [String : String]]] = [
         [
             "button": [
-                "normal": "subscribe to ",
-                "bold": "updates"
+                "normal": "stingray news ",
+                "bold": "& more"
             ],
             "alert": [
-                "title": "Updates from the Academy",
-                "body": "Signup to receive occasional updates via email.",
+                "title": "Animal antics, delivered to your inbox.",
+                "body": "Get Academy Updates for email you actually look forward to.",
                 "url": "https://www.calacademy.org/stay-connected/?src=stingrayslive",
                 "confirm": "Subscribe"
             ]
         ],
         [
             "button": [
-                "normal": "feed ",
-                "bold": "the Stingrays"
+                "normal": "support ",
+                "bold": "our stingrays"
             ],
             "alert": [
-                "title": "Help Advance Our Mission",
-                "body": "Please visit our website to make a donation.",
+                "title": "Help the Academy zap extinction.",
+                "body": "Your donation supports biodiversity research and conservation.",
                 "url": "https://www.calacademy.org/donate/?src=stingrayslive",
                 "confirm": "Donate"
             ]
