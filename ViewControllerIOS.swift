@@ -298,7 +298,13 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
             self.onAlertClose()
         }))
         
-        currentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        var confirmLabel = "OK"
+        
+        if let confirm = config["confirm"] {
+            confirmLabel = confirm
+        }
+        
+        currentAlert.addAction(UIAlertAction(title: confirmLabel, style: .default, handler: { action in
             self.goToWebsite(config["url"]!)
             self.onAlertClose()
         }))

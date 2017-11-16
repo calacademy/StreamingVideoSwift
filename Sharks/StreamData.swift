@@ -29,7 +29,8 @@ class StreamData: NSObject {
             "alert": [
                 "title": "Updates from the Academy",
                 "body": "Signup to receive occasional updates via email.",
-                "url": "https://www.calacademy.org/stay-connected/?src=stingrayslive"
+                "url": "https://www.calacademy.org/stay-connected/?src=stingrayslive",
+                "confirm": "Subscribe"
             ]
         ],
         [
@@ -40,7 +41,8 @@ class StreamData: NSObject {
             "alert": [
                 "title": "Help Advance Our Mission",
                 "body": "Please visit our website to make a donation.",
-                "url": "https://www.calacademy.org/donate/?src=stingrayslive"
+                "url": "https://www.calacademy.org/donate/?src=stingrayslive",
+                "confirm": "Donate"
             ]
         ]
     ]
@@ -132,7 +134,8 @@ class StreamData: NSObject {
                         "alert": [
                             "title": donateStyle["alert"]["title"].string!,
                             "body": donateStyle["alert"]["body"].string!,
-                            "url": donateStyle["alert"]["url"].string!
+                            "url": donateStyle["alert"]["url"].string!,
+                            "confirm": donateStyle["alert"]["confirm"].string!
                         ]
                     ])
                 }
