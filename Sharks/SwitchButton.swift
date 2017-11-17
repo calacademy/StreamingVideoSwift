@@ -84,7 +84,7 @@ class SwitchButton: UIView {
             return
         }
         
-        self._border.layer.borderColor = UIColor(red: 0, green: 0.58, blue: 0.83, alpha: 1).cgColor
+        self._border.layer.borderColor = UIColor(red: 0.09, green: 0.59, blue: 0.82, alpha: 1).cgColor
         
         if (animate) {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
