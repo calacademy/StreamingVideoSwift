@@ -48,6 +48,11 @@ class StreamData: NSObject {
     ]
     
     var alerts: [String: [String: String]] = [
+        "donate": [
+            "title": "",
+            "body": "",
+            "url": ""
+        ],
         "logo": [
             "title": "Visit Us Online",
             "body": "Learn about events and exhibits, purchase tickets, submit feedback, and more!",
