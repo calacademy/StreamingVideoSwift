@@ -10,6 +10,8 @@ import UIKit
 import AVKit
 
 class ViewController: UIViewController {
+    var slug = "unknown"
+    
     // add logo and interaction once only
     var isFirstPlay = true
     
@@ -31,6 +33,13 @@ class ViewController: UIViewController {
     var streamController:StreamController!
     
     override func viewDidLoad() {
+        if let mySlug = Bundle.main.infoDictionary?["StreamSlug"] as? String {
+            slug = mySlug
+        }
+        
+        menu.slug = slug
+        streamData.slug = slug
+        
         self.view.backgroundColor = UIColor(white: 1, alpha: 0)
         self.view.layer.contents = getBackgroundImage()
         
@@ -50,7 +59,7 @@ class ViewController: UIViewController {
     }
     
     func getBackgroundImage() -> CGImage {
-        return (UIImage(named: "launch")?.cgImage)!
+        return (UIImage(named: "bg")?.cgImage)!
     }
     
     func getDeviceType() -> String? {

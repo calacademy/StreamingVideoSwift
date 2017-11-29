@@ -9,12 +9,13 @@
 import UIKit
 
 class StreamData: NSObject {
-    fileprivate let _configEndpoint: String = "https://s3.amazonaws.com/data.calacademy.org/sharks/data.json"
+    fileprivate let _configEndpoint: String = "https://s3.amazonaws.com/data.calacademy.org/"
     fileprivate var _endpoint: String!
     fileprivate var _hlsKey: String!
     fileprivate var _task: URLSessionDataTask!
     fileprivate var _session: URLSession!
     
+    var slug = "unknown"
     var streams: [[String:String]]!
     
     // defaults
@@ -89,9 +90,10 @@ class StreamData: NSObject {
     
     func getConfig() {
         destroy()
+        
         _session = URLSession(configuration: URLSessionConfiguration.ephemeral)
         
-        let url = URL(string: _configEndpoint)!
+        let url = URL(string: _configEndpoint + slug + "/data.json")!
         
         _task = _session.dataTask(with: url, completionHandler: {
             data, response, error -> Void in
