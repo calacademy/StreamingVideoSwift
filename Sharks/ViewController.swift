@@ -37,7 +37,6 @@ class ViewController: UIViewController {
             slug = mySlug
         }
         
-        menu.slug = slug
         streamData.slug = slug
         
         self.view.backgroundColor = UIColor(white: 1, alpha: 0)

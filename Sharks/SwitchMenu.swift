@@ -18,7 +18,6 @@ class SwitchMenu: UIView {
     var buttons:[SwitchButton]!
     var onStage:Bool = false
     var currentIndex:Int = 0
-    var slug = "unknown"
     
     var streams:[[String:String]] = [] {
         willSet (newStreams) {
@@ -50,7 +49,7 @@ class SwitchMenu: UIView {
                     let btn = SwitchButton()
                 #endif
                 
-                btn.setup(id: stream["id"]!, label: stream["label"]!, pic: slug + "-" + stream["asset"]!)
+                btn.setup(id: stream["id"]!, label: stream["label"]!, pic: stream["asset"]!)
                 
                 // btn.frame.origin.y = getTargetY(btn)
                 
