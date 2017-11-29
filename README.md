@@ -1,2 +1,1 @@
-# Stingrays Live
-#### A simple YouTube live stream viewer for tvOS and iOS
+## Live stream viewer for tvOS and iOS built in Swift
