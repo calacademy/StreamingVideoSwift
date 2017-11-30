@@ -69,16 +69,6 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         return savedIndex
     }
     
-    func isIphoneX() -> Bool {
-        if (UIDevice.current.userInterfaceIdiom == .phone) {
-            if (UIScreen.main.nativeBounds.height == 2436) {
-                return true
-            }
-        }
-        
-        return false
-    }
-    
     func getAttributedString (_ string: String, _ font: String, _ size: CGFloat = 18) -> NSMutableAttributedString {
         let labelFont = UIFont(name: font, size: CGFloat(size))!
         let attributes = [NSAttributedStringKey.font: labelFont]
@@ -116,10 +106,14 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         
         donateButton.addSubview(label)
         
-        // image
-        let silhouette = UIImageView(image: UIImage(named: "silhouette")!)
-        silhouette.alpha = 0.8
-        donateButton.addSubview(silhouette)
+        // silhouette
+        if (slug == "penguins") {
+            _initAnimation()
+        } else {
+            let silhouette = UIImageView(image: UIImage(named: "silhouette")!)
+            silhouette.alpha = 0.8
+            donateButton.addSubview(silhouette)
+        }
         
         // place
         let w: CGFloat = 300
@@ -128,7 +122,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let yOffset: CGFloat = 8
         var xOffset: CGFloat = 12
         
-        if (isIphoneX()) {
+        if (getDeviceType() == "iphonex") {
             xOffset += 4
         }
         
@@ -138,6 +132,10 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         fadeIn(donateButton, _uiOpacity, 3.2)
         
         self.view.addSubview(donateButton)
+    }
+    
+    internal func _initAnimation() {
+
     }
     
     func addDonateButtonInteraction() {
@@ -184,7 +182,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         var w: CGFloat = 87
         var h: CGFloat = 135
         
-        if (isIphoneX()) {
+        if (getDeviceType() == "iphonex") {
             asset = "logoioshoriz"
             w = 182
             h = 90

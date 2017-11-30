@@ -60,7 +60,8 @@ class StreamController: AVPlayerViewController {
         
         UIView.animate(withDuration: 0.8, delay: 2.5, options: .curveEaseOut, animations: {
             self.view.alpha = 1
-        }, completion: { _ in            
+        }, completion: { _ in
+            self.fadeVolume(fadeIn: true)
             NotificationCenter.default.post(name: Notification.Name(rawValue: "streamVisible"), object: nil)
         })
         
