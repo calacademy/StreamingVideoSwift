@@ -32,7 +32,7 @@ class SwitchButtonIOS: SwitchButton {
         _label = UILabel(frame: CGRect(x: _borderWidth, y: _w - _borderWidth - h - 5, width: _w - (_borderWidth * 2), height: h))
         _label.textColor = UIColor.white
         _label.textAlignment = NSTextAlignment.center
-        _label.font = UIFont(name: "Whitney-Semibold", size: 16)
+        _label.font = UIFont(name: "Whitney-Semibold", size: _labelSize)
         _label.text = label.uppercased()
         
         self.addSubview(_label)

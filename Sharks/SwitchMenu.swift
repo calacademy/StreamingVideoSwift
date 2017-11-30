@@ -49,7 +49,7 @@ class SwitchMenu: UIView {
                     let btn = SwitchButton()
                 #endif
                 
-                btn.setup(id: stream["id"]!, label: stream["label"]!, pic: stream["asset"]!)
+                btn.setup(id: stream["id"]!, label: stream["label"]!, pic: stream["asset"]!, numButtons: streams.count, margin: _margin)
                 
                 // btn.frame.origin.y = getTargetY(btn)
                 

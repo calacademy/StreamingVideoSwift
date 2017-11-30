@@ -16,9 +16,11 @@ class SwitchButton: UIView {
     #if os(iOS)
         internal var _w:CGFloat = round(UIScreen.main.bounds.size.width * 0.3)
         internal var _borderWidth:CGFloat = 8
+        internal var _labelSize:CGFloat = 16
     #else
         internal var _w:CGFloat = 400
-        internal var _borderWidth:CGFloat = 15
+        internal var _borderWidth:CGFloat = 13
+        internal var _labelSize:CGFloat = 30
     #endif
     
     internal var _label:UILabel!
@@ -29,13 +31,6 @@ class SwitchButton: UIView {
     var id:String!
     
     override init(frame: CGRect) {
-        #if os(iOS)
-            if (_w > 225) {
-                _w = 225
-            }
-        #endif
-        
-        let frame = CGRect(x: 0, y: 0, width: _w, height: _w)
         super.init(frame: frame)
         
         self.layer.masksToBounds = true
@@ -43,7 +38,24 @@ class SwitchButton: UIView {
         self.isUserInteractionEnabled = true
     }
     
-    func setup(id myID: String, label myLabel: String, pic asset: String) {
+    internal func _setDimensions(numButtons: Int, margin: CGFloat) {
+        #if os(iOS)
+            if (_w > 225) {
+                _w = 225
+            }
+            
+            if (numButtons > 2) {
+                _w = round(UIScreen.main.bounds.size.width * 0.25)
+                _borderWidth = 6
+                _labelSize = 14
+            }
+        #endif
+        
+        self.frame = CGRect(x: 0, y: 0, width: _w, height: _w)
+    }
+    
+    func setup(id myID: String, label myLabel: String, pic asset: String, numButtons: Int, margin: CGFloat) {
+        _setDimensions(numButtons: numButtons, margin: margin)
         self.id = myID
         
         if (asset.hasPrefix("http")) {
@@ -160,7 +172,7 @@ class SwitchButton: UIView {
         _label = UILabel(frame: CGRect(x: _borderWidth, y: _w - _borderWidth - h - 10, width: _w - (_borderWidth * 2), height: h))
         _label.textColor = UIColor.white
         _label.textAlignment = NSTextAlignment.center
-        _label.font = UIFont(name: "Whitney-Semibold", size: 30)
+        _label.font = UIFont(name: "Whitney-Semibold", size: _labelSize)
         _label.text = label.uppercased()
         
         self.addSubview(_label)
