@@ -230,6 +230,7 @@ class ViewController: UIViewController {
         }
         
         streamController = StreamController()
+        streamController.aspect = ["width": CGFloat(truncating: streamData.width), "height": CGFloat(truncating: streamData.height)]
         streamController.setStream(url, minSecs: streamData.minSecs, isFlat: isFlat)
     }
     

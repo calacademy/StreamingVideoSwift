@@ -20,6 +20,8 @@ class StreamData: NSObject {
     
     // defaults
     var minSecs: NSNumber = 6
+    var width: NSNumber = 1280
+    var height: NSNumber = 720
     
     var donateStyles: [[String : [String : String]]] = [
         [
@@ -125,6 +127,15 @@ class StreamData: NSObject {
         // minSecs
         if let myMinSecs = json["minSecs"].number {
             minSecs = myMinSecs
+        }
+        
+        // size
+        if let myWidth = json["width"].number {
+            width = myWidth
+        }
+        
+        if let myHeight = json["height"].number {
+            height = myHeight
         }
         
         // donate styles

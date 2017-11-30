@@ -19,10 +19,7 @@ class StreamController: AVPlayerViewController {
     fileprivate var _pollMinSecs:Timer!
     fileprivate var _videoOutput:AVPlayerItemVideoOutput!
     
-    let aspect:[String: CGFloat] = [
-        "width": 1280,
-        "height": 720
-    ]
+    var aspect:[String: CGFloat]!
     
     init() {
         super.init(nibName:nil, bundle:nil)
