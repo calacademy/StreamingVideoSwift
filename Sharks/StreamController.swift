@@ -60,10 +60,7 @@ class StreamController: AVPlayerViewController {
         
         UIView.animate(withDuration: 0.8, delay: 2.5, options: .curveEaseOut, animations: {
             self.view.alpha = 1
-        }, completion: { _ in
-            // fade in audio
-            self._fadeVolume(fadeIn: true)
-            
+        }, completion: { _ in            
             NotificationCenter.default.post(name: Notification.Name(rawValue: "streamVisible"), object: nil)
         })
         
@@ -212,7 +209,7 @@ class StreamController: AVPlayerViewController {
         }
     }
     
-    fileprivate func _fadeVolume(fadeIn: Bool = true) {
+    func fadeVolume(fadeIn: Bool = true) {
         if (_pollVolumeFade != nil) {
             _pollVolumeFade.invalidate()
         }
