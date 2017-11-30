@@ -16,6 +16,7 @@ class StreamController: AVPlayerViewController {
     fileprivate var _isMinSecsElapsed = false
     
     fileprivate var _pollColorTimer:Timer!
+    fileprivate var _pollVolumeFade:Timer!
     fileprivate var _pollMinSecs:Timer!
     fileprivate var _videoOutput:AVPlayerItemVideoOutput!
     
@@ -55,11 +56,14 @@ class StreamController: AVPlayerViewController {
         scaleToFill()
         
         // fade in
-        self.view.alpha = 0;
+        self.view.alpha = 0
         
         UIView.animate(withDuration: 0.8, delay: 2.5, options: .curveEaseOut, animations: {
             self.view.alpha = 1
         }, completion: { _ in
+            // fade in audio
+            self._fadeVolume(fadeIn: true)
+            
             NotificationCenter.default.post(name: Notification.Name(rawValue: "streamVisible"), object: nil)
         })
         
@@ -104,7 +108,7 @@ class StreamController: AVPlayerViewController {
         let url:URL = URL(string: path)!
         let streamPlayer = AVPlayer(url: url)
         
-        streamPlayer.isMuted = true
+        streamPlayer.volume = 0
         self.player = streamPlayer
         
         _startKVO()
@@ -193,6 +197,35 @@ class StreamController: AVPlayerViewController {
         }
     }
     
+    @objc func fadeVolumeIn() {
+        self.player!.volume += 0.05
+        
+        if (self.player!.volume >= 1) {
+            _pollVolumeFade.invalidate()
+        }
+    }
+    @objc func fadeVolumeOut() {
+        self.player!.volume -= 0.05
+        
+        if (self.player!.volume <= 0) {
+            _pollVolumeFade.invalidate()
+        }
+    }
+    
+    fileprivate func _fadeVolume(fadeIn: Bool = true) {
+        if (_pollVolumeFade != nil) {
+            _pollVolumeFade.invalidate()
+        }
+        
+        let timeInt = 0.05
+        
+        if (fadeIn) {
+            _pollVolumeFade = Timer.scheduledTimer(timeInterval: timeInt, target: self, selector: #selector(StreamController.fadeVolumeIn), userInfo: nil, repeats: true)
+        } else {
+            _pollVolumeFade = Timer.scheduledTimer(timeInterval: timeInt, target: self, selector: #selector(StreamController.fadeVolumeOut), userInfo: nil, repeats: true)
+        }
+    }
+    
     fileprivate func _pollColor() {
         self.player!.currentItem!.remove(_videoOutput)
         self.player!.currentItem!.add(_videoOutput)
@@ -205,6 +238,10 @@ class StreamController: AVPlayerViewController {
     }
     
     func destroy() {        
+        if (_pollVolumeFade != nil) {
+            _pollVolumeFade.invalidate()
+        }
+        
         if (_pollColorTimer != nil) {
             _pollColorTimer.invalidate()
         }

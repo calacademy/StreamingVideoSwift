@@ -58,6 +58,7 @@
 		E8DC23021BBEF8C3006CE476 /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */; };
 		E8DC23111BBF2372006CE476 /* Whitney-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */; };
 		E8EF4CCD1FCF485900AD0559 /* Menu Pocket Penguins.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8EF4CCB1FCF484A00AD0559 /* Menu Pocket Penguins.xcassets */; };
+		E8EF4CCF1FD0945700AD0559 /* fallback.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E8EF4CCE1FD0945700AD0559 /* fallback.mp4 */; };
 		E8FB95311BC2F77B0090552C /* SwitchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB95301BC2F77B0090552C /* SwitchMenu.swift */; };
 		E8FBCF631BC6C72F00EA3145 /* UIImageView+remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */; };
 		E8FBCF931BC6ED3F00EA3145 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */; };
@@ -92,6 +93,7 @@
 		E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchButton.swift; path = Sharks/SwitchButton.swift; sourceTree = "<group>"; };
 		E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Whitney-Semibold.otf"; path = "Sharks/Whitney-Semibold.otf"; sourceTree = "<group>"; };
 		E8EF4CCB1FCF484A00AD0559 /* Menu Pocket Penguins.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Menu Pocket Penguins.xcassets"; sourceTree = "<group>"; };
+		E8EF4CCE1FD0945700AD0559 /* fallback.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = fallback.mp4; sourceTree = "<group>"; };
 		E8FB95301BC2F77B0090552C /* SwitchMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchMenu.swift; path = Sharks/SwitchMenu.swift; sourceTree = "<group>"; };
 		E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImageView+remote.swift"; path = "Sharks/UIImageView+remote.swift"; sourceTree = "<group>"; };
 		E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Sharks/SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		E8025C101FCE0F37006ABEAE /* Pocket Penguins iOS */ = {
 			isa = PBXGroup;
 			children = (
+				E8EF4CCE1FD0945700AD0559 /* fallback.mp4 */,
 				E8025C1B1FCF2688006ABEAE /* Assets.xcassets */,
 				E8025C0F1FCE0E7E006ABEAE /* Pocket Penguins iOS.plist */,
 			);
@@ -318,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8025C051FCE0E7E006ABEAE /* Whitney-Book.otf in Resources */,
+				E8EF4CCF1FD0945700AD0559 /* fallback.mp4 in Resources */,
 				E8EF4CCD1FCF485900AD0559 /* Menu Pocket Penguins.xcassets in Resources */,
 				E8025C1A1FCF234E006ABEAE /* Global Assets iOS.xcassets in Resources */,
 				E8025C081FCE0E7E006ABEAE /* Whitney-Semibold.otf in Resources */,
@@ -609,6 +613,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -627,6 +632,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
