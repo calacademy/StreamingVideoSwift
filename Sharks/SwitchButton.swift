@@ -46,8 +46,17 @@ class SwitchButton: UIView {
             
             if (numButtons > 2) {
                 _w = round(UIScreen.main.bounds.size.width * 0.25)
-                _borderWidth = 6
-                _labelSize = 14
+                
+                if (UIDevice.current.userInterfaceIdiom == .phone) {
+                    if (_w > 200) {
+                        _w = 200
+                    }
+                }
+                
+                if (_w < 250) {
+                    _borderWidth = 6
+                    _labelSize = 14
+                }
             }
         #endif
         
