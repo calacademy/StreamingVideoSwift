@@ -21,6 +21,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     
     let donateStyleIndexKey = "donateStyleIndex"
     var donateStyle: [String : [String : String]]!
+    var silhouetteAnimation: SpriteView!
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -129,13 +130,21 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         donateButton.frame = CGRect(x: xOffset, y: screen.height - h - yOffset, width: w, height: h)
         
         addDonateButtonInteraction()
-        fadeIn(donateButton, _uiOpacity, 3.2)
+        
+        fadeIn(donateButton, _uiOpacity, 3.2,  {(error) -> Void in
+            if (self.silhouetteAnimation != nil) {
+                self.silhouetteAnimation.cycle()
+            }
+        })
         
         self.view.addSubview(donateButton)
     }
     
-    internal func _initAnimation() {
-
+   internal func _initAnimation() {
+        silhouetteAnimation = SpriteView()
+        silhouetteAnimation.setSheet(sheetName: "penguinsprite", frameWidth: 170, frameHeight: 170, numFrames: 26)
+        
+        donateButton.addSubview(silhouetteAnimation)
     }
     
     func addDonateButtonInteraction() {
@@ -160,6 +169,10 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     
     override func removeUI() {
         super.removeUI()
+        
+        if (silhouetteAnimation != nil) {
+            silhouetteAnimation.destroy()
+        }
         
         if (donateButton != nil) {
             donateButton.removeFromSuperview()

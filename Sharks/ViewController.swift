@@ -378,13 +378,13 @@ class ViewController: UIViewController {
         placeLogo(w, h: h, offsetX: offset, offsetY: offset - 5)
     }
     
-    func fadeIn(_ view: UIView, _ targetAlpha: CGFloat, _ delay: Double) {
+    func fadeIn(_ view: UIView, _ targetAlpha: CGFloat, _ delay: Double, _ onComplete: ((Bool) -> Void)? = nil) {
         // fade in
         view.alpha = 0
         
         UIView.animate(withDuration: 0.8, delay: delay, options: .curveEaseOut, animations: {
             view.alpha = targetAlpha
-        }, completion: nil)
+        }, completion: onComplete)
     }
     
     func placeLogo(_ w: CGFloat, h: CGFloat, offsetX: CGFloat, offsetY: CGFloat, targetOpacity: CGFloat = 0.5) {

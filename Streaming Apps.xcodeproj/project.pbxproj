@@ -59,6 +59,12 @@
 		E8DC23111BBF2372006CE476 /* Whitney-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */; };
 		E8EF4CCD1FCF485900AD0559 /* Menu Pocket Penguins.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8EF4CCB1FCF484A00AD0559 /* Menu Pocket Penguins.xcassets */; };
 		E8EF4CCF1FD0945700AD0559 /* fallback.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E8EF4CCE1FD0945700AD0559 /* fallback.mp4 */; };
+		E8EF4D0C1FD1C92300AD0559 /* SpriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF4D0B1FD1C92300AD0559 /* SpriteView.swift */; };
+		E8EF4D0D1FD1C92D00AD0559 /* SpriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF4D0B1FD1C92300AD0559 /* SpriteView.swift */; };
+		E8EF4D0E1FD1C92D00AD0559 /* SpriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF4D0B1FD1C92300AD0559 /* SpriteView.swift */; };
+		E8EF4D141FD209B200AD0559 /* CGFloat+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF4D131FD209B200AD0559 /* CGFloat+random.swift */; };
+		E8EF4D151FD209E900AD0559 /* CGFloat+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF4D131FD209B200AD0559 /* CGFloat+random.swift */; };
+		E8EF4D161FD209E900AD0559 /* CGFloat+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF4D131FD209B200AD0559 /* CGFloat+random.swift */; };
 		E8FB95311BC2F77B0090552C /* SwitchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB95301BC2F77B0090552C /* SwitchMenu.swift */; };
 		E8FBCF631BC6C72F00EA3145 /* UIImageView+remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */; };
 		E8FBCF931BC6ED3F00EA3145 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */; };
@@ -94,6 +100,8 @@
 		E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Whitney-Semibold.otf"; path = "Sharks/Whitney-Semibold.otf"; sourceTree = "<group>"; };
 		E8EF4CCB1FCF484A00AD0559 /* Menu Pocket Penguins.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Menu Pocket Penguins.xcassets"; sourceTree = "<group>"; };
 		E8EF4CCE1FD0945700AD0559 /* fallback.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = fallback.mp4; sourceTree = "<group>"; };
+		E8EF4D0B1FD1C92300AD0559 /* SpriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteView.swift; sourceTree = "<group>"; };
+		E8EF4D131FD209B200AD0559 /* CGFloat+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+random.swift"; sourceTree = "<group>"; };
 		E8FB95301BC2F77B0090552C /* SwitchMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchMenu.swift; path = Sharks/SwitchMenu.swift; sourceTree = "<group>"; };
 		E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImageView+remote.swift"; path = "Sharks/UIImageView+remote.swift"; sourceTree = "<group>"; };
 		E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Sharks/SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -140,6 +148,8 @@
 				E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */,
 				E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */,
 				E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */,
+				E8EF4D0B1FD1C92300AD0559 /* SpriteView.swift */,
+				E8EF4D131FD209B200AD0559 /* CGFloat+random.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -358,11 +368,13 @@
 				E829CD451C7CFE0F003AA289 /* ViewControllerIOS.swift in Sources */,
 				E802091B1C7B97C20044F64C /* SwiftyJSON.swift in Sources */,
 				E80209171C7B97C20044F64C /* ViewController.swift in Sources */,
+				E8EF4D151FD209E900AD0559 /* CGFloat+random.swift in Sources */,
 				E829CD491C7FB40D003AA289 /* UITouchBeginGestureRecognizer.swift in Sources */,
 				E802091A1C7B97C20044F64C /* StreamController.swift in Sources */,
 				E829CD4E1C81027F003AA289 /* SwitchButtonIOS.swift in Sources */,
 				E802091C1C7B97C20044F64C /* StreamData.swift in Sources */,
 				E802091E1C7B97C20044F64C /* UIImageView+remote.swift in Sources */,
+				E8EF4D0D1FD1C92D00AD0559 /* SpriteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,11 +390,13 @@
 				E8025BFB1FCE0E7E006ABEAE /* ViewControllerIOS.swift in Sources */,
 				E8025BFC1FCE0E7E006ABEAE /* SwiftyJSON.swift in Sources */,
 				E8025BFD1FCE0E7E006ABEAE /* ViewController.swift in Sources */,
+				E8EF4D161FD209E900AD0559 /* CGFloat+random.swift in Sources */,
 				E8025BFE1FCE0E7E006ABEAE /* UITouchBeginGestureRecognizer.swift in Sources */,
 				E8025BFF1FCE0E7E006ABEAE /* StreamController.swift in Sources */,
 				E8025C001FCE0E7E006ABEAE /* SwitchButtonIOS.swift in Sources */,
 				E8025C011FCE0E7E006ABEAE /* StreamData.swift in Sources */,
 				E8025C021FCE0E7E006ABEAE /* UIImageView+remote.swift in Sources */,
+				E8EF4D0E1FD1C92D00AD0559 /* SpriteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,7 +405,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8A104481BAC6B8A000F6736 /* ViewController.swift in Sources */,
+				E8EF4D0C1FD1C92300AD0559 /* SpriteView.swift in Sources */,
 				E8DC23021BBEF8C3006CE476 /* SwitchButton.swift in Sources */,
+				E8EF4D141FD209B200AD0559 /* CGFloat+random.swift in Sources */,
 				E8FB95311BC2F77B0090552C /* SwitchMenu.swift in Sources */,
 				E890771E1BB9CF2C00F6F1B5 /* StreamData.swift in Sources */,
 				E8D2903B1BB5A23400AF8B06 /* StreamController.swift in Sources */,
