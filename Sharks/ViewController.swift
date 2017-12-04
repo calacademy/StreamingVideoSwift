@@ -387,15 +387,17 @@ class ViewController: UIViewController {
         }, completion: onComplete)
     }
     
-    func placeLogo(_ w: CGFloat, h: CGFloat, offsetX: CGFloat, offsetY: CGFloat, targetOpacity: CGFloat = 0.5) {
+    func placeLogo(_ w: CGFloat, h: CGFloat, offsetX: CGFloat, offsetY: CGFloat, targetOpacity: CGFloat = 0.5, theLogo: UIImageView? = nil) {
+        let theLogo = theLogo ?? self.logo
+        
         // place
         let bounds: CGRect = UIScreen.main.bounds
-        logo.frame = CGRect(x: bounds.size.width - w - offsetX, y: offsetY, width: w, height: h)
+        theLogo!.frame = CGRect(x: bounds.size.width - w - offsetX, y: offsetY, width: w, height: h)
         
-        fadeIn(logo, targetOpacity, 3)
+        fadeIn(theLogo!, targetOpacity, 3)
         
         // add to stage
-        self.view.addSubview(logo)
+        self.view.addSubview(theLogo!)
     }
     
     func buffer(_ boo: Bool) {
