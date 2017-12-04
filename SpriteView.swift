@@ -71,8 +71,8 @@ class SpriteView: UIView {
             _pollAnimateCycle.invalidate()
         }
         
-        print(CGFloat.random(min: 15, max: 30))
-        _pollAnimateCycle = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(SpriteView.cycle), userInfo: nil, repeats: false)
+        let delay = Double(CGFloat.random(min: 15, max: 30))
+        _pollAnimateCycle = Timer.scheduledTimer(timeInterval: delay, target: self, selector: #selector(SpriteView.cycle), userInfo: nil, repeats: false)
     }
     
     func destroy() {

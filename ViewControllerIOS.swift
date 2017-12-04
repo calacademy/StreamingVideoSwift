@@ -123,8 +123,12 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let yOffset: CGFloat = 8
         var xOffset: CGFloat = 12
         
+        if (slug == "penguins") {
+            xOffset -= 12
+        }
+        
         if (getDeviceType() == "iphonex") {
-            xOffset += 4
+            xOffset += (slug == "penguins") ? 8 : 4
         }
         
         donateButton.frame = CGRect(x: xOffset, y: screen.height - h - yOffset, width: w, height: h)
@@ -143,6 +147,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
    internal func _initAnimation() {
         silhouetteAnimation = SpriteView()
         silhouetteAnimation.setSheet(sheetName: "penguinsprite", frameWidth: 170, frameHeight: 170, numFrames: 26)
+        silhouetteAnimation.frame = silhouetteAnimation.frame.offsetBy(dx: 5, dy: 24)
         
         donateButton.addSubview(silhouetteAnimation)
     }
