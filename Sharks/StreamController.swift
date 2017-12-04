@@ -200,6 +200,7 @@ class StreamController: AVPlayerViewController {
         
         if (self.player!.volume >= 1) {
             _pollVolumeFade.invalidate()
+            self.player!.volume = 1
         }
     }
     @objc func fadeVolumeOut() {
@@ -207,6 +208,7 @@ class StreamController: AVPlayerViewController {
         
         if (self.player!.volume <= 0) {
             _pollVolumeFade.invalidate()
+            self.player!.volume = 0
         }
     }
     
@@ -233,6 +235,12 @@ class StreamController: AVPlayerViewController {
         }
         
         _pollColorTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(StreamController.checkColor), userInfo: nil, repeats: true)
+    }
+    
+    func destroyVolumeTimer() {
+        if (_pollVolumeFade != nil) {
+            _pollVolumeFade.invalidate()
+        }
     }
     
     func destroy() {        

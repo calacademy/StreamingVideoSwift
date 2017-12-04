@@ -201,7 +201,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let image = UIImage(named: "logoshadow")
         let logoShadow = UIImageView(image: image!)
         
-        placeLogo(300, h: 300, offsetX: 0, offsetY: 0, targetOpacity: 0.4, theLogo: logoShadow)
+        placeLogo(300, h: 300, offsetX: 0, offsetY: 0, targetOpacity: 0.3, theLogo: logoShadow)
     }
     
     override func addLogo() {

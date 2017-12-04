@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     var menu = SwitchMenu()
     var streamData = StreamData()
     var streamController:StreamController!
+    var lastStreamController:StreamController!
     
     override func viewDidLoad() {
         if let mySlug = Bundle.main.infoDictionary?["StreamSlug"] as? String {
@@ -145,6 +146,11 @@ class ViewController: UIViewController {
             streamController = nil
         }
         
+        if (lastStreamController != nil) {
+            lastStreamController.destroyVolumeTimer()
+            lastStreamController = nil
+        }
+        
         removeUI()
         
         buffer(false)
@@ -226,6 +232,7 @@ class ViewController: UIViewController {
     
     func loadAndPlay(url: String, isFlat: Bool = false) {
         if (streamController != nil) {
+            lastStreamController = streamController
             streamController.destroy()
         }
         
@@ -247,6 +254,10 @@ class ViewController: UIViewController {
                 if (streamController.player != nil) {
                     streamController.player!.play()
                 }
+            }
+            
+            if (lastStreamController != nil) {
+                lastStreamController.fadeVolume(fadeIn: false)
             }
         }
     }
