@@ -32,6 +32,9 @@ class ViewController: UIViewController {
     var streamData = StreamData()
     var streamController:StreamController!
     var lastStreamController:StreamController!
+    var delaySecs = 2.5
+    
+    internal var _pollFadeOutLastStream:Timer!
     
     override func viewDidLoad() {
         if let mySlug = Bundle.main.infoDictionary?["StreamSlug"] as? String {
@@ -151,6 +154,10 @@ class ViewController: UIViewController {
             lastStreamController = nil
         }
         
+        if (_pollFadeOutLastStream != nil) {
+            _pollFadeOutLastStream.invalidate()
+        }
+        
         removeUI()
         
         buffer(false)
@@ -236,7 +243,10 @@ class ViewController: UIViewController {
             streamController.destroy()
         }
         
+        // let testUrl = "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8"
+        
         streamController = StreamController()
+        streamController.delaySecs = self.delaySecs
         streamController.aspect = ["width": CGFloat(truncating: streamData.width), "height": CGFloat(truncating: streamData.height)]
         streamController.setStream(url, minSecs: streamData.minSecs, isFlat: isFlat)
     }
@@ -256,9 +266,17 @@ class ViewController: UIViewController {
                 }
             }
             
-            if (lastStreamController != nil) {
-                lastStreamController.fadeVolume(fadeIn: false)
+            if (_pollFadeOutLastStream != nil) {
+                _pollFadeOutLastStream.invalidate()
             }
+            
+            _pollFadeOutLastStream = Timer.scheduledTimer(timeInterval: self.delaySecs - 0.5, target: self, selector: #selector(ViewController.fadeOutLastStream), userInfo: nil, repeats: false)
+        }
+    }
+    
+    @objc func fadeOutLastStream() {
+        if (lastStreamController != nil) {
+            lastStreamController.fadeVolume(fadeIn: false)
         }
     }
     

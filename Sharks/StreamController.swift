@@ -21,6 +21,7 @@ class StreamController: AVPlayerViewController {
     fileprivate var _videoOutput:AVPlayerItemVideoOutput!
     
     var aspect:[String: CGFloat]!
+    var delaySecs:Double = 2.5
     
     init() {
         super.init(nibName:nil, bundle:nil)
@@ -58,7 +59,7 @@ class StreamController: AVPlayerViewController {
         // fade in
         self.view.alpha = 0
         
-        UIView.animate(withDuration: 0.8, delay: 2.5, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.8, delay: self.delaySecs, options: .curveEaseOut, animations: {
             self.view.alpha = 1
         }, completion: { _ in
             self.fadeVolume(fadeIn: true)
