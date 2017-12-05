@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     var currentStreamIndex = 0
     var menuRecognizer:UIGestureRecognizer!
     
+    let delaySecs:Double = 2.5
     let currentStreamIndexDefaultsKey = "currentStreamIndex"
     var defaults = UserDefaults.standard
     
@@ -32,7 +33,6 @@ class ViewController: UIViewController {
     var streamData = StreamData()
     var streamController:StreamController!
     var lastStreamController:StreamController!
-    var delaySecs = 2.5
     
     internal var _pollFadeOutLastStream:Timer!
     
