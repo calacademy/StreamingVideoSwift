@@ -188,11 +188,21 @@ class StreamData: NSObject {
                         
                         // success
                         for stream in myStreams {
-                            streams.append([
+                            var myStream = [
                                 "id": stream["id"].string!,
                                 "label": stream["label"].string!,
                                 "asset": stream["asset"].string!
-                            ])
+                            ]
+                            
+                            if (stream["logoShadowOpacity"].string != nil) {
+                                myStream["logoShadowOpacity"] = stream["logoShadowOpacity"].string!
+                            }
+                            
+                            if (stream["logoShadowScale"].string != nil) {
+                                myStream["logoShadowScale"] = stream["logoShadowScale"].string!
+                            }
+                            
+                            streams.append(myStream)
                         }
                         
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "configDataLoaded"), object: nil)

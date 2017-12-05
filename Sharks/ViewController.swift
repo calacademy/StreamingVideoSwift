@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     var defaults = UserDefaults.standard
     
     var logo:UIImageView!
+    var logoShadow:UIImageView!
     var streamViewContainer = UIView()
     
     var menu = SwitchMenu()
@@ -166,6 +167,10 @@ class ViewController: UIViewController {
     }
     
     func removeUI() {
+        if (logoShadow != nil) {
+            logoShadow.removeFromSuperview()
+        }
+        
         if (logo != nil) {
             logo.removeFromSuperview()
         }
@@ -285,6 +290,25 @@ class ViewController: UIViewController {
             streamController.removeStaleViews(streamViewContainer)
         }
         
+        var opacity:CGFloat = 0
+        var scale:CGFloat = 1.0
+        
+        let selectedStream = streamData.streams[currentStreamIndex]
+        
+        if let logoShadowOpacity = selectedStream["logoShadowOpacity"] {
+            if let n = NumberFormatter().number(from: logoShadowOpacity) {
+                opacity = CGFloat(truncating: n)
+            }
+        }
+        
+        if let logoShadowScale = selectedStream["logoShadowScale"] {
+            if let n = NumberFormatter().number(from: logoShadowScale) {
+                scale = CGFloat(truncating: n)
+            }
+        }
+        
+        alterLogoShadow(opacity: opacity, scale: scale)
+        
         isTransitioning = false
     }
     
@@ -393,7 +417,17 @@ class ViewController: UIViewController {
     }
     
     func addUI() {
+        addLogoShadow()
         addLogo()
+    }
+    
+    func addLogoShadow() {
+        let image = UIImage(named: "logoshadow")
+        logoShadow = UIImageView(image: image!)
+        logoShadow.alpha = 0
+        
+        placeLogo(300, h: 300, offsetX: 0, offsetY: 0, targetOpacity: 0, theLogo: logoShadow)
+        setAnchorPoint(anchorPoint: CGPoint(x: 1, y: 0), forView: logoShadow)
     }
     
     func addLogo() {
@@ -414,6 +448,31 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.8, delay: delay, options: .curveEaseOut, animations: {
             view.alpha = targetAlpha
         }, completion: onComplete)
+    }
+    
+    func setAnchorPoint(anchorPoint: CGPoint, forView view: UIView) {
+        var newPoint = CGPoint(x: view.bounds.size.width * anchorPoint.x, y: view.bounds.size.height * anchorPoint.y)
+        var oldPoint = CGPoint(x: view.bounds.size.width * view.layer.anchorPoint.x, y: view.bounds.size.height * view.layer.anchorPoint.y)
+        
+        newPoint = newPoint.applying(view.transform)
+        oldPoint = oldPoint.applying(view.transform)
+        
+        var position = view.layer.position
+        position.x -= oldPoint.x
+        position.x += newPoint.x
+        
+        position.y -= oldPoint.y
+        position.y += newPoint.y
+        
+        view.layer.position = position
+        view.layer.anchorPoint = anchorPoint
+    }
+    
+    func alterLogoShadow(opacity: CGFloat, scale: CGFloat) {
+        UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseOut, animations: {
+            self.logoShadow.alpha = opacity
+            self.logoShadow.transform = CGAffineTransform(scaleX: scale, y: scale)
+        })
     }
     
     func placeLogo(_ w: CGFloat, h: CGFloat, offsetX: CGFloat, offsetY: CGFloat, targetOpacity: CGFloat = 0.5, theLogo: UIImageView? = nil) {

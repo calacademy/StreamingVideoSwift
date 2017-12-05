@@ -192,21 +192,8 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
             onAlertClose()
         }
     }
-    
-    func addLogoShadow() {
-        if (slug != "penguins") {
-            return
-        }
         
-        let image = UIImage(named: "logoshadow")
-        let logoShadow = UIImageView(image: image!)
-        
-        placeLogo(300, h: 300, offsetX: 0, offsetY: 0, targetOpacity: 0.3, theLogo: logoShadow)
-    }
-    
     override func addLogo() {
-        addLogoShadow()
-        
         let offset: CGFloat = 6
         
         var asset = "logoios"
