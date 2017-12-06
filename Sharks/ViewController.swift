@@ -293,6 +293,12 @@ class ViewController: UIViewController {
         var opacity:CGFloat = 0
         var scale:CGFloat = 1.0
         
+        if (streamData.streams == nil || streamData.streams.count < (currentStreamIndex + 1)) {
+            alterLogoShadow(opacity: opacity, scale: scale)
+            isTransitioning = false
+            return
+        }
+        
         let selectedStream = streamData.streams[currentStreamIndex]
         
         if let logoShadowOpacity = selectedStream["logoShadowOpacity"] {
@@ -304,11 +310,11 @@ class ViewController: UIViewController {
         if let logoShadowScale = selectedStream["logoShadowScale"] {
             if let n = NumberFormatter().number(from: logoShadowScale) {
                 scale = CGFloat(truncating: n)
+                print(scale)
             }
         }
         
         alterLogoShadow(opacity: opacity, scale: scale)
-        
         isTransitioning = false
     }
     

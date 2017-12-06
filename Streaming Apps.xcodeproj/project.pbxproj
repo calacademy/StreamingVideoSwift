@@ -45,6 +45,12 @@
 		E829CD491C7FB40D003AA289 /* UITouchBeginGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */; };
 		E829CD4C1C80E924003AA289 /* UITouchEndGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */; };
 		E829CD4E1C81027F003AA289 /* SwitchButtonIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD4D1C81027F003AA289 /* SwitchButtonIOS.swift */; };
+		E86BAA0F1FD75A24007258AE /* penguins.json in Resources */ = {isa = PBXBuildFile; fileRef = E86BAA0D1FD75A23007258AE /* penguins.json */; };
+		E86BAA101FD75A24007258AE /* penguins.json in Resources */ = {isa = PBXBuildFile; fileRef = E86BAA0D1FD75A23007258AE /* penguins.json */; };
+		E86BAA111FD75A24007258AE /* penguins.json in Resources */ = {isa = PBXBuildFile; fileRef = E86BAA0D1FD75A23007258AE /* penguins.json */; };
+		E86BAA121FD75A24007258AE /* sharks.json in Resources */ = {isa = PBXBuildFile; fileRef = E86BAA0E1FD75A23007258AE /* sharks.json */; };
+		E86BAA131FD75A24007258AE /* sharks.json in Resources */ = {isa = PBXBuildFile; fileRef = E86BAA0E1FD75A23007258AE /* sharks.json */; };
+		E86BAA141FD75A24007258AE /* sharks.json in Resources */ = {isa = PBXBuildFile; fileRef = E86BAA0E1FD75A23007258AE /* sharks.json */; };
 		E884CA111C7BB1960048938E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E884CA101C7BB1960048938E /* Main.storyboard */; };
 		E885CE3B1BB45F65005A0721 /* Buffering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E885CE3A1BB45F65005A0721 /* Buffering.swift */; };
 		E890771E1BB9CF2C00F6F1B5 /* StreamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */; };
@@ -84,6 +90,8 @@
 		E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITouchBeginGestureRecognizer.swift; sourceTree = "<group>"; };
 		E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITouchEndGestureRecognizer.swift; sourceTree = "<group>"; };
 		E829CD4D1C81027F003AA289 /* SwitchButtonIOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchButtonIOS.swift; sourceTree = "<group>"; };
+		E86BAA0D1FD75A23007258AE /* penguins.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = penguins.json; sourceTree = "<group>"; };
+		E86BAA0E1FD75A23007258AE /* sharks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sharks.json; sourceTree = "<group>"; };
 		E884CA101C7BB1960048938E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E885CE3A1BB45F65005A0721 /* Buffering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Buffering.swift; path = Sharks/Buffering.swift; sourceTree = "<group>"; usesTabs = 1; };
 		E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamData.swift; path = Sharks/StreamData.swift; sourceTree = "<group>"; };
@@ -181,6 +189,8 @@
 				E8A104431BAC6B8A000F6736 /* Products */,
 				E8A149BD1EFADA51004592AD /* Whitney-Book.otf */,
 				E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */,
+				E86BAA0D1FD75A23007258AE /* penguins.json */,
+				E86BAA0E1FD75A23007258AE /* sharks.json */,
 				E8025C171FCF2314006ABEAE /* Global Assets iOS.xcassets */,
 				E80209291C7BA1FB0044F64C /* Global Assets tvOS.xcassets */,
 				E8025C141FCF2201006ABEAE /* Menu Sharks.xcassets */,
@@ -322,6 +332,8 @@
 				E802091F1C7B99500044F64C /* Whitney-Semibold.otf in Resources */,
 				E8025C191FCF234D006ABEAE /* Global Assets iOS.xcassets in Resources */,
 				E884CA111C7BB1960048938E /* Main.storyboard in Resources */,
+				E86BAA101FD75A24007258AE /* penguins.json in Resources */,
+				E86BAA131FD75A24007258AE /* sharks.json in Resources */,
 				E8025C161FCF22A5006ABEAE /* Menu Sharks.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,6 +348,8 @@
 				E8025C1A1FCF234E006ABEAE /* Global Assets iOS.xcassets in Resources */,
 				E8025C081FCE0E7E006ABEAE /* Whitney-Semibold.otf in Resources */,
 				E8025C0A1FCE0E7E006ABEAE /* Main.storyboard in Resources */,
+				E86BAA111FD75A24007258AE /* penguins.json in Resources */,
+				E86BAA141FD75A24007258AE /* sharks.json in Resources */,
 				E8025C1D1FCF2693006ABEAE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,9 +361,11 @@
 				E8A1044B1BAC6B8A000F6736 /* Main.storyboard in Resources */,
 				E80209251C7BA1160044F64C /* Assets.xcassets in Resources */,
 				E8025C151FCF2201006ABEAE /* Menu Sharks.xcassets in Resources */,
+				E86BAA0F1FD75A24007258AE /* penguins.json in Resources */,
 				E802092A1C7BA1FB0044F64C /* Global Assets tvOS.xcassets in Resources */,
 				E8A149BE1EFADA51004592AD /* Whitney-Book.otf in Resources */,
 				E8DC23111BBF2372006CE476 /* Whitney-Semibold.otf in Resources */,
+				E86BAA121FD75A24007258AE /* sharks.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

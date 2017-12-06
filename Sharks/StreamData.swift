@@ -15,7 +15,6 @@ class StreamData: NSObject {
     fileprivate var _task: URLSessionDataTask!
     fileprivate var _session: URLSession!
     
-    var slug = "unknown"
     var streams: [[String:String]]!
     
     // defaults
@@ -23,53 +22,26 @@ class StreamData: NSObject {
     var width: NSNumber = 1280
     var height: NSNumber = 720
     
-    var donateStyles: [[String : [String : String]]] = [
-        [
-            "button": [
-                "normal": "stingray news ",
-                "bold": "& more"
-            ],
-            "alert": [
-                "title": "Animal antics, delivered to your inbox.",
-                "body": "Get Academy Updates for email you actually look forward to.",
-                "url": "https://www.calacademy.org/stay-connected/?src=stingrayslive",
-                "confirm": "Subscribe"
-            ]
-        ],
-        [
-            "button": [
-                "normal": "support ",
-                "bold": "our stingrays"
-            ],
-            "alert": [
-                "title": "Help the Academy zap extinction.",
-                "body": "Your donation supports biodiversity research and conservation.",
-                "url": "https://www.calacademy.org/donate/?src=stingrayslive",
-                "confirm": "Donate"
-            ]
-        ]
-    ]
+    var donateStyles: [[String : [String : String]]]!
+    var alerts: [String: [String: String]]!
     
-    var alerts: [String: [String: String]] = [
-        "donate": [
-            "title": "",
-            "body": "",
-            "url": ""
-        ],
-        "logo": [
-            "title": "Visit Us Online",
-            "body": "Learn about events and exhibits, purchase tickets, submit feedback, and more!",
-            "url": "http://www.calacademy.org/?src=stingrayslive"
-        ],
-        "error": [
-            "title": "Network Error",
-            "body": "There appears to be a problem with the network. Would you like to watch a pre-recorded video instead?"
-        ],
-        "flatPlaybackComplete": [
-            "title": "Playback Complete",
-            "body": "Would you like to watch the video again?"
-        ]
-    ]
+    var slug: String = "unknown" {
+        willSet(newSlug) {
+            if let path = Bundle.main.path(forResource: newSlug, ofType: "json") {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                    let json = JSON(data: data)
+                    _setCopyFromJSON(json)
+                } catch {
+                    print("! error loading flat data")
+                }
+            }
+        }
+    }
+    
+    override init() {
+        super.init()
+    }
     
     func getHLSPath(_ id: String) {
         destroy()
@@ -110,34 +82,7 @@ class StreamData: NSObject {
         _task.resume()
     }
     
-    fileprivate func _onConfigComplete(_ data: Data?, response: URLResponse?, error: NSError?) {
-        let errorInfo = [
-            "error": "configDataError"
-        ]
-        
-        if (error != nil) {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "dataError"), object: nil, userInfo: errorInfo)
-            return
-        }
-        
-        print("config loaded from " + (response!.url?.absoluteString)!)
-        
-        let json = JSON(data: data!)
-        
-        // minSecs
-        if let myMinSecs = json["minSecs"].number {
-            minSecs = myMinSecs
-        }
-        
-        // size
-        if let myWidth = json["width"].number {
-            width = myWidth
-        }
-        
-        if let myHeight = json["height"].number {
-            height = myHeight
-        }
-        
+    fileprivate func _setCopyFromJSON(_ json: JSON) {
         // donate styles
         if let myDonateStyles = json["donateStyles"].array {
             if (myDonateStyles.count > 0) {
@@ -162,17 +107,49 @@ class StreamData: NSObject {
         
         // alerts
         if let alertsData = json["alerts"].dictionary {
-            for (key, originalAlert) in alerts {
-                if let newAlert = alertsData[key]?.dictionary {
-                    for (alertKey, _) in originalAlert {
-                        if let newValue = newAlert[alertKey]?.string {
-                            alerts[key]?[alertKey] = newValue
-                        }
-                    }
+            alerts = [String : [String : String]]()
+            
+            for (key, val) in alertsData {
+                alerts[key] = [:]
+                
+                for (alertKey, newValue) in val {
+                    alerts[key]?[alertKey] = newValue.string!
                 }
             }
             
             alerts["donate"] = donateStyles[0]["alert"]
+        }
+    }
+    
+    fileprivate func _onConfigComplete(_ data: Data?, response: URLResponse?, error: NSError?) {
+        let errorInfo = [
+            "error": "configDataError"
+        ]
+        
+        if (error != nil) {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "dataError"), object: nil, userInfo: errorInfo)
+            return
+        }
+        
+        print("config loaded from " + (response!.url?.absoluteString)!)
+        
+        let json = JSON(data: data!)
+        
+        // alert copy
+        _setCopyFromJSON(json)
+        
+        // minSecs
+        if let myMinSecs = json["minSecs"].number {
+            minSecs = myMinSecs
+        }
+        
+        // size
+        if let myWidth = json["width"].number {
+            width = myWidth
+        }
+        
+        if let myHeight = json["height"].number {
+            height = myHeight
         }
         
         // stream
