@@ -39,10 +39,6 @@ class StreamData: NSObject {
         }
     }
     
-    override init() {
-        super.init()
-    }
-    
     func getHLSPath(_ id: String) {
         destroy()
         _session = URLSession(configuration: URLSessionConfiguration.ephemeral)
