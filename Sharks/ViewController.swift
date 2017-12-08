@@ -311,7 +311,20 @@ class ViewController: UIViewController {
         if let logoShadowScale = selectedStream["logoShadowScale"] {
             if let n = NumberFormatter().number(from: logoShadowScale) {
                 scale = CGFloat(truncating: n)
-                print(scale)
+            }
+        }
+        
+        if (getDeviceType() == "tv") {
+            if let logoShadowOpacity = selectedStream["logoShadowOpacityTV"] {
+                if let n = NumberFormatter().number(from: logoShadowOpacity) {
+                    opacity = CGFloat(truncating: n)
+                }
+            }
+            
+            if let logoShadowScale = selectedStream["logoShadowScaleTV"] {
+                if let n = NumberFormatter().number(from: logoShadowScale) {
+                    scale = CGFloat(truncating: n)
+                }
             }
         }
         

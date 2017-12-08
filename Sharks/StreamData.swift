@@ -175,6 +175,14 @@ class StreamData: NSObject {
                                 myStream["logoShadowScale"] = stream["logoShadowScale"].string!
                             }
                             
+                            if (stream["logoShadowOpacityTV"].string != nil) {
+                                myStream["logoShadowOpacityTV"] = stream["logoShadowOpacityTV"].string!
+                            }
+                            
+                            if (stream["logoShadowScaleTV"].string != nil) {
+                                myStream["logoShadowScaleTV"] = stream["logoShadowScaleTV"].string!
+                            }
+                            
                             streams.append(myStream)
                         }
                         

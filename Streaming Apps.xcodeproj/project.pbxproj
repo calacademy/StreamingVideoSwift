@@ -45,6 +45,24 @@
 		E829CD491C7FB40D003AA289 /* UITouchBeginGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */; };
 		E829CD4C1C80E924003AA289 /* UITouchEndGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */; };
 		E829CD4E1C81027F003AA289 /* SwitchButtonIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD4D1C81027F003AA289 /* SwitchButtonIOS.swift */; };
+		E834887F1FDB3E6900C52A6D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104471BAC6B8A000F6736 /* ViewController.swift */; };
+		E83488801FDB3E6900C52A6D /* SpriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF4D0B1FD1C92300AD0559 /* SpriteView.swift */; };
+		E83488811FDB3E6900C52A6D /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */; };
+		E83488821FDB3E6900C52A6D /* CGFloat+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF4D131FD209B200AD0559 /* CGFloat+random.swift */; };
+		E83488831FDB3E6900C52A6D /* SwitchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB95301BC2F77B0090552C /* SwitchMenu.swift */; };
+		E83488841FDB3E6900C52A6D /* StreamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */; };
+		E83488851FDB3E6900C52A6D /* StreamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D2903A1BB5A23400AF8B06 /* StreamController.swift */; };
+		E83488861FDB3E6900C52A6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104451BAC6B8A000F6736 /* AppDelegate.swift */; };
+		E83488871FDB3E6900C52A6D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */; };
+		E83488881FDB3E6900C52A6D /* UIImageView+remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */; };
+		E83488891FDB3E6900C52A6D /* Buffering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E885CE3A1BB45F65005A0721 /* Buffering.swift */; };
+		E834888C1FDB3E6900C52A6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A104491BAC6B8A000F6736 /* Main.storyboard */; };
+		E834888F1FDB3E6900C52A6D /* Global Assets tvOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E80209291C7BA1FB0044F64C /* Global Assets tvOS.xcassets */; };
+		E83488901FDB3E6900C52A6D /* Whitney-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A149BD1EFADA51004592AD /* Whitney-Book.otf */; };
+		E83488911FDB3E6900C52A6D /* Whitney-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8DC23101BBF2372006CE476 /* Whitney-Semibold.otf */; };
+		E83488981FDB3EE400C52A6D /* penguins.json in Resources */ = {isa = PBXBuildFile; fileRef = E86BAA0D1FD75A23007258AE /* penguins.json */; };
+		E83488991FDB3EFF00C52A6D /* Menu Pocket Penguins.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8EF4CCB1FCF484A00AD0559 /* Menu Pocket Penguins.xcassets */; };
+		E834889D1FDB40B000C52A6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E834889B1FDB407000C52A6D /* Assets.xcassets */; };
 		E86BAA111FD75A24007258AE /* penguins.json in Resources */ = {isa = PBXBuildFile; fileRef = E86BAA0D1FD75A23007258AE /* penguins.json */; };
 		E86BAA121FD75A24007258AE /* sharks.json in Resources */ = {isa = PBXBuildFile; fileRef = E86BAA0E1FD75A23007258AE /* sharks.json */; };
 		E86BAA131FD75A24007258AE /* sharks.json in Resources */ = {isa = PBXBuildFile; fileRef = E86BAA0E1FD75A23007258AE /* sharks.json */; };
@@ -87,6 +105,9 @@
 		E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITouchBeginGestureRecognizer.swift; sourceTree = "<group>"; };
 		E829CD4A1C80E8E1003AA289 /* UITouchEndGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITouchEndGestureRecognizer.swift; sourceTree = "<group>"; };
 		E829CD4D1C81027F003AA289 /* SwitchButtonIOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchButtonIOS.swift; sourceTree = "<group>"; };
+		E83488961FDB3E6900C52A6D /* Pocket Penguins tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Penguins tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E83488971FDB3E6A00C52A6D /* Pocket Penguins tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pocket Penguins tvOS.plist"; path = "/Users/grotter/Work/Academy/Sharks Live/dev/Pocket Penguins/Pocket Penguins tvOS.plist"; sourceTree = "<absolute>"; };
+		E834889B1FDB407000C52A6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E86BAA0D1FD75A23007258AE /* penguins.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = penguins.json; sourceTree = "<group>"; };
 		E86BAA0E1FD75A23007258AE /* sharks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sharks.json; sourceTree = "<group>"; };
 		E884CA101C7BB1960048938E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -121,6 +142,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E8025C031FCE0E7E006ABEAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E834888A1FDB3E6900C52A6D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -180,6 +208,15 @@
 			path = "Pocket Penguins iOS";
 			sourceTree = "<group>";
 		};
+		E834889A1FDB3FA200C52A6D /* Pocket Penguins */ = {
+			isa = PBXGroup;
+			children = (
+				E834889B1FDB407000C52A6D /* Assets.xcassets */,
+				E83488971FDB3E6A00C52A6D /* Pocket Penguins tvOS.plist */,
+			);
+			path = "Pocket Penguins";
+			sourceTree = "<group>";
+		};
 		E8A104391BAC6B8A000F6736 = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +232,7 @@
 				E80208FF1C7B965C0044F64C /* Classes */,
 				E8A104441BAC6B8A000F6736 /* Sharks */,
 				E80209051C7B96D10044F64C /* Sharks iOS */,
+				E834889A1FDB3FA200C52A6D /* Pocket Penguins */,
 				E8025C101FCE0F37006ABEAE /* Pocket Penguins iOS */,
 			);
 			sourceTree = "<group>";
@@ -205,6 +243,7 @@
 				E8A104421BAC6B8A000F6736 /* Stringrays Live.app */,
 				E80209041C7B96D10044F64C /* Stringrays Live iOS.app */,
 				E8025C0E1FCE0E7E006ABEAE /* Pocket Penguins iOS.app */,
+				E83488961FDB3E6900C52A6D /* Pocket Penguins tvOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -256,6 +295,23 @@
 			productReference = E8025C0E1FCE0E7E006ABEAE /* Pocket Penguins iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E834887D1FDB3E6900C52A6D /* Pocket Penguins tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E83488931FDB3E6900C52A6D /* Build configuration list for PBXNativeTarget "Pocket Penguins tvOS" */;
+			buildPhases = (
+				E834887E1FDB3E6900C52A6D /* Sources */,
+				E834888A1FDB3E6900C52A6D /* Frameworks */,
+				E834888B1FDB3E6900C52A6D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pocket Penguins tvOS";
+			productName = Sharks;
+			productReference = E83488961FDB3E6900C52A6D /* Pocket Penguins tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E8A104411BAC6B8A000F6736 /* Stringrays Live */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8A104511BAC6B8A000F6736 /* Build configuration list for PBXNativeTarget "Stringrays Live" */;
@@ -291,6 +347,9 @@
 					E8025BF41FCE0E7E006ABEAE = {
 						DevelopmentTeam = XTG2KYSB7E;
 					};
+					E834887D1FDB3E6900C52A6D = {
+						DevelopmentTeam = XTG2KYSB7E;
+					};
 					E8A104411BAC6B8A000F6736 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = XTG2KYSB7E;
@@ -314,6 +373,7 @@
 				E8A104411BAC6B8A000F6736 /* Stringrays Live */,
 				E80209031C7B96D10044F64C /* Stringrays Live iOS */,
 				E8025BF41FCE0E7E006ABEAE /* Pocket Penguins iOS */,
+				E834887D1FDB3E6900C52A6D /* Pocket Penguins tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -346,6 +406,20 @@
 				E8025C0A1FCE0E7E006ABEAE /* Main.storyboard in Resources */,
 				E86BAA111FD75A24007258AE /* penguins.json in Resources */,
 				E8025C1D1FCF2693006ABEAE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E834888B1FDB3E6900C52A6D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E834888C1FDB3E6900C52A6D /* Main.storyboard in Resources */,
+				E834888F1FDB3E6900C52A6D /* Global Assets tvOS.xcassets in Resources */,
+				E83488991FDB3EFF00C52A6D /* Menu Pocket Penguins.xcassets in Resources */,
+				E83488901FDB3E6900C52A6D /* Whitney-Book.otf in Resources */,
+				E83488911FDB3E6900C52A6D /* Whitney-Semibold.otf in Resources */,
+				E834889D1FDB40B000C52A6D /* Assets.xcassets in Resources */,
+				E83488981FDB3EE400C52A6D /* penguins.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +481,24 @@
 				E8025C011FCE0E7E006ABEAE /* StreamData.swift in Sources */,
 				E8025C021FCE0E7E006ABEAE /* UIImageView+remote.swift in Sources */,
 				E8EF4D0E1FD1C92D00AD0559 /* SpriteView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E834887E1FDB3E6900C52A6D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E834887F1FDB3E6900C52A6D /* ViewController.swift in Sources */,
+				E83488801FDB3E6900C52A6D /* SpriteView.swift in Sources */,
+				E83488811FDB3E6900C52A6D /* SwitchButton.swift in Sources */,
+				E83488821FDB3E6900C52A6D /* CGFloat+random.swift in Sources */,
+				E83488831FDB3E6900C52A6D /* SwitchMenu.swift in Sources */,
+				E83488841FDB3E6900C52A6D /* StreamData.swift in Sources */,
+				E83488851FDB3E6900C52A6D /* StreamController.swift in Sources */,
+				E83488861FDB3E6900C52A6D /* AppDelegate.swift in Sources */,
+				E83488871FDB3E6900C52A6D /* SwiftyJSON.swift in Sources */,
+				E83488881FDB3E6900C52A6D /* UIImageView+remote.swift in Sources */,
+				E83488891FDB3E6900C52A6D /* Buffering.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +615,44 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E83488941FDB3E6900C52A6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Brand Assets";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = PenguinsLaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = XTG2KYSB7E;
+				INFOPLIST_FILE = "$(SRCROOT)/Pocket Penguins/Pocket Penguins tvOS.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.calacademy.pocketpenguins;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		E83488951FDB3E6900C52A6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Brand Assets";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = PenguinsLaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = XTG2KYSB7E;
+				INFOPLIST_FILE = "$(SRCROOT)/Pocket Penguins/Pocket Penguins tvOS.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.calacademy.pocketpenguins;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -679,6 +809,15 @@
 			buildConfigurations = (
 				E8025C0C1FCE0E7E006ABEAE /* Debug */,
 				E8025C0D1FCE0E7E006ABEAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E83488931FDB3E6900C52A6D /* Build configuration list for PBXNativeTarget "Pocket Penguins tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E83488941FDB3E6900C52A6D /* Debug */,
+				E83488951FDB3E6900C52A6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
