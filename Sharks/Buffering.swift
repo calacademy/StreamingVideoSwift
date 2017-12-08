@@ -10,6 +10,7 @@ import UIKit
 
 class Buffering: UIImageView {
     var onStage: Bool = false
+	var delaySecs:Double = 2.0
     fileprivate var _isOverlayVisible: Bool = false
     fileprivate var _timer: Timer!
     
@@ -63,7 +64,7 @@ class Buffering: UIImageView {
             view.addSubview(self)
         } else {
             // delay before removing
-            self._timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(UIView.removeFromSuperview), userInfo: nil, repeats: false)
+            self._timer = Timer.scheduledTimer(timeInterval: self.delaySecs, target: self, selector: #selector(UIView.removeFromSuperview), userInfo: nil, repeats: false)
         }
     }
     

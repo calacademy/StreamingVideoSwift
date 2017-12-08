@@ -21,7 +21,7 @@ class StreamController: AVPlayerViewController {
     fileprivate var _videoOutput:AVPlayerItemVideoOutput!
     
     var aspect:[String: CGFloat]!
-    var delaySecs:Double = 2.5
+    var delaySecs:Double = 2.0
     
     init() {
         super.init(nibName:nil, bundle:nil)

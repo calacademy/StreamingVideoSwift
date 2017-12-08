@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     var currentStreamIndex = 0
     var menuRecognizer:UIGestureRecognizer!
     
-    let delaySecs:Double = 2.5
+    let delaySecs:Double = 1.0
     let currentStreamIndexDefaultsKey = "currentStreamIndex"
     var defaults = UserDefaults.standard
     
@@ -43,6 +43,7 @@ class ViewController: UIViewController {
         }
         
         streamData.slug = slug
+        buffering.delaySecs = self.delaySecs
         
         self.view.backgroundColor = UIColor(white: 1, alpha: 0)
         self.view.layer.contents = getBackgroundImage()
@@ -488,7 +489,7 @@ class ViewController: UIViewController {
         let bounds: CGRect = UIScreen.main.bounds
         theLogo!.frame = CGRect(x: bounds.size.width - w - offsetX, y: offsetY, width: w, height: h)
         
-        fadeIn(theLogo!, targetOpacity, 3)
+        fadeIn(theLogo!, targetOpacity, self.delaySecs + 0.5)
         
         // add to stage
         self.view.addSubview(theLogo!)

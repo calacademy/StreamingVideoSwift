@@ -78,6 +78,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     }
     
     func addDonateButton() {
+        let donateDelay = self.delaySecs + 0.7
         let donateStyleIndex = getDonateStyleIndex()
         donateStyle = streamData.donateStyles[donateStyleIndex]
         
@@ -91,7 +92,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         let shadowH: CGFloat = 175
         shadow.frame = CGRect(x: 0, y: screen.height - shadowH, width: shadowW, height: shadowH)
         
-        fadeIn(shadow, 0.8, 3.2)
+        fadeIn(shadow, 0.8, donateDelay)
         self.view.addSubview(shadow)
         
         // label
@@ -135,7 +136,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         
         addDonateButtonInteraction()
         
-        fadeIn(donateButton, _uiOpacity, 3.2,  {(error) -> Void in
+        fadeIn(donateButton, _uiOpacity, donateDelay,  {(error) -> Void in
             if (self.silhouetteAnimation != nil) {
                 self.silhouetteAnimation.cycle()
             }
