@@ -92,7 +92,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E80209041C7B96D10044F64C /* Stringrays Live iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stringrays Live iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E80209041C7B96D10044F64C /* Stingrays Live iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stingrays Live iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E802090D1C7B96D10044F64C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E80209121C7B96D10044F64C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E80209291C7BA1FB0044F64C /* Global Assets tvOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Global Assets tvOS.xcassets"; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		E885CE3A1BB45F65005A0721 /* Buffering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Buffering.swift; path = Sharks/Buffering.swift; sourceTree = "<group>"; usesTabs = 1; };
 		E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamData.swift; path = Sharks/StreamData.swift; sourceTree = "<group>"; };
 		E8943E6C1EFC68AB00270F5C /* fallback.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = fallback.mp4; sourceTree = "<group>"; };
-		E8A104421BAC6B8A000F6736 /* Stringrays Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stringrays Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8A104421BAC6B8A000F6736 /* Stingrays Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stingrays Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A104451BAC6B8A000F6736 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sharks/AppDelegate.swift; sourceTree = "<group>"; };
 		E8A104471BAC6B8A000F6736 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Sharks/ViewController.swift; sourceTree = "<group>"; };
 		E8A1044A1BAC6B8A000F6736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -240,8 +240,8 @@
 		E8A104431BAC6B8A000F6736 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E8A104421BAC6B8A000F6736 /* Stringrays Live.app */,
-				E80209041C7B96D10044F64C /* Stringrays Live iOS.app */,
+				E8A104421BAC6B8A000F6736 /* Stingrays Live.app */,
+				E80209041C7B96D10044F64C /* Stingrays Live iOS.app */,
 				E8025C0E1FCE0E7E006ABEAE /* Pocket Penguins iOS.app */,
 				E83488961FDB3E6900C52A6D /* Pocket Penguins tvOS.app */,
 			);
@@ -261,9 +261,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E80209031C7B96D10044F64C /* Stringrays Live iOS */ = {
+		E80209031C7B96D10044F64C /* Stingrays Live iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E80209131C7B96D10044F64C /* Build configuration list for PBXNativeTarget "Stringrays Live iOS" */;
+			buildConfigurationList = E80209131C7B96D10044F64C /* Build configuration list for PBXNativeTarget "Stingrays Live iOS" */;
 			buildPhases = (
 				E80209001C7B96D10044F64C /* Sources */,
 				E80209011C7B96D10044F64C /* Frameworks */,
@@ -273,9 +273,9 @@
 			);
 			dependencies = (
 			);
-			name = "Stringrays Live iOS";
+			name = "Stingrays Live iOS";
 			productName = "Sharks iOS";
-			productReference = E80209041C7B96D10044F64C /* Stringrays Live iOS.app */;
+			productReference = E80209041C7B96D10044F64C /* Stingrays Live iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E8025BF41FCE0E7E006ABEAE /* Pocket Penguins iOS */ = {
@@ -312,9 +312,9 @@
 			productReference = E83488961FDB3E6900C52A6D /* Pocket Penguins tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E8A104411BAC6B8A000F6736 /* Stringrays Live */ = {
+		E8A104411BAC6B8A000F6736 /* Stingrays Live */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E8A104511BAC6B8A000F6736 /* Build configuration list for PBXNativeTarget "Stringrays Live" */;
+			buildConfigurationList = E8A104511BAC6B8A000F6736 /* Build configuration list for PBXNativeTarget "Stingrays Live" */;
 			buildPhases = (
 				E8A1043E1BAC6B8A000F6736 /* Sources */,
 				E8A1043F1BAC6B8A000F6736 /* Frameworks */,
@@ -324,9 +324,9 @@
 			);
 			dependencies = (
 			);
-			name = "Stringrays Live";
+			name = "Stingrays Live";
 			productName = Sharks;
-			productReference = E8A104421BAC6B8A000F6736 /* Stringrays Live.app */;
+			productReference = E8A104421BAC6B8A000F6736 /* Stingrays Live.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -370,8 +370,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E8A104411BAC6B8A000F6736 /* Stringrays Live */,
-				E80209031C7B96D10044F64C /* Stringrays Live iOS */,
+				E8A104411BAC6B8A000F6736 /* Stingrays Live */,
+				E80209031C7B96D10044F64C /* Stingrays Live iOS */,
 				E8025BF41FCE0E7E006ABEAE /* Pocket Penguins iOS */,
 				E834887D1FDB3E6900C52A6D /* Pocket Penguins tvOS */,
 			);
@@ -795,7 +795,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E80209131C7B96D10044F64C /* Build configuration list for PBXNativeTarget "Stringrays Live iOS" */ = {
+		E80209131C7B96D10044F64C /* Build configuration list for PBXNativeTarget "Stingrays Live iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E80209141C7B96D10044F64C /* Debug */,
@@ -831,7 +831,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E8A104511BAC6B8A000F6736 /* Build configuration list for PBXNativeTarget "Stringrays Live" */ = {
+		E8A104511BAC6B8A000F6736 /* Build configuration list for PBXNativeTarget "Stingrays Live" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E8A104521BAC6B8A000F6736 /* Debug */,
