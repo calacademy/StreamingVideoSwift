@@ -38,6 +38,9 @@ class ViewController: UIViewController {
     internal var _pollFadeOutLastStream:Timer!
     
     override func viewDidLoad() {
+        let device = getDeviceType() ?? "unknown"
+        print("device type: " + device)
+        
         if let mySlug = Bundle.main.infoDictionary?["StreamSlug"] as? String {
             slug = mySlug
         }
@@ -98,8 +101,12 @@ class ViewController: UIViewController {
                     return "iphonemedium"
                 case 2208:
                     return "iphonelarge"
+                case 1792:
+                    return "iphonexr"
                 case 2436:
                     return "iphonex"
+                case 2688:
+                    return "iphonexsmax"
                 default:
                     return nil
             }

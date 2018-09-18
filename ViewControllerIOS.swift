@@ -30,7 +30,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     override func prefersHomeIndicatorAutoHidden() -> Bool {
         return true
     }
-        
+    
     override func getBackgroundImage() -> CGImage {
         var asset = "iphonelarge"
         
@@ -201,10 +201,13 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
         var w: CGFloat = 87
         var h: CGFloat = 135
         
-        if (getDeviceType() == "iphonex") {
-            asset = "logoioshoriz"
-            w = 182
-            h = 90
+        switch (getDeviceType()) {
+            case "iphonex", "iphonexr", "iphonexsmax":
+                asset = "logoioshoriz"
+                w = 182
+                h = 90
+            default:
+                print("")
         }
         
         let image = UIImage(named: asset)

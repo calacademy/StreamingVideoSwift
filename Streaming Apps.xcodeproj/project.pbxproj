@@ -538,7 +538,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = SharksAppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = SharksLaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = SharksLaunchImagev2;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XTG2KYSB7E;
@@ -559,7 +559,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = SharksAppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = SharksLaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = SharksLaunchImagev2;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XTG2KYSB7E;
@@ -580,7 +580,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = PenguinsAppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = PenguinsLaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = PenguinsLaunchImagev2;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XTG2KYSB7E;
@@ -601,7 +601,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = PenguinsAppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = PenguinsLaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = PenguinsLaunchImagev2;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XTG2KYSB7E;

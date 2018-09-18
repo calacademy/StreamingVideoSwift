@@ -211,7 +211,7 @@ class StreamData: NSObject {
         
         // split data from YouTube
         let datastring = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-        let arr = datastring?.components(separatedBy: "&") as Array!
+        let arr = datastring?.components(separatedBy: "&")
         
         // search for "hlsvp"
         for part in arr! {
