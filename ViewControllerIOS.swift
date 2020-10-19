@@ -23,11 +23,11 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     var donateStyle: [String : [String : String]]!
     var silhouetteAnimation: SpriteView!
     
-    override var prefersStatusBarHidden: Bool {
+    override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
     
-    override func prefersHomeIndicatorAutoHidden() -> Bool {
+    override var prefersStatusBarHidden: Bool {
         return true
     }
     
@@ -72,7 +72,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     
     func getAttributedString (_ string: String, _ font: String, _ size: CGFloat = 18) -> NSMutableAttributedString {
         let labelFont = UIFont(name: font, size: CGFloat(size))!
-        let attributes = [NSAttributedStringKey.font: labelFont]
+        let attributes = [NSAttributedString.Key.font: labelFont]
         
         return NSMutableAttributedString(string: string, attributes: attributes)
     }
@@ -293,7 +293,7 @@ class ViewControllerIOS: ViewController, UIGestureRecognizerDelegate {
     }
     
     func goToWebsite(_ url: String) {
-        UIApplication.shared.openURL(URL(string: url)!)
+        UIApplication.shared.open(URL(string: url)!)
     }
     
     func playFallbackVideo() {

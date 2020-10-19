@@ -377,11 +377,11 @@ class ViewController: UIViewController {
     
     @objc func onSwipe(_ sender: UISwipeGestureRecognizer) {
         switch sender.direction {
-            case UISwipeGestureRecognizerDirection.left,
-            UISwipeGestureRecognizerDirection.down:
+            case UISwipeGestureRecognizer.Direction.left,
+            UISwipeGestureRecognizer.Direction.down:
                 menu.navigate("left")
-            case UISwipeGestureRecognizerDirection.right,
-            UISwipeGestureRecognizerDirection.up:
+            case UISwipeGestureRecognizer.Direction.right,
+            UISwipeGestureRecognizer.Direction.up:
                 menu.navigate("right")
             default:
                 print("unknown")
@@ -398,7 +398,7 @@ class ViewController: UIViewController {
         menuRecognizer = UITapGestureRecognizer(target: self, action:#selector(ViewController.onMenu(_:)))
         
         menuRecognizer.allowedPressTypes = [
-            NSNumber(value: UIPressType.menu.rawValue as Int)
+            NSNumber(value: UIPress.PressType.menu.rawValue as Int)
         ];
         
         self.view.addGestureRecognizer(menuRecognizer)
@@ -423,17 +423,17 @@ class ViewController: UIViewController {
         // tap
         let selectRecognizer = UITapGestureRecognizer(target: self, action:#selector(ViewController.onSelect(_:)))
         selectRecognizer.allowedPressTypes = [
-            NSNumber(value: UIPressType.playPause.rawValue as Int),
-            NSNumber(value: UIPressType.select.rawValue as Int)
+            NSNumber(value: UIPress.PressType.playPause.rawValue as Int),
+            NSNumber(value: UIPress.PressType.select.rawValue as Int)
         ]
         self.view.addGestureRecognizer(selectRecognizer)
         
         // swipe
         let directions = [
-            UISwipeGestureRecognizerDirection.right,
-            UISwipeGestureRecognizerDirection.left,
-            UISwipeGestureRecognizerDirection.up,
-            UISwipeGestureRecognizerDirection.down
+            UISwipeGestureRecognizer.Direction.right,
+            UISwipeGestureRecognizer.Direction.left,
+            UISwipeGestureRecognizer.Direction.up,
+            UISwipeGestureRecognizer.Direction.down
         ]
         
         for direction in directions {

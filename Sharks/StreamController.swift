@@ -27,8 +27,12 @@ class StreamController: AVPlayerViewController {
         super.init(nibName:nil, bundle:nil)
         
         // allow other apps to play audio
-        let audioSession = AVAudioSession.sharedInstance()
-        try! audioSession.setCategory(AVAudioSessionCategoryAmbient, with: AVAudioSessionCategoryOptions.mixWithOthers)
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient, options: AVAudioSession.CategoryOptions.mixWithOthers)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print(error)
+        }
         
         self.showsPlaybackControls = false
         _videoOutput = AVPlayerItemVideoOutput()

@@ -30,7 +30,7 @@ class StreamData: NSObject {
             if let path = Bundle.main.path(forResource: newSlug, ofType: "json") {
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                    let json = JSON(data: data)
+                    let json = try JSON(data: data)
                     _setCopyFromJSON(json)
                 } catch {
                     print("! error loading flat data")
@@ -129,7 +129,7 @@ class StreamData: NSObject {
         
         print("config loaded from " + (response!.url?.absoluteString)!)
         
-        let json = JSON(data: data!)
+        let json = try! JSON(data: data!)
         
         // alert copy
         _setCopyFromJSON(json)
@@ -215,7 +215,7 @@ class StreamData: NSObject {
         
         // search for "hlsvp"
         for part in arr! {
-            var varArr = part.components(separatedBy: "=")
+            let varArr = part.components(separatedBy: "=")
             
             if (varArr[0] == _hlsKey) {
                 // found video url, broadcast to observers

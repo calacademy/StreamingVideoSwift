@@ -9,7 +9,7 @@
 import CoreGraphics
 
 public extension CGFloat {
-    public static func random(min: CGFloat, max: CGFloat) -> CGFloat {
+    static func random(min: CGFloat, max: CGFloat) -> CGFloat {
         return CGFloat(Float(arc4random()) / Float(UINT32_MAX)) * (max - min) + min
     }
 }

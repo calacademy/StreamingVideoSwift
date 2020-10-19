@@ -13,7 +13,6 @@
 		E80209181C7B97C20044F64C /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */; };
 		E80209191C7B97C20044F64C /* Buffering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E885CE3A1BB45F65005A0721 /* Buffering.swift */; };
 		E802091A1C7B97C20044F64C /* StreamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D2903A1BB5A23400AF8B06 /* StreamController.swift */; };
-		E802091B1C7B97C20044F64C /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */; };
 		E802091C1C7B97C20044F64C /* StreamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */; };
 		E802091D1C7B97C20044F64C /* SwitchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB95301BC2F77B0090552C /* SwitchMenu.swift */; };
 		E802091E1C7B97C20044F64C /* UIImageView+remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */; };
@@ -26,7 +25,6 @@
 		E8025BF91FCE0E7E006ABEAE /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC23011BBEF8C3006CE476 /* SwitchButton.swift */; };
 		E8025BFA1FCE0E7E006ABEAE /* Buffering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E885CE3A1BB45F65005A0721 /* Buffering.swift */; };
 		E8025BFB1FCE0E7E006ABEAE /* ViewControllerIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD441C7CFE0F003AA289 /* ViewControllerIOS.swift */; };
-		E8025BFC1FCE0E7E006ABEAE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */; };
 		E8025BFD1FCE0E7E006ABEAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104471BAC6B8A000F6736 /* ViewController.swift */; };
 		E8025BFE1FCE0E7E006ABEAE /* UITouchBeginGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829CD471C7FB3F9003AA289 /* UITouchBeginGestureRecognizer.swift */; };
 		E8025BFF1FCE0E7E006ABEAE /* StreamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D2903A1BB5A23400AF8B06 /* StreamController.swift */; };
@@ -53,7 +51,6 @@
 		E83488841FDB3E6900C52A6D /* StreamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */; };
 		E83488851FDB3E6900C52A6D /* StreamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D2903A1BB5A23400AF8B06 /* StreamController.swift */; };
 		E83488861FDB3E6900C52A6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A104451BAC6B8A000F6736 /* AppDelegate.swift */; };
-		E83488871FDB3E6900C52A6D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */; };
 		E83488881FDB3E6900C52A6D /* UIImageView+remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */; };
 		E83488891FDB3E6900C52A6D /* Buffering.swift in Sources */ = {isa = PBXBuildFile; fileRef = E885CE3A1BB45F65005A0721 /* Buffering.swift */; };
 		E834888C1FDB3E6900C52A6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A104491BAC6B8A000F6736 /* Main.storyboard */; };
@@ -86,9 +83,12 @@
 		E8EF4D141FD209B200AD0559 /* CGFloat+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF4D131FD209B200AD0559 /* CGFloat+random.swift */; };
 		E8EF4D151FD209E900AD0559 /* CGFloat+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF4D131FD209B200AD0559 /* CGFloat+random.swift */; };
 		E8EF4D161FD209E900AD0559 /* CGFloat+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF4D131FD209B200AD0559 /* CGFloat+random.swift */; };
+		E8F1ECAC253E43910008B7EE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1ECAB253E43910008B7EE /* SwiftyJSON.swift */; };
+		E8F1ECAD253E43910008B7EE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1ECAB253E43910008B7EE /* SwiftyJSON.swift */; };
+		E8F1ECAE253E43910008B7EE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1ECAB253E43910008B7EE /* SwiftyJSON.swift */; };
+		E8F1ECAF253E43910008B7EE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1ECAB253E43910008B7EE /* SwiftyJSON.swift */; };
 		E8FB95311BC2F77B0090552C /* SwitchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB95301BC2F77B0090552C /* SwitchMenu.swift */; };
 		E8FBCF631BC6C72F00EA3145 /* UIImageView+remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */; };
-		E8FBCF931BC6ED3F00EA3145 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,9 +128,10 @@
 		E8EF4CCE1FD0945700AD0559 /* fallback.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = fallback.mp4; sourceTree = "<group>"; };
 		E8EF4D0B1FD1C92300AD0559 /* SpriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteView.swift; sourceTree = "<group>"; };
 		E8EF4D131FD209B200AD0559 /* CGFloat+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+random.swift"; sourceTree = "<group>"; };
+		E8F1ECAB253E43910008B7EE /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		E8F1ECB4253E44270008B7EE /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
 		E8FB95301BC2F77B0090552C /* SwitchMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchMenu.swift; path = Sharks/SwitchMenu.swift; sourceTree = "<group>"; };
 		E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImageView+remote.swift"; path = "Sharks/UIImageView+remote.swift"; sourceTree = "<group>"; };
-		E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Sharks/SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +169,8 @@
 		E80208FF1C7B965C0044F64C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E8F1ECB4253E44270008B7EE /* SwiftyJSON.h */,
+				E8F1ECAB253E43910008B7EE /* SwiftyJSON.swift */,
 				E8A104451BAC6B8A000F6736 /* AppDelegate.swift */,
 				E8A104471BAC6B8A000F6736 /* ViewController.swift */,
 				E829CD441C7CFE0F003AA289 /* ViewControllerIOS.swift */,
@@ -175,7 +178,6 @@
 				E829CD4D1C81027F003AA289 /* SwitchButtonIOS.swift */,
 				E885CE3A1BB45F65005A0721 /* Buffering.swift */,
 				E8D2903A1BB5A23400AF8B06 /* StreamController.swift */,
-				E8FBCF921BC6ED3F00EA3145 /* SwiftyJSON.swift */,
 				E890771D1BB9CF2C00F6F1B5 /* StreamData.swift */,
 				E8FB95301BC2F77B0090552C /* SwitchMenu.swift */,
 				E8FBCF621BC6C72F00EA3145 /* UIImageView+remote.swift */,
@@ -336,16 +338,17 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "Greg Rotter";
 				TargetAttributes = {
 					E80209031C7B96D10044F64C = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = XTG2KYSB7E;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1210;
 					};
 					E8025BF41FCE0E7E006ABEAE = {
 						DevelopmentTeam = XTG2KYSB7E;
+						LastSwiftMigration = 1210;
 					};
 					E834887D1FDB3E6900C52A6D = {
 						DevelopmentTeam = XTG2KYSB7E;
@@ -359,7 +362,7 @@
 			};
 			buildConfigurationList = E8A1043D1BAC6B8A000F6736 /* Build configuration list for PBXProject "Streaming Apps" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -447,10 +450,10 @@
 				E802091D1C7B97C20044F64C /* SwitchMenu.swift in Sources */,
 				E829CD4C1C80E924003AA289 /* UITouchEndGestureRecognizer.swift in Sources */,
 				E80209161C7B97C20044F64C /* AppDelegate.swift in Sources */,
+				E8F1ECAD253E43910008B7EE /* SwiftyJSON.swift in Sources */,
 				E80209181C7B97C20044F64C /* SwitchButton.swift in Sources */,
 				E80209191C7B97C20044F64C /* Buffering.swift in Sources */,
 				E829CD451C7CFE0F003AA289 /* ViewControllerIOS.swift in Sources */,
-				E802091B1C7B97C20044F64C /* SwiftyJSON.swift in Sources */,
 				E80209171C7B97C20044F64C /* ViewController.swift in Sources */,
 				E8EF4D151FD209E900AD0559 /* CGFloat+random.swift in Sources */,
 				E829CD491C7FB40D003AA289 /* UITouchBeginGestureRecognizer.swift in Sources */,
@@ -469,10 +472,10 @@
 				E8025BF61FCE0E7E006ABEAE /* SwitchMenu.swift in Sources */,
 				E8025BF71FCE0E7E006ABEAE /* UITouchEndGestureRecognizer.swift in Sources */,
 				E8025BF81FCE0E7E006ABEAE /* AppDelegate.swift in Sources */,
+				E8F1ECAE253E43910008B7EE /* SwiftyJSON.swift in Sources */,
 				E8025BF91FCE0E7E006ABEAE /* SwitchButton.swift in Sources */,
 				E8025BFA1FCE0E7E006ABEAE /* Buffering.swift in Sources */,
 				E8025BFB1FCE0E7E006ABEAE /* ViewControllerIOS.swift in Sources */,
-				E8025BFC1FCE0E7E006ABEAE /* SwiftyJSON.swift in Sources */,
 				E8025BFD1FCE0E7E006ABEAE /* ViewController.swift in Sources */,
 				E8EF4D161FD209E900AD0559 /* CGFloat+random.swift in Sources */,
 				E8025BFE1FCE0E7E006ABEAE /* UITouchBeginGestureRecognizer.swift in Sources */,
@@ -491,12 +494,12 @@
 				E834887F1FDB3E6900C52A6D /* ViewController.swift in Sources */,
 				E83488801FDB3E6900C52A6D /* SpriteView.swift in Sources */,
 				E83488811FDB3E6900C52A6D /* SwitchButton.swift in Sources */,
+				E8F1ECAF253E43910008B7EE /* SwiftyJSON.swift in Sources */,
 				E83488821FDB3E6900C52A6D /* CGFloat+random.swift in Sources */,
 				E83488831FDB3E6900C52A6D /* SwitchMenu.swift in Sources */,
 				E83488841FDB3E6900C52A6D /* StreamData.swift in Sources */,
 				E83488851FDB3E6900C52A6D /* StreamController.swift in Sources */,
 				E83488861FDB3E6900C52A6D /* AppDelegate.swift in Sources */,
-				E83488871FDB3E6900C52A6D /* SwiftyJSON.swift in Sources */,
 				E83488881FDB3E6900C52A6D /* UIImageView+remote.swift in Sources */,
 				E83488891FDB3E6900C52A6D /* Buffering.swift in Sources */,
 			);
@@ -509,12 +512,12 @@
 				E8A104481BAC6B8A000F6736 /* ViewController.swift in Sources */,
 				E8EF4D0C1FD1C92300AD0559 /* SpriteView.swift in Sources */,
 				E8DC23021BBEF8C3006CE476 /* SwitchButton.swift in Sources */,
+				E8F1ECAC253E43910008B7EE /* SwiftyJSON.swift in Sources */,
 				E8EF4D141FD209B200AD0559 /* CGFloat+random.swift in Sources */,
 				E8FB95311BC2F77B0090552C /* SwitchMenu.swift in Sources */,
 				E890771E1BB9CF2C00F6F1B5 /* StreamData.swift in Sources */,
 				E8D2903B1BB5A23400AF8B06 /* StreamController.swift in Sources */,
 				E8A104461BAC6B8A000F6736 /* AppDelegate.swift in Sources */,
-				E8FBCF931BC6ED3F00EA3145 /* SwiftyJSON.swift in Sources */,
 				E8FBCF631BC6C72F00EA3145 /* UIImageView+remote.swift in Sources */,
 				E885CE3B1BB45F65005A0721 /* Buffering.swift in Sources */,
 			);
@@ -543,14 +546,14 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XTG2KYSB7E;
 				INFOPLIST_FILE = "Sharks iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.calacademy.sharkslive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -564,14 +567,14 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XTG2KYSB7E;
 				INFOPLIST_FILE = "Sharks iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.calacademy.sharkslive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -585,14 +588,14 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XTG2KYSB7E;
 				INFOPLIST_FILE = "$(SRCROOT)/Pocket Penguins iOS/Pocket Penguins iOS.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.calacademy.pocketpenguins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -606,14 +609,14 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = XTG2KYSB7E;
 				INFOPLIST_FILE = "$(SRCROOT)/Pocket Penguins iOS/Pocket Penguins iOS.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.calacademy.pocketpenguins;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -633,7 +636,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -652,7 +655,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -660,6 +663,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -668,14 +672,17 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -704,7 +711,7 @@
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -712,6 +719,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -720,14 +728,17 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -749,7 +760,7 @@
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -769,7 +780,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -788,7 +799,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
